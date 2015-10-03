@@ -1,0 +1,104 @@
+<div class="news_column col-md-6">
+    <?php foreach($this->news as $news): ?>
+        <article class="news">
+            <div class="news_header">
+                <div class="news_header_date">
+                    <?php echo $news->date['day'] ?><div class="news_header_month"><?php echo $news->date['month'] ?></div>
+                </div>
+                <h1><a href="#" title="<?php echo $news->title ?>" /><?php echo $news->title ?></a></h1>
+            </div>
+            <div class="news_content">
+                <?php echo $news->description ?>
+            </div>
+            <div class="news_more">
+                <a href="#" title="<?php echo $news->title ?>" />Czytaj więcej...</a>
+            </div>
+        </article>
+    <?php endforeach; ?>
+</div>
+<div class="col-md-1"></div>
+<div class="widgets_column col-md-5">
+    <div class="widget">
+        <div class="header">
+            <?php echo $this->seasonInfo->name ?>
+            <span class="season"><?php echo $this->seasonInfo->period ?></span>
+        </div>
+        <div class="widget_content">
+            <table class="table">
+                <?php foreach($this->table as $team): ?>
+                    <tr class="<?php echo $team->rank%2 ? 'table_n':'table_p'; echo $team->name == "Kilo Wiejskiej" ? " kilo" : null; ?>">
+                        <td><?php echo $team->rank ?>.</td>
+                        <td><?php echo $team->name ?></td>
+                        <td><?php echo $team->points ?> pkt.</td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </div>
+    </div>
+    <div class="widget">
+        <div class="header">
+            Ranking zawodników Kilo Wiejskiej
+        </div>
+        <div class="separator"></div>
+        <div class="widget_content">
+            <ul role="tablist" class="nav nav-tabs" id="ranking_tabs">
+                <li class="active" role="presentation"><a aria-expanded="true" aria-controls="scorers" data-toggle="tab" role="tab" id="scorers-tab" href="#scorers">Strzelcy</a></li>
+                <li role="presentation" class=""><a aria-controls="matches" data-toggle="tab" id="matches-tab" role="tab" href="#matches" aria-expanded="false">Występy</a></li>
+                <li role="presentation" class=""><a aria-controls="cards" data-toggle="tab" id="cards-tab" role="tab" href="#cards" aria-expanded="false">Kartki</a></li>
+            </ul>
+            <div class="tab-content" id="ranking_tab_content">
+                <div aria-labelledby="scorers-tab" id="scorers" class="tab-pane fade active in" role="tabpanel">
+                    <?php if($this->scorers->count()): ?>
+                        <table class="table">
+                            <?php $i=1; foreach($this->scorers as $scorer): ?>    
+                                <tr class="<?php echo $i%2 ? 'table_n' : 'table_p' ?>">
+                                    <td><?php echo $i; ?>.</td>
+                                    <td><?php echo $scorer->name.' '.$scorer->surname; ?></td>
+                                    <td><?php echo $scorer->goals ?> bramek</td>
+                                </tr>
+                            <?php $i++;endforeach; ?>
+                        </table>
+                    <?php else: ?>
+                        <div class="no_data">Nikt jeszcze nie strzelił bramki!</div>
+                    <?php endif; ?>
+                </div>
+                <div aria-labelledby="matches-tab" id="matches" class="tab-pane fade" role="tabpanel">
+                    <?php if($this->performances->count()): ?>
+                        <table class="table">
+                            <?php $i=1; foreach($this->performances as $player): ?>    
+                                <tr class="<?php echo $i%2 ? 'table_n' : 'table_p' ?>">
+                                    <td><?php echo $i; ?>.</td>
+                                    <td><?php echo $player->name.' '.$player->surname; ?></td>
+                                    <td><?php echo $player->performances ?> występów</td>
+                                </tr>
+                            <?php $i++;endforeach; ?>
+                        </table>
+                    <?php else: ?>
+                        <div class="no_data">Nikt jeszcze nie wystąpił w meczu!</div>
+                    <?php endif; ?>
+                </div>
+                <div aria-labelledby="cards-tab" id="cards" class="tab-pane fade" role="tabpanel">
+                    <?php if($this->cards->count()): ?>
+                        <table class="table">
+                            <?php $i=1; foreach($this->cards as $player): ?>    
+                                <tr class="<?php echo $i%2 ? 'table_n' : 'table_p' ?>">
+                                    <td><?php echo $i; ?>.</td>
+                                    <td><?php echo $player->name.' '.$player->surname; ?></td>
+                                    <td><?php echo $player->cards ?> kartek</td>
+                                </tr>
+                            <?php $i++;endforeach; ?>
+                        </table>
+                    <?php else: ?>
+                        <div class="no_data">Nikt nie dostał kartki!</div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#myTabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
+</script>
