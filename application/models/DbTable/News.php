@@ -15,14 +15,16 @@ class Application_Model_DbTable_News extends Zend_Db_Table_Abstract
         'category_id',
         'author_id',
         'date',
-        'main_photo'
+        'main_photo',
+        'slug'
     );
     private $columnListForHomepage = array(
         'id',
         'title',
         'description',
         'date',
-        'main_photo'
+        'main_photo',
+        'slug'
     );
     
     /**
@@ -33,10 +35,30 @@ class Application_Model_DbTable_News extends Zend_Db_Table_Abstract
     public function getNewsForHomepage(){
         $select = $this->select()
                 ->from($this->_name, $this->columnListForHomepage)
+                ->setIntegrityCheck(false)
+                ->join('categories',$this->_name.'.category_id = categories.id','slug as category_slug')
                 ->order('date DESC')
                 ->limit(self::HOMEPAGE_NEWS_LIMIT);
         
         return $this->fetchAll($select);
+    }
+    
+    /**
+     * Zwraca newsa o danej kategorii i slug
+     * 
+     * @param string $category
+     * @param string $slug
+     * @return Zend_Db_Table_Row
+     */
+    public function getByCategoryAndSlug($category, $slug){
+        $select = $this->select()
+                ->from($this->_name, $this->columnListFull)
+                ->setIntegrityCheck(false)
+                ->join('categories',$this->_name.'.category_id = categories.id','')
+                ->where($this->_name.'.slug = ?', $slug)
+                ->where('categories.slug = ?', $category);
+        
+        return $this->fetchRow($select);
     }
     
 }

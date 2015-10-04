@@ -1,0 +1,23 @@
+<div class="news_column col-md-6">
+    <article class="news">
+        <div class="news_header">
+            <div class="news_header_date">
+                <?php //echo $this->news->date['day'] ?><div class="news_header_month"><?php //echo $this->news->date['month'] ?></div>
+            </div>
+            <h1><a href="#" title="<?php echo $this->news->title ?>" /><?php echo $this->news->title ?></a></h1>
+        </div>
+        <div class="news_content">
+            <?php echo $this->news->content ?>
+        </div>
+    </article>
+</div>
+<div class="col-md-1"></div>
+<div class="widgets_column col-md-5">
+    
+</div>
+<script type="text/javascript">
+    $('#myTabs a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    })
+</script>
