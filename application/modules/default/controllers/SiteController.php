@@ -15,6 +15,22 @@ class SiteController extends Zend_Controller_Action
         $this->view->site = $site = $sitesMapper->getSiteByUrl($url);
     }
 
-
+    public function teamAction()
+    {
+        $playersMapper = new Application_Model_DbTable_Players();
+        $players = $playersMapper->getAllKiloPlayers();
+        $this->view->players = $players;
+    }
+    
+    public function mediaAction()
+    {
+        
+    }
+    
+    public function contactAction()
+    {
+        
+    }
+    
 }
 

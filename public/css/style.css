@@ -370,3 +370,50 @@ strong{
 	border-color: #990304;
 	margin-left: 0;
 }
+
+/* PLAYER */
+
+.player{
+	border: 1px solid #8E8E8E;
+	overflow: hidden;
+	margin-bottom: 30px;
+}
+
+.player > div {
+	padding: 0px;
+}
+
+.player .separator{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.player_photo{
+	float: left;
+}
+
+.player_personal{
+	position: absolute;
+	top: 50%;
+	transform: translateY(25%);
+}
+
+.player_name{
+	color: #c00202;
+}
+
+.player_stat{
+	padding: 20px 0;
+	text-align:center;
+	border-right: 1px solid #8e8e8e;
+	margin: 35px 0;
+}
+
+.player_stat:last-child{
+	border-right: 0;
+}
+
+.player_stat_count{
+	color: #c00202;
+	display: block;
+}
