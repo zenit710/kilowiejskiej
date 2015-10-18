@@ -3,6 +3,8 @@
 <head>
     <meta name='author' content='Kamil Małek' />
     <?php echo $this->headMeta(); ?>
+    <link rel="shortcut icon" href="<?php echo $this->baseUrl('favicon.ico') ?>" type="image/x-icon">
+    <link rel="icon" href="<?php echo $this->baseUrl('favicon.ico') ?>" type="image/x-icon">
     <link href='<?php echo $this->baseUrl('css/bootstrap.css') ?>' rel='stylesheet' type='text/css' />
     <link href='<?php echo $this->baseUrl('css/style.css') ?>' rel='stylesheet' type='text/css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -10,6 +12,18 @@
     <?php echo $this->headTitle(); ?>
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.5";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="fb">
+        <div class="fb-page" data-href="https://www.facebook.com/Kilo-Wiejskiej-210043922347916/" data-width="350" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"></div>
+        <div class="fb-icon"></div>
+    </div>
     <nav class="navbar navbar-default" role="navigation">
         <div class="container">
             <div class="navbar-header">
@@ -20,7 +34,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">
-                    <img src="<?php echo $this->baseUrl('img/logo_kwft.png'); ?>" alt="Stowarzyszenie Kilo Wiejskiej Futsal Team" width="65px" style="float: left; margin-right: 20px;"/>
+                    <img src="<?php echo $this->baseUrl('img/kwft_65.png'); ?>" alt="Stowarzyszenie Kilo Wiejskiej Futsal Team" width="65px" style="float: left; margin-right: 20px;"/>
                     Stowarzyszenie <br /> Kilo Wiejskiej Futsal Team
                 </a>
             </div>
@@ -30,7 +44,7 @@
                     <li class="active"><a href="/">Strona główna</a></li>
                     <li><a href="<?php echo $this->url(array('url' => 'o-nas'), 'site') ?>">O nas</a></li>
                     <li><a href="<?php echo $this->url(array(),'team') ?>">Skład</a></li>
-                    <li><a href="<?php echo $this->url(array(),'media') ?>">Multimedia</a></li>
+                    <!--<li><a href="<?php echo $this->url(array(),'media') ?>">Multimedia</a></li>-->
                     <li><a href="<?php echo $this->url(array(),'contact') ?>">Kontakt</a></li>
                 </ul>
             </div>
@@ -50,7 +64,7 @@
                 <button>Dowiedz się więcej</button>
             </div>
             <div class="footer_logo col-md-4">
-                <img src="<?php echo $this->baseUrl('img/logo_kwft.png'); ?>" alt="KWFT" width="250px" />
+                <img src="<?php echo $this->baseUrl('img/kwft_215.png'); ?>" alt="KWFT" />
             </div>
             <div class="footer_events col-md-4">
                 <div style="margin-bottom: 20px">Najbliższe turnieje organizowane przez <span class="span_kilo">Kilo Wiejskiej</span>:</div>
@@ -67,11 +81,11 @@
                 <div class="separator"></div>
                 <table class="made_by">
                     <tr>
-                        <td>CMS & Develop</td>
+                        <td>CMS & Develop:</td>
                         <td>Kamil Małek</td>
                     </tr>
                     <tr>
-                        <td>Design</td>
+                        <td>Projekt:</td>
                         <td>Piotr Pabiś</td>
                     </tr>
                 </table>

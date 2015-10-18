@@ -38,6 +38,11 @@ class IndexController extends Zend_Controller_Action
         $this->view->cards = $cardsMapper->getMostCards();
     }
 
+    public function introAction(){
+        $this->view->layout()->setLayout('intro');
+        $this->view->viewRenderer()->setNoRender(true);
+    }
+    
     /**
      * Wyciąga z daty newsa dzień miesiącia i polski skrót nazwy miesiąca
      * 

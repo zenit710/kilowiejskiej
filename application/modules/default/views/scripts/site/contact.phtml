@@ -1,1 +1,41 @@
-<?php
+<div class="site col-md-12">
+    <div class="title">
+        <h1>Dowiedz się o nas więcej i skontaktuj się z nami</h1>
+    </div>
+    <div class="separator"></div>
+    <div class="content">
+        <table id="stuff" class="col-sm-12">
+            <tr>
+                <td class="col-md-4 col-sm-12"><img src='<?php echo $this->baseUrl('img/prezes.png') ?>' title="Prezes" /></td>
+                <td class="col-md-4 col-sm-12"><img src='<?php echo $this->baseUrl('img/admin.png') ?>' title="Admin" /></td>
+                <td class="col-md-4 col-sm-12"><img src='<?php echo $this->baseUrl('img/zalozyciel.png') ?>' title="Założyciel" /></td>
+            </tr>
+            <tr>
+                <td class="col-md-4 col-sm-12">
+                    <strong>Krzysztof Bełus</strong>
+                    <div class="separator"></div>
+                    Prezes zarządu KWFT
+                </td>
+                <td class="col-md-4 col-sm-12">
+                    <strong>Kamil Małek</strong>
+                    <div class="separator"></div>
+                    Administrator strony www
+                </td>
+                <td class="col-md-4 col-sm-12">
+                    <strong>Damian Łąkas</strong>
+                    <div class="separator"></div>
+                    Założyciel Kilo Wiejskiej
+                </td>
+            </tr>
+        </table>
+        <div id="greetings" class="col-sm-12">
+            Dziękujemy za wsparcie Gminy Koniusza odnośnie organizowania turniejów.
+            <img src="<?php echo $this->baseUrl('img/koniusza.png') ?>" title="Gmina Koniusza" />
+        </div>
+        <div class="title">
+            <h1>W celu kontaktu skorzystaj z poniższego formularza</h1>
+        </div>
+        <div class="separator"></div>
+        <?php echo $this->form ?>
+    </div>
+</div>
