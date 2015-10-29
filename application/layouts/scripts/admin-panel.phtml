@@ -1,0 +1,76 @@
+<?php echo $this->doctype(); ?>
+<html>
+<head>
+    <meta name='author' content='Kamil Małek' />
+    <?php echo $this->headMeta(); ?>
+    <link rel="shortcut icon" href="<?php echo $this->baseUrl('favicon.ico') ?>" type="image/x-icon">
+    <link rel="icon" href="<?php echo $this->baseUrl('favicon.ico') ?>" type="image/x-icon">
+    <link href='<?php echo $this->baseUrl('css/bootstrap.css') ?>' rel='stylesheet' type='text/css' />
+    <link href='<?php echo $this->baseUrl('css/admin.css') ?>' rel='stylesheet' type='text/css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src='<?php echo $this->baseUrl('js/bootstrap.js') ?>'></script>
+    <?php echo $this->headTitle(); ?>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="admin_panel col-md-3">
+            <ul id="panels">
+                <li>Kategorie</li>
+                <li>
+                    <ul>
+                        <li><a href="/admin/category" title="Kategorie">Lista</a></li>
+                        <li><a href="/admin/category/add" title="Dodaj kategorię">Dodaj kategorię</a></li>
+                    </ul>
+                </li>
+                <li>Mecze</li>
+                <li>
+                    <ul>
+                        <li><a href="/admin/match" title="Mecze">Lista</a></li>
+                        <li><a href="/admin/match/add" title="Dodaj mecz">Dodaj mecz</a></li>
+                    </ul>
+                </li>
+                <li>Artykuły</li>
+                <li>
+                    <ul>
+                        <li><a href="/admin/news" title="Artykuły">Lista</a></li>
+                        <li><a href="/admin/news/add" title="Dodaj artykuł">Dodaj artykuł</a></li>
+                    </ul>
+                </li>
+                <li>Zawodnicy</li>
+                <li>
+                    <ul>
+                        <li><a href="/admin/players" title="Zawodnicy">Lista</a></li>
+                        <li><a href="/admin/players/add" title="Dodaj zawodnika">Dodaj zawodnika</a></li>
+                    </ul>
+                </li>
+                <li>Strony</li>
+                <li>
+                    <ul>
+                        <li><a href="/admin/site" title="Strony">Lista</a></li>
+                        <li><a href="/admin/site/add" title="Dodaj stronę">Dodaj stronę</a></li>
+                    </ul>
+                </li>
+                <li>Drużyny</li>
+                <li>
+                    <ul>
+                        <li><a href="/admin/team" title="Drużyny">Lista</a></li>
+                        <li><a href="/admin/team/add" title="Dodaj drużynę">Dodaj drużynę</a></li>
+                    </ul>
+                </li>
+                <li>Użytkownicy</li>
+                <li>
+                    <ul>
+                        <li><a href="/admin/user" title="Użytkownicy">Lista</a></li>
+                        <li><a href="/admin/user/add" title="Dodaj użytkownika">Dodaj użytkownika</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="content col-md-9">
+            <?php echo $this->layout()->content; ?>
+        </div>
+    </div>
+
+</body>
+</html>

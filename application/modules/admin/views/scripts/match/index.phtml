@@ -1,0 +1,26 @@
+<table id="matches" class="col-md-12">
+    <thead>
+        <tr>
+            <td class="col-md-1">Kolejka</td>
+            <td class="col-md-3">Data</td>
+            <td class="col-md-3">Gospodardz</td>
+            <td class="col-md-3">Gość</td>
+            <td class="col-md-1">Wynik</td>
+            <td class="col-md-1">Edytuj</td>
+            <td class="col-md-1">Usuń</td>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->matches as $match): ?>
+        <tr>
+            <td><?php echo $match->stage ?></td>
+            <td><?php echo $match->date ?></td>
+            <td><?php echo $match->home_name ?></td>
+            <td><?php echo $match->away_name ?></td>
+            <td><?php echo $match->is_played ? $match->home_goals.':'.$match->away_goals : '-:-' ?></td>
+            <td><a href="/admin/match/edit?id=<?php echo $match->id ?>" title="Edytuj mecz" >Edytuj</a></td>
+            <td><a href="/admin/match/delete?id=<?php echo $match->id ?>" title="Edytuj mecz" >Usuń</a></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

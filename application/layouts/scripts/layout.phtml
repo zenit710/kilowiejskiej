@@ -13,13 +13,23 @@
 </head>
 <body>
     <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v2.5";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    <script>
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '1652268505057180',
+            xfbml      : true,
+            version    : 'v2.5'
+          });
+        };
+
+        (function(d, s, id){
+           var js, fjs = d.getElementsByTagName(s)[0];
+           if (d.getElementById(id)) {return;}
+           js = d.createElement(s); js.id = id;
+           js.src = "//connect.facebook.net/pl_PL/sdk.js";
+           fjs.parentNode.insertBefore(js, fjs);
+         }(document, 'script', 'facebook-jssdk'));
+      </script>
     <div class="fb">
         <div class="fb-page" data-href="https://www.facebook.com/Kilo-Wiejskiej-210043922347916/" data-width="350" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"></div>
         <div class="fb-icon"></div>
@@ -61,7 +71,7 @@
                 <span class="span_kilo">Kilo Wiejskiej</span> to coś więcej niż drużyna - to styl życia.
                 <div class="separator"></div>
                 <div>Amatorska drużyna Kilo Wiejskiej powstała w 2011 roku z inicjatywy Damiana Łąkasa i swój debiut zaliczyła na turnieju w Sierosławicach (woj. Małopolskie). Zespół specjalizuje się głównie w piłce nożnej halowej.</div>
-                <button>Dowiedz się więcej</button>
+                <a href="<?php echo $this->url(array('url' => 'o-nas'), 'site') ?>" title="O nas"><button>Dowiedz się więcej</button></a>
             </div>
             <div class="footer_logo col-md-4">
                 <img src="<?php echo $this->baseUrl('img/kwft_215.png'); ?>" alt="KWFT" />
@@ -82,7 +92,7 @@
                 <table class="made_by">
                     <tr>
                         <td>CMS & Develop:</td>
-                        <td>Kamil Małek</td>
+                        <td><a href="http://kamilmalek.pl" title="kamilmalek.pl">Kamil Małek</a></td>
                     </tr>
                     <tr>
                         <td>Projekt:</td>

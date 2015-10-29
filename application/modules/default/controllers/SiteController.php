@@ -29,79 +29,29 @@ class SiteController extends Zend_Controller_Action
     
     public function contactAction()
     {
-        $form = new Zend_Form();
-        $form->setMethod('post');
-        
-        $form->removeDecorator('Label');
-        $form->setElementDecorators(array(
-            'viewHelper',
-            'Errors',
-            array(
-                array('row'=>'HtmlTag'),
-                array('tag'=>'div')
-            )
-        ));
-        $form->setDecorators(array(
-            'FormElements',
-            array(
-                array('data'=>'HtmlTag'),
-                array('tag'=>'div', 'class'=>'contact_form')
-            ),
-            'Form'
-        ));
-        
-        $form->addElement('text','name',array(
-            'required' => true,
-            'validators' => array(
-                'alnum'
-            ),
-            'placeholder' => 'Imię i nazwisko',
-            'class' => 'col-xs-12'
-        ));
-        $form->addElement('text','mail',array(
-            'required' => true,
-            'validators' => array(
-                array('regex',false,array(
-                    'pattern' => '^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$',
-                    'messages' => 'Nieprawidłowy adres e-mail!'
-                ))
-            ),
-            'placeholder' => 'Adres e-mail',
-            'class' => 'col-xs-12'
-        ));
-        $form->addElement('text','title',array(
-            'required' => true,
-            'validators' => array(
-                'alnum'
-            ),
-            'placeholder' => 'Tytuł wiadomości',
-            'class' => 'col-xs-12'
-        ));
-        $form->addDisplayGroup(array('name','mail','title'), 'info');
-        $info = $form->getDisplayGroup('info');
-        $info->setDecorators(array(
-            'FormElements',
-            'Fieldset',
-            array('HtmlTag',array('tag'=>'div', 'class'=>'col-md-4 col-sm-12'))
-        ));
-        $form->addElement('textarea','message',array(
-            'required' => true,
-            'placeholder' => 'Treść wiadomości',
-            'rows' => 5,
-            'class' => 'col-xs-12'
-        ));
-        $form->addElement('submit','submit', array(
-            'label' => 'Wyślij wiadomość',
-            'id' => 'contact_form_submit'
-        ));
-        $form->addDisplayGroup(array('message','submit'), 'message_group');
-        $message = $form->getDisplayGroup('message_group');
-        $message->setDecorators(array(
-            'FormElements',
-            'Fieldset',
-            array('HtmlTag',array('tag'=>'div', 'class'=>'col-md-8 col-sm-12'))
-        ));
+        $form = new My_Forms_Contact();
         echo $form->render();
+        
+        if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
+            exit;
+            $values = $form->getValues();
+            $html= 'Wiadomość od: '.$values['name'].'<br /><br />';
+            $html.= $values['message'];
+            
+            $config = Zend_Registry::get('config')->mail->config;
+            $smtp = Zend_Registry::get('config')->mail->smtp;
+            $sendTo = Zend_Registry::get('config')->mail->to;
+
+            $transport = new Zend_Mail_Transport_Smtp($smtp, (array)$config);
+            
+            $mail = new Zend_Mail('utf-8');
+            $mail->setFrom($values['mail']);
+            $mail->setReplyTo($values['mail']);
+            $mail->setSubject($values['title']);
+            $mail->setBodyHtml($html);
+            $mail->addTo($sendTo);
+            $mail->send($transport);
+        }
     }
     
 }

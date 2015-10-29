@@ -61,5 +61,25 @@ class Application_Model_DbTable_News extends Zend_Db_Table_Abstract
         return $this->fetchRow($select);
     }
     
+    public function getAll()
+    {
+        $select = $this->select()
+                ->from($this->_name)
+                ->setIntegrityCheck(false)
+                ->join('categories','category_id = categories.id',array('name as categoryName'))
+                ->order('date DESC');
+        
+        return $this->fetchAll($select);
+    }
+    
+    public function getById($id)
+    {
+        $select = $this->select()
+                ->from($this->_name)
+                ->where('id = ?',$id);
+        
+        return $this->fetchAll($select);
+    }
+    
 }
 

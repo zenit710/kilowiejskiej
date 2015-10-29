@@ -1,0 +1,22 @@
+<table class="col-md-12">
+    <thead>
+        <tr>
+            <td class="col-md-3">Data</td>
+            <td class="col-md-3">Tytuł</td>
+            <td class="col-md-2">Kategoria</td>
+            <td class="col-md-1">Usuń</td>
+            <td class="col-md-1">Edytuj</td>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($this->news as $news): ?>
+        <tr>
+            <td><?php echo $news->date ?></td>
+            <td><?php echo $news->title ?></td>
+            <td><?php echo $news->categoryName ?></td>
+            <td><a href="/admin/news/edit?id=<?php echo $news->id ?>" title="Edytuj artykuł">Edytuj</a></td>
+            <td><a href="/admin/news/delete?id=<?php echo $news->id ?>" title="Usuń artykuł">Usuń</a></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

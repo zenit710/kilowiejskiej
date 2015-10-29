@@ -1,10 +1,20 @@
+@font-face {
+    font-family: Fira-regular;
+    src: url(../fonts/FiraSansOT-Regular.otf);
+}
+
+@font-face {
+    font-family: Fira-bold;
+    src: url(../fonts/FiraSansOT-Bold.otf);
+}
+
 html{
     margin: 0;
 }
 
 body{
     background: #eee url(../img/tlo2.jpg) no-repeat top center;
-    font-family: verdana;
+    font-family: Fira-regular;
     font-size: 14px;
     margin: 0;
 }
@@ -56,7 +66,7 @@ h3,h4,h5,h6{
 .fb{
     position: fixed;
     left: -350px;
-    top: 40%;
+    top: 35%;
     z-index: 2;
     transition: left .4s;
 }
@@ -68,7 +78,7 @@ h3,h4,h5,h6{
 .fb-icon{
     width: 32px;
     height: 32px;
-    background: #0000ff;
+    background-image: url(../img/fb.png);
     position: absolute;
     top: 0px;
     right: -32px;
@@ -388,8 +398,13 @@ h3,h4,h5,h6{
     border: none;
 }
 
-.widget #ranking_tabs a:active, .widget #ranking_tabs a:link, .widget #ranking_tabs a:hover, .widget #ranking_tabs a:visited{
+.widget #ranking_tabs a:active, .widget #ranking_tabs a:link, .widget #ranking_tabs a:visited{
     color: #8E8E8E;
+    background: none;
+}
+
+.widget #ranking_tabs a:hover{
+    color: #C00202;
 }
 
 .widget #ranking_tabs li.active a:active, .widget #ranking_tabs li.active a:link, .widget #ranking_tabs li.active a:hover, .widget #ranking_tabs li.active a:visited{

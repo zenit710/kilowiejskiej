@@ -1,0 +1,12 @@
+body{
+    margin-top: 10px;
+}
+
+ul#panels, ul#panels ul{
+    list-style-type: none;
+    display: block;
+}
+
+li{
+    display: block;
+}

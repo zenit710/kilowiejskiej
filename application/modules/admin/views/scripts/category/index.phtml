@@ -1,0 +1,18 @@
+<table id="categories" class="col-sm-12">
+    <thead>
+        <tr>
+            <td class="col-md-8">Nazwa kategorii</td>
+            <td class="col-md-2">Edytuj</td>
+            <td class="col-md-2">Usuń</td>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->categories as $category): ?>
+            <tr>
+                <td><?php echo $category->name ?></td>
+                <td><a href="/admin/category/edit/?id=<?php echo $category->id ?>" title="Edytuj kategorię" >Edytuj</a></td>
+                <td><a href="/admin/category/delete/?id=<?php echo $category->id ?>" title="Usuń kategorię" >Usuń</a></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>    
