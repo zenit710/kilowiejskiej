@@ -47,6 +47,26 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
         
         return $this->fetchAll($select);
     }
+ 
+    public function getAll()
+    {
+        $select = $this->select()
+                ->from($this->_name)
+                ->setIntegrityCheck(false)
+                ->join('teams','team_id = teams.id','name as teamName')
+                ->order(array('teamName ASC','surname ASC','name ASC'));
+        
+        return $this->fetchAll($select);
+    }
+    
+    public function getById($id)
+    {
+        $select = $this->select()
+                ->from($this->_name)
+                ->where('id = ?',$id);
+        
+        return $this->fetchAll($select);
+    }
     
 }
 

@@ -59,7 +59,7 @@ class Admin_NewsController extends Zend_Controller_Action
     public function deleteAction()
     {
         $id = $this->getParam('id');
-        $this->newsMapper->update('id = '.$id);
+        $this->newsMapper->delete('id = '.$id);
         $this->redirect('/admin/news');
     }
     

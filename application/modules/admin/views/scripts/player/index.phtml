@@ -1,4 +1,22 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Player</b> and script/action name <b>index</b></p>
-</div>
+<table class="col-md-12">
+    <thead>
+        <tr>
+            <td class="col-md-3">Nazwisko</td>
+            <td class="col-md-3">Imię</td>
+            <td class="col-md-4">Zespół</td>
+            <td class="col-md-1">Edytuj</td>
+            <td class="col-md-1">Usuń</td>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($this->players as $player): ?>
+        <tr>
+            <td><?php echo $player->surname ?></td>
+            <td><?php echo $player->name ?></td>
+            <td><?php echo $player->teamName ?></td>
+            <td><a href="/admin/player/edit?id=<?php echo $player->id ?>" title="Edytuj zawodnika">Edytuj</a></td>
+            <td><a href="/admin/player/delete?id=<?php echo $player->id ?>" title="Usuń zawodnika">Usuń</a></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
