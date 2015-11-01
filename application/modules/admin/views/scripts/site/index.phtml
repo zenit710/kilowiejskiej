@@ -1,4 +1,20 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Site</b> and script/action name <b>index</b></p>
-</div>
+<table class="col-md-12">
+    <thead>
+        <tr>
+            <th class="col-md-9">Tytuł</th>
+            <th class="col-md-1">Zewnętrzny</th>
+            <th class="col-md-1">Edytuj</th>
+            <th class="col-md-1">Usuń</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->sites as $site): ?>
+        <tr>
+            <td><?php echo $site->title ?></td>
+            <td><?php echo $site->outside_url ? 'TAK' : 'NIE' ?></td>
+            <td><a href="/admin/site/edit?id=<?php echo $site->id ?>" title="Edytuj stronę">Edytuj</a></td>
+            <td><a href="/admin/site/delete?id=<?php echo $site->id ?>" title="Usuń stron">Usuń</a></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

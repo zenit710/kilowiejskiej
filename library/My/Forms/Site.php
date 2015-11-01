@@ -4,20 +4,32 @@
  *
  * @author Kamil
  */
-class My_Forms_Category extends Zend_Form {
+class My_Forms_Site extends Zend_Form {
     
     public function init()
     {
-        $this->addElement('text','name',array(
-            'label' => 'Nazwa kategorii:',
+        $this->addElement('text','title',array(
+            'label' => 'Tytuł strony:',
             'required' => true
         ));
-        $this->addElement('file','picture',array(
-            'label' => 'Domyślna grafika:',
+        $this->addElement('text','content',array(
+            'label' => 'Treść:',
+            'required' => false
+        ));
+        $this->addElement('text','keywords',array(
+            'label' => 'Słowa kluczowe:',
+            'required' => false
+        ));
+        $this->addElement('text','order',array(
+            'label' => 'Kolejność w menu:',
+            'required' => true
+        ));
+        $this->addElement('text','outside_url',array(
+            'label' => 'Link zewnętrzny:',
             'required' => false
         ));
         $this->addElement('submit','submit',array(
-            'label' => 'Dodaj',
+            'label' => 'Dodaj stronę',
             'ignore' => true
         ));
     }
