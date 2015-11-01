@@ -1,4 +1,18 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Team</b> and script/action name <b>index</b></p>
-</div>
+<table class="col-md-12">
+    <thead>
+        <tr>
+            <th class="col-md-10">Nazwa</th>
+            <th class="col-md-1">Edytuj</th>
+            <th class="col-md-1">Usuń</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->teams as $team): ?>
+        <tr>
+            <td><?php echo $team->name ?></td>
+            <td><a href="/admin/team/edit?id=<?php echo $team->id ?>" title="Edytuj zaspół">Edytuj</a></td>
+            <td><a href="/admin/team/delete?id=<?php echo $team->id ?>" title="Usuń zespół">Usuń</a></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

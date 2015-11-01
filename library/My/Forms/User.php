@@ -4,17 +4,20 @@
  *
  * @author Kamil
  */
-class My_Forms_Category extends Zend_Form {
+class My_Forms_User extends Zend_Form {
+    
+    private $permissions = array(
+        'ADMIN' => 'ADMIN',
+        'MODERATOR' => 'MODERATOR',
+        'USER' => 'USER'
+    );
     
     public function init()
     {
-        $this->addElement('text','name',array(
-            'label' => 'Nazwa kategorii:',
-            'required' => true
-        ));
-        $this->addElement('file','picture',array(
-            'label' => 'Domyślna grafika:',
-            'required' => false
+        $this->addElement('select','permissions',array(
+            'label' => 'Uprawnienia:',
+            'required' => true,
+            'multiSelect' => $this->permissions
         ));
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj',

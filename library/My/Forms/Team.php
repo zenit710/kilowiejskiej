@@ -4,16 +4,16 @@
  *
  * @author Kamil
  */
-class My_Forms_Category extends Zend_Form {
+class My_Forms_Team extends Zend_Form {
     
     public function init()
     {
         $this->addElement('text','name',array(
-            'label' => 'Nazwa kategorii:',
+            'label' => 'Nazwa drużyny:',
             'required' => true
         ));
-        $this->addElement('file','picture',array(
-            'label' => 'Domyślna grafika:',
+        $this->addElement('file','photo',array(
+            'label' => 'Zdjęcie drużyny:',
             'required' => false
         ));
         $this->addElement('submit','submit',array(

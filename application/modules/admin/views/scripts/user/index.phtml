@@ -1,4 +1,24 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>User</b> and script/action name <b>index</b></p>
-</div>
+<table class="col-md-12">
+    <thead>
+        <tr>
+            <th class="col-md-6">Użytkownik</th>
+            <th class="col-md-1">Uprawnienia</th>
+            <th class="col-md-1">Zbanowany</th>
+            <th class="col-md-2">Zmień uprawnienia</th>
+            <th class="col-md-1">Banuj</th>
+            <th class="col-md-1">Usuń</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->users as $user): ?>
+        <tr>
+            <td><?php echo $user->nickname ?></td>
+            <td><?php echo $user->permissions ?></td>
+            <td><?php echo $user->is_banned ? 'TAK' : 'NIE'; ?></td>
+            <td><a href="/admin/user/permissions?id=<?php echo $user->id ?>" title="Zmień uprawnienia użytkownika">Zmień</a></td>
+            <td><a href="/admin/user/ban?id=<?php echo $user->id ?>" title="Banuj użytkownika">Banuj</a></td>
+            <td><a href="/admin/user/delete?id=<?php echo $user->id ?>" title="Usuń użytkownika">Usuń</a></td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
