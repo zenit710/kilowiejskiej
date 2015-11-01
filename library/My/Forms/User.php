@@ -17,10 +17,10 @@ class My_Forms_User extends Zend_Form {
         $this->addElement('select','permissions',array(
             'label' => 'Uprawnienia:',
             'required' => true,
-            'multiSelect' => $this->permissions
+            'multiOptions' => $this->permissions
         ));
         $this->addElement('submit','submit',array(
-            'label' => 'Dodaj',
+            'label' => 'Zmień',
             'ignore' => true
         ));
     }
