@@ -26,5 +26,14 @@ class Application_Model_DbTable_Seasons extends Zend_Db_Table_Abstract
         return $this->fetchRow($select);
     }
 
+    public function getById($id)
+    {
+        $select = $this->select()
+                ->from($this->_name)
+                ->where('id = ?',$id);
+        
+        return $this->fetchRow($select);
+    }
+    
 }
 

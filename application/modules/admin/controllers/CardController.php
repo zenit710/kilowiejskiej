@@ -1,6 +1,6 @@
 <?php
 
-class CardController extends Zend_Controller_Action
+class Admin_CardController extends Zend_Controller_Action
 {
 
     public function init()

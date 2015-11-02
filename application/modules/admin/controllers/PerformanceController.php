@@ -1,6 +1,6 @@
 <?php
 
-class PerformanceController extends Zend_Controller_Action
+class Admin_PerformanceController extends Zend_Controller_Action
 {
 
     public function init()

@@ -56,7 +56,6 @@ class Admin_CategoryController extends Zend_Controller_Action
         $this->redirect('/admin/category');
     }
 
-
     private function generateSlug($string)
     {
         $string = strtr($string, 'ĘęÓóĄąŚśŁłŹźŻżĆćŃń', 'EeOoAaSsLlZzZzCcNn');

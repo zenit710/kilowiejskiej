@@ -1,6 +1,6 @@
 <?php
 
-class ScorerController extends Zend_Controller_Action
+class Admin_ScorerController extends Zend_Controller_Action
 {
 
     public function init()

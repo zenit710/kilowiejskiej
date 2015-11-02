@@ -1,18 +1,57 @@
 <?php
 
-class SeasonController extends Zend_Controller_Action
+class Admin_SeasonController extends Zend_Controller_Action
 {
 
+    private $seasonsMapper;
+    
     public function init()
     {
-        /* Initialize action controller here */
+        $this->seasonsMapper = new Application_Model_DbTable_Seasons();
+        $this->_helper->layout->setLayout('admin-panel');
     }
 
     public function indexAction()
     {
-        // action body
+        $this->view->seasons = $this->seasonsMapper->fetchAll();
     }
 
-
+    public function addAction()
+    {
+        $form = new My_Forms_Season();
+        echo $form->render();
+        
+        if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
+            $values = $form->getValues();
+            $this->seasonsMapper->insert($values);
+            $this->redirect('/admin/season');
+        }
+    }
+    
+    public function editAction()
+    {
+        $id = $this->getParam('id');
+        $season = $this->seasonsMapper->getById($id);
+        if(!$season){
+            return;
+        }
+        $form = new My_Forms_Season();
+        $form->populate($season->toArray());
+        echo $form->render();
+        
+        if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
+            $values = $form->getValues();
+            $this->seasonsMapper->update($values, 'id = '.$id);
+            $this->redirect('/admin/season');
+        }
+    }
+    
+    public function deleteAction()
+    {
+        $id = $this->getParam('id');
+        $this->seasonsMapper->delete('id = '.$id);
+        $this->redirect('/admin/season');
+    }
+    
 }
 

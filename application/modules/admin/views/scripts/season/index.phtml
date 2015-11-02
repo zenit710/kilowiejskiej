@@ -1,4 +1,22 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Season</b> and script/action name <b>index</b></p>
-</div>
+<table id="seasons" class="col-sm-12">
+    <thead>
+        <tr>
+            <th class="col-md-6">Sezon</th>
+            <th class="col-md-3">Okres</th>
+            <th class="col-md-1">Aktywny</th>
+            <th class="col-md-1">Edytuj</th>
+            <th class="col-md-1">Usuń</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->seasons as $season): ?>
+            <tr>
+                <td><?php echo $season->name ?></td>
+                <td><?php echo $season->period ?></td>
+                <td><?php echo $season->is_active ? 'TAK' : 'NIE' ?></td>
+                <td><a href="/admin/season/edit/?id=<?php echo $season->id ?>" title="Edytuj sezon" >Edytuj</a></td>
+                <td><a href="/admin/season/delete/?id=<?php echo $season->id ?>" title="Usuń sezon" >Usuń</a></td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>    
