@@ -10,7 +10,3 @@ ul#panels, ul#panels ul{
 li{
     display: block;
 }
-
-#scorers select, #performances select{
-    display: block;
-}

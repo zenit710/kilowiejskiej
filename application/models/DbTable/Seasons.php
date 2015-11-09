@@ -35,5 +35,14 @@ class Application_Model_DbTable_Seasons extends Zend_Db_Table_Abstract
         return $this->fetchRow($select);
     }
     
+    public function getAllActive()
+    {
+        $select = $this->select()
+                ->from($this->_name)
+                ->where('is_active = ?', 1);
+        
+        return $this->fetchAll($select);
+    }
+    
 }
 

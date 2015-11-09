@@ -12,7 +12,7 @@ class My_Forms_Site extends Zend_Form {
             'label' => 'Tytuł strony:',
             'required' => true
         ));
-        $this->addElement('text','content',array(
+        $this->addElement('textarea','content',array(
             'label' => 'Treść:',
             'required' => false
         ));

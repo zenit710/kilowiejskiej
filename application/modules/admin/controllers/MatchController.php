@@ -5,9 +5,7 @@ class Admin_MatchController extends Zend_Controller_Action
 
     private $matchesMapper;
     private $teamsMapper;
-    private $playersMapper;
-    private $performancesMapper;
-    private $scorersMapper;
+    private $seasonsMapper;
     private $seasonsDataMapper;
     
     public function init()
@@ -15,9 +13,7 @@ class Admin_MatchController extends Zend_Controller_Action
         $this->_helper->layout->setLayout('admin-panel');
         $this->matchesMapper = new Application_Model_DbTable_Matches();
         $this->teamsMapper = new Application_Model_DbTable_Teams();
-        $this->playersMapper = new Application_Model_DbTable_Players();
-        $this->performancesMapper = new Application_Model_DbTable_Performances();
-        $this->scorersMapper = new Application_Model_DbTable_Scorers();
+        $this->seasonsMapper = new Application_Model_DbTable_Seasons();
         $this->seasonsDataMapper = new Application_Model_DbTable_SeasonData();
     }
 
@@ -31,13 +27,12 @@ class Admin_MatchController extends Zend_Controller_Action
         $teams = $this->teamsMapper->getAllTeamNameIdPairs();
         $teamsArray = $this->prepareTeamsArray($teams);
         $this->view->teamIds = $this->getTeamIds($teams);
-        $this->view->players = json_encode($this->playersMapper->getAllKiloPlayers()->toArray());
-        $form = new My_Forms_Match($teamsArray);
+        $seasons = $this->prepareSeasonsArray($this->seasonsMapper->getAllActive());
+        $form = new My_Forms_Match($teamsArray, $seasons);
         echo $form->render();
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
-            var_dump($values);exit;
             $this->matchesMapper->insert($values);
             $this->redirect('/admin/match');
         }
@@ -53,7 +48,8 @@ class Admin_MatchController extends Zend_Controller_Action
         $teams = $this->teamsMapper->getAllTeamNameIdPairs();
         $teamsArray = $this->prepareTeamsArray($teams);
         $this->view->teamIds = $this->getTeamIds($teams);
-        $form = new My_Forms_Match($teamsArray);
+        $seasons = $this->prepareSeasonsArray($this->seasonsMapper->getAllActive());
+        $form = new My_Forms_Match($teamsArray, $seasons);
         $form->populate($match->toArray());
         echo $form->render();
         
@@ -69,6 +65,18 @@ class Admin_MatchController extends Zend_Controller_Action
         $id = $this->getParam('id');
         $this->matchesMapper->delete('id='.$id);
         $this->redirect('/admin/match');
+    }
+    
+    private function prepareSeasonsArray($seasons)
+    {
+        if($seasons) {
+            $seasonsArray = array();
+            foreach($seasons as $season) {
+                $seasonsArray[$season->id] = $season->name.' '.$season->period;
+            }
+            return $seasonsArray;
+        }
+        return null;
     }
     
     private function prepareTeamsArray($teams)

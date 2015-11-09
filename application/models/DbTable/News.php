@@ -78,7 +78,7 @@ class Application_Model_DbTable_News extends Zend_Db_Table_Abstract
                 ->from($this->_name)
                 ->where('id = ?',$id);
         
-        return $this->fetchAll($select);
+        return $this->fetchRow($select);
     }
     
 }

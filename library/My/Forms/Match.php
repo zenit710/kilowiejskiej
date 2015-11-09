@@ -7,18 +7,20 @@
 class My_Forms_Match extends Zend_Form {
     
     private $teams = null;
+    private $seasons = null;
     
-    public function __construct($teams, $options = null) {
+    public function __construct($teams, $seasons, $options = null) {
         $this->teams = $teams;
+        $this->seasons = $seasons;
         parent::__construct($options);
     }
     
     public function init()
     {
-        $this->addElement('text','season_id',array(
+        $this->addElement('select','season_id',array(
             'label' => 'Sezon:',
             'required' => true,
-            'min' => 0
+            'multiOptions' => $this->seasons
         ));
         $this->addElement('text','stage',array(
             'label' => 'Kolejka:',
@@ -55,40 +57,6 @@ class My_Forms_Match extends Zend_Form {
         ));
         $this->addElement('hidden','home_id',array());
         $this->addElement('hidden','away_id',array());
-        $this->addElement(
-            'hidden',
-            'scorers',
-            array(
-                'required' => false,
-                'autoInsertNotEmptyValidator' => false,
-                'decorators' => array(
-                    array(
-                        'HtmlTag', array(
-                            'tag'  => 'div',
-                            'id'   => 'scorers'
-                        )
-                    )
-                )
-            )
-        );
-        $this->scorers->clearValidators();
-        $this->addElement(
-            'hidden',
-            'performances',
-            array(
-                'required' => false,
-                'autoInsertNotEmptyValidator' => false,
-                'decorators' => array(
-                    array(
-                        'HtmlTag', array(
-                            'tag'  => 'div',
-                            'id'   => 'performances'
-                        )
-                    )
-                )
-            )
-        );
-        $this->performances->clearValidators();
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj mecz',
             'ignore' => true

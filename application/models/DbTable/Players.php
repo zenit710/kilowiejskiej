@@ -19,14 +19,6 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
         'is_junior',
         'is_active'
     );
-    private $columnListForTeamInfo = array(
-        'name',
-        'surname',
-        'city',
-        'position',
-        'photo',
-        'age' => "TIMESTAMPDIFF(YEAR, date_of_birth, CURDATE()) AS age"
-    );
     
     /**
      * Zwraca listę wszystkich zawodników Kilo Wiejskiej
@@ -35,7 +27,7 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
      */
     public function getAllKiloPlayers(){
         $select = $this->select()
-                ->from($this->_name,$this->columnListForTeamInfo)
+                ->from($this->_name)
                 ->setIntegrityCheck(false)
                 ->joinLeft('teams',$this->_name.'.team_id = teams.id','')
                 ->joinLeft('performances',$this->_name.'.id = performances.player_id','count(distinct performances.id) as performances')
@@ -65,7 +57,7 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
                 ->from($this->_name)
                 ->where('id = ?',$id);
         
-        return $this->fetchAll($select);
+        return $this->fetchRow($select);
     }
     
 }
