@@ -10,8 +10,7 @@ class Application_Model_DbTable_Scorers extends Zend_Db_Table_Abstract
         'id',
         'season_id',
         'match_id',
-        'player_id',
-        'goals'
+        'player_id'
     );
     
     /**
@@ -21,7 +20,7 @@ class Application_Model_DbTable_Scorers extends Zend_Db_Table_Abstract
      */
     public function getTopScorers(){
         $select = $this->select()
-                ->from($this->_name, 'sum(goals) as goals')
+                ->from($this->_name, 'count(player_id) as goals')
                 ->setIntegrityCheck(false)
                 ->join('seasons', 'scorers.season_id = seasons.id', '')
                 ->join('players', 'scorers.player_id = players.id', array('name','surname'))
@@ -35,5 +34,26 @@ class Application_Model_DbTable_Scorers extends Zend_Db_Table_Abstract
         return $this->fetchAll($select);
     }
 
+    public function getIdsByMatchId($id)
+    {
+        $select = $this->select()
+                ->from($this->_name)
+                ->where('match_id = ?', $id);
+               
+        $scorers = $this->fetchAll($select);
+        $scorersIds = $this->getIdsFromScorers($scorers);
+        
+        return $scorersIds;
+    }
+
+    private function getIdsFromScorers($scorers){
+        $ids = array();
+        foreach($scorers as $scorer){
+            $ids[] = $scorer->id;
+        }
+        
+        return $ids;
+    }
+    
 }
 

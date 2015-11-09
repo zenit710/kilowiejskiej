@@ -31,7 +31,7 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
                 ->setIntegrityCheck(false)
                 ->joinLeft('teams',$this->_name.'.team_id = teams.id','')
                 ->joinLeft('performances',$this->_name.'.id = performances.player_id','count(distinct performances.id) as performances')
-                ->joinLeft('scorers',$this->_name.'.id = scorers.player_id','CAST((sum(scorers.goals)*count(DISTINCT scorers.id)/count(*)) as UNSIGNED) as goals')
+                ->joinLeft('scorers',$this->_name.'.id = scorers.player_id','count(distinct scorers.id) as goals')
                 ->joinLeft('cards',$this->_name.'.id = cards.player_id','count(distinct cards.id) as cards')
                 ->group($this->_name.'.id')
                 ->where('teams.name = ?',self::TEAM)

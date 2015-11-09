@@ -20,7 +20,11 @@
             <td><?php echo $match->away_name ?></td>
             <td><?php echo $match->is_played ? $match->home_goals.':'.$match->away_goals : '-:-' ?></td>
             <td><a href="/admin/match/edit?id=<?php echo $match->id ?>" title="Edytuj mecz" >Edytuj</a></td>
-            <td><a href="/admin/match/fill?id=<?php echo $match->id ?>" title="Uzupełnij mecz" >Uzupełnij</a></td>
+            <td>
+                <?php if($match->home_name == 'Kilo Wiejskiej' || $match->away_name == 'Kilo Wiejskiej'): ?>
+                <a href="/admin/match/fill?id=<?php echo $match->id ?>" title="Uzupełnij mecz" >Uzupełnij</a>
+                <?php endif; ?>
+            </td>
             <td><a href="/admin/match/delete?id=<?php echo $match->id ?>" title="Edytuj mecz" >Usuń</a></td>
         </tr>
         <?php endforeach; ?>

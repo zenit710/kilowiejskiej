@@ -34,6 +34,27 @@ class Application_Model_DbTable_Performances extends Zend_Db_Table_Abstract
                 
         return $this->fetchAll($select);
     }
+    
+    public function getIdsByMatchId($id)
+    {
+        $select = $this->select()
+                ->from($this->_name)
+                ->where('match_id = ?', $id);
+               
+        $performances = $this->fetchAll($select);
+        $performancesIds = $this->getIdsFromPerformances($performances);
+        
+        return $performancesIds;
+    }
 
+    private function getIdsFromPerformances($performances){
+        $ids = array();
+        foreach($performances as $performance){
+            $ids[] = $performance->id;
+        }
+        
+        return $ids;
+    }
+    
 }
 
