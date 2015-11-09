@@ -3,10 +3,11 @@
         <tr>
             <th class="col-md-1">Kolejka</th>
             <th class="col-md-3">Data</th>
-            <th class="col-md-3">Gospodardz</th>
-            <th class="col-md-3">Gość</th>
+            <th class="col-md-2">Gospodardz</th>
+            <th class="col-md-2">Gość</th>
             <th class="col-md-1">Wynik</th>
             <th class="col-md-1">Edytuj</th>
+            <th class="col-md-1">Uzupełnij zawodników</th>
             <th class="col-md-1">Usuń</th>
         </tr>
     </thead>
@@ -19,6 +20,7 @@
             <td><?php echo $match->away_name ?></td>
             <td><?php echo $match->is_played ? $match->home_goals.':'.$match->away_goals : '-:-' ?></td>
             <td><a href="/admin/match/edit?id=<?php echo $match->id ?>" title="Edytuj mecz" >Edytuj</a></td>
+            <td><a href="/admin/match/fill?id=<?php echo $match->id ?>" title="Uzupełnij mecz" >Uzupełnij</a></td>
             <td><a href="/admin/match/delete?id=<?php echo $match->id ?>" title="Edytuj mecz" >Usuń</a></td>
         </tr>
         <?php endforeach; ?>
