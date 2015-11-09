@@ -55,6 +55,40 @@ class My_Forms_Match extends Zend_Form {
         ));
         $this->addElement('hidden','home_id',array());
         $this->addElement('hidden','away_id',array());
+        $this->addElement(
+            'hidden',
+            'scorers',
+            array(
+                'required' => false,
+                'autoInsertNotEmptyValidator' => false,
+                'decorators' => array(
+                    array(
+                        'HtmlTag', array(
+                            'tag'  => 'div',
+                            'id'   => 'scorers'
+                        )
+                    )
+                )
+            )
+        );
+        $this->scorers->clearValidators();
+        $this->addElement(
+            'hidden',
+            'performances',
+            array(
+                'required' => false,
+                'autoInsertNotEmptyValidator' => false,
+                'decorators' => array(
+                    array(
+                        'HtmlTag', array(
+                            'tag'  => 'div',
+                            'id'   => 'performances'
+                        )
+                    )
+                )
+            )
+        );
+        $this->performances->clearValidators();
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj mecz',
             'ignore' => true
