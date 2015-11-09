@@ -1,2 +1,6 @@
-<?php
-
+<script>
+    var playersJson = '<?php echo $this->players ?>';
+    var playersObjectArray = JSON.parse(playersJson);
+    playersObjectArray.unshift({'id':0,'name':'---','surname':'---'});
+</script>
+<script src="<?php echo $this->baseUrl('/js/match.js'); ?>"></script>

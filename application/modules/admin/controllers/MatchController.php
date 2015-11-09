@@ -5,12 +5,20 @@ class Admin_MatchController extends Zend_Controller_Action
 
     private $matchesMapper;
     private $teamsMapper;
+    private $playersMapper;
+    private $performancesMapper;
+    private $scorersMapper;
+    private $seasonsDataMapper;
     
     public function init()
     {
         $this->_helper->layout->setLayout('admin-panel');
         $this->matchesMapper = new Application_Model_DbTable_Matches();
         $this->teamsMapper = new Application_Model_DbTable_Teams();
+        $this->playersMapper = new Application_Model_DbTable_Players();
+        $this->performancesMapper = new Application_Model_DbTable_Performances();
+        $this->scorersMapper = new Application_Model_DbTable_Scorers();
+        $this->seasonsDataMapper = new Application_Model_DbTable_SeasonData();
     }
 
     public function indexAction()
@@ -23,11 +31,13 @@ class Admin_MatchController extends Zend_Controller_Action
         $teams = $this->teamsMapper->getAllTeamNameIdPairs();
         $teamsArray = $this->prepareTeamsArray($teams);
         $this->view->teamIds = $this->getTeamIds($teams);
+        $this->view->players = json_encode($this->playersMapper->getAllKiloPlayers()->toArray());
         $form = new My_Forms_Match($teamsArray);
         echo $form->render();
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
+            var_dump($values);exit;
             $this->matchesMapper->insert($values);
             $this->redirect('/admin/match');
         }
