@@ -96,6 +96,18 @@ class Admin_MatchController extends Zend_Controller_Action
         $this->redirect('/admin/match');
     }
     
+    private function prepareSeasonsArray($seasons)
+    {
+        if($seasons) {
+            $seasonsArray = array();
+            foreach($seasons as $season) {
+                $seasonsArray[$season->id] = $season->name.' '.$season->period;
+            }
+            return $seasonsArray;
+        }
+        return null;
+    }
+    
     private function preparePlayersArray($players)
     {
         if($players) {
