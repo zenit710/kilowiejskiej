@@ -42,8 +42,8 @@ class Application_Model_DbTable_Users extends Zend_Db_Table_Abstract
     
     public function add(array $data)
     {
-        $data['password_hash'] = $data['salt'] . sha1($data['salt'] . $data['password']);
-        unset($data['password'], $data['salt']);
+        $data['password'] = $data['salt'] . sha1($data['salt'] . $data['password']);
+        unset($data['passwordAgain']);
         return $this->insert($data);
     }
  

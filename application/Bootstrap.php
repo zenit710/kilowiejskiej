@@ -10,6 +10,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             'frontController'
         ));
         $this->getResource('frontController')->registerPlugin(new My_Controller_Plugin_Auth());
+        //Zend_Registry::get('auth')->clearIdentity();
     }
     
     protected function _initPage(){

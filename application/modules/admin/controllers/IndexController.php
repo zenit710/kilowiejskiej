@@ -27,6 +27,7 @@ class Admin_IndexController extends Zend_Controller_Action
         $request = $this->getRequest();
 
         $form = new My_Forms_Login();
+        
         // if POST data has been submitted
         if ($request->isPost() && $form->isValid($request->getPost())) {
             // prepare a database adapter for Zend_Auth
@@ -56,6 +57,11 @@ class Admin_IndexController extends Zend_Controller_Action
                 case Zend_Auth_Result::SUCCESS:
                     // get user object (ommit password_hash)
                     $user = $adapter->getResultRowObject(null, 'password');
+                    if($user->is_banned){
+                        $auth->clearIdentity();
+                        $this->view->error = 'Nie zostałeś jeszcze zweryfikowany albo masz bana';
+                        break;
+                    }
                     // to help thwart session fixation/hijacking
                     if ($form->getValue('rememberMe') == 1) {
                         // remember the session for 604800s = 7 days
@@ -89,70 +95,32 @@ class Admin_IndexController extends Zend_Controller_Action
     {
         // redirect logged in users
         if (Zend_Registry::getInstance()->get('auth')->hasIdentity()) {
-            $this->_redirect('/');
+            $this->_redirect('/admin');
         }
 
         $request = $this->getRequest();
-        $users = $this->_getTable('Users');
 
-        $form = $this->_getForm('Register',
-                                $this->_helper->url('register'));
+        $form = new My_Forms_Register();
+        
         // if POST data has been submitted
-        if ($request->isPost()) {
-            // if the Register form has been submitted and the submitted data is valid
-            if (isset($_POST['register']) && $form->isValid($_POST)) {
+        if ($request->isPost() && $form->isValid($request->getPost())) {
+            $data = $form->getValues();
 
-                $data = $form->getValues();
-
-                if ($users->getSingleWithEmail($data['email']) != null) {
-                    // if the email already exists in the database
-                    $this->view->error = 'Email already taken';
-                } else if ($users->getSingleWithUsername($data['username']) != null) {
-                    // if the username already exists in the database
-                    $this->view->error = 'Username already taken';
-                } else if ($data['email'] != $data['emailAgain']) {
-                    // if both emails do not match
-                    $this->view->error = 'Both emails must be same';
-                } else if ($data['password'] != $data['passwordAgain']) {
-                    // if both passwords do not match
-                    $this->view->error = 'Both passwords must be same';
-                } else {
-
-                    // everything is OK, let's send email with a verification string
-                    // the verifications string is an sha1 hash of the email
-                    $mail = new Zend_Mail();
-                    $mail->setFrom('your@name.com', 'Your Name');
-                    $mail->setSubject('Thank you for registering');
-                    $mail->setBodyText('Dear Sir or Madam,
-
-    Thank You for registering at yourwebsite.com. In order for your account to be
-    activated please click on the following URI:
-
-    http://yourwebsite.com/admin/login/email-verification?str=' . sha1($data['email'])
-    . '
-    Best Regards,
-    Your Name and yourwebsite.com staff');
-                    $mail->addTo($data['email'],
-                                 $data['first_name'] . ' ' . $data['last_name']);
-
-                    if (!$mail->send()) {
-                        // email sending failed
-                        $this->view->error = 'Failed to send email to the address you provided';
-                    } else {
-
-                        // email sent successfully, let's add the user to the database
-                        unset($data['emailAgain'], $data['passwordAgain'],
-                              $data['register']);
-                        $data['salt'] = $this->_helper->RandomString(40);
-                        $data['role'] = 'user';
-                        $data['status'] = 'pending';
-                        $users->add($data);
-                        $this->view->success = 'Successfully registered';
-
-                    }
-
-                }
-
+            if ($this->usersMapper->getSingleWithEmail($data['email']) != null) {
+                // if the email already exists in the database
+                $this->view->error = 'Adres e-mail jest zajęty';
+            } else if ($this->usersMapper->getSingleWithUsername($data['nickname']) != null) {
+                // if the username already exists in the database
+                $this->view->error = 'Login zajęty';
+            } else if ($data['password'] != $data['passwordAgain']) {
+                // if both passwords do not match
+                $this->view->error = 'Wprowadzone hasła różnią się';
+            } else {
+                $data['permissions'] = 'MODERATOR';
+                $data['is_banned'] = 1;
+                $this->usersMapper->add($data);
+                $this->view->success = 'Zarejestrowano! Musisz poczekać na weryfikację'
+                        . ' zanim będziesz mógł się zarejestrować.';
             }
         }
 

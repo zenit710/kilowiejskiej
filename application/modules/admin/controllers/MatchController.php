@@ -40,6 +40,9 @@ class Admin_MatchController extends Zend_Controller_Action
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
             $this->matchesMapper->insert($values);
+            if($values['is_played']){
+                $this->prepareTable($values['season_id']);
+            }
             $this->redirect('/admin/match');
         }
     }
@@ -62,6 +65,9 @@ class Admin_MatchController extends Zend_Controller_Action
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
             $this->matchesMapper->update($values, 'id='.$id);
+            if($values['is_played']){
+                $this->prepareTable($values['season_id']);
+            }
             $this->redirect('/admin/match');
         }
     }
@@ -144,7 +150,7 @@ class Admin_MatchController extends Zend_Controller_Action
         return null;
     }
     
-    public function saveScorers($values, $scorersIds, $seasonId, $matchId)
+    private function saveScorers($values, $scorersIds, $seasonId, $matchId)
     {
         $i = 0;
         foreach($values as $key=>$value) {
@@ -164,7 +170,7 @@ class Admin_MatchController extends Zend_Controller_Action
         }
     }
     
-    public function savePerformances($values, $performancesIds, $seasonId, $matchId, $teamId)
+    private function savePerformances($values, $performancesIds, $seasonId, $matchId, $teamId)
     {
         $i = 0;
         foreach($values as $key=>$value) {
@@ -183,6 +189,11 @@ class Admin_MatchController extends Zend_Controller_Action
                 }
             }
         }
+    }
+ 
+    private function prepareTable($id)
+    {
+        
     }
     
 }

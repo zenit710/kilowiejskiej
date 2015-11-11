@@ -37,7 +37,7 @@ class My_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
             $acl->allow('MODERATOR'); // allow users everywhere
             $acl->allow('ADMIN'); // allow administrators everywhere
  
-            $role = ($auth->getIdentity() && $auth->getIdentity()->is_active = 1)
+            $role = $auth->getIdentity()
             ? $auth->getIdentity()->permissions : 'USER';
  
             if (!$acl->isAllowed($role, $this->_controller, $this->_action)) {
@@ -47,7 +47,7 @@ class My_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
  
         }
         // for admin module
-        else if ($this->_module == 'admin' && $this->_action != 'login') {
+        else if ($this->_module == 'admin' && $this->_action != 'login'  && $this->_action != 'register') {
  
             // access resources (controllers)
             // usually there will be more access resources
@@ -72,7 +72,7 @@ class My_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
             $acl->allow('MODERATOR'); // allow moderator everywhere
             $acl->allow('ADMIN'); // allow administrators everywhere
  
-            $role = ($auth->getIdentity() && $auth->getIdentity()->is_active = 1)
+            $role = $auth->getIdentity()
             ? $auth->getIdentity()->permissions : 'USER';
  
             if (!$acl->isAllowed($role, $this->_controller, $this->_action)) {

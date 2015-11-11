@@ -19,9 +19,9 @@ class My_Forms_Register extends Zend_Form
     {
         $this->setMethod('post');
  
-        $firstName = new Zend_Form_Element_Text('first_name', array(
+        $firstName = new Zend_Form_Element_Text('name', array(
             'decorators' => $this->elementDecorators,
-            'label' => 'First name',
+            'label' => 'Imię:',
             'required' => true,
             'filters' => array(
                 'StringTrim'
@@ -32,9 +32,9 @@ class My_Forms_Register extends Zend_Form
             'class' => 'input-text'
         ));
  
-        $lastName = new Zend_Form_Element_Text('last_name', array(
+        $lastName = new Zend_Form_Element_Text('surname', array(
             'decorators' => $this->elementDecorators,
-            'label' => 'First name',
+            'label' => 'Nazwisko:',
             'required' => true,
             'filters' => array(
                 'StringTrim'
@@ -47,7 +47,7 @@ class My_Forms_Register extends Zend_Form
  
         $email = new Zend_Form_Element_Text('email', array(
             'decorators' => $this->elementDecorators,
-            'label' => 'Email',
+            'label' => 'Email:',
             'required' => true,
             'filters' => array(
                 'StringTrim'
@@ -58,22 +58,9 @@ class My_Forms_Register extends Zend_Form
             'class' => 'input-text'
         ));
  
-        $emailAgain = new Zend_Form_Element_Text('emailAgain', array(
+        $username = new Zend_Form_Element_Text('nickname', array(
             'decorators' => $this->elementDecorators,
-            'label' => 'Email again',
-            'required' => true,
-            'filters' => array(
-                'StringTrim'
-            ),
-            'validators' => array(
-                'EmailAddress'
-            ),
-            'class' => 'input-text'
-        ));
- 
-        $username = new Zend_Form_Element_Text('username', array(
-            'decorators' => $this->elementDecorators,
-            'label' => 'Username',
+            'label' => 'Login:',
             'required' => true,
             'filters' => array(
                 'StringTrim'
@@ -86,7 +73,7 @@ class My_Forms_Register extends Zend_Form
  
         $password = new Zend_Form_Element_Password('password', array(
             'decorators' => $this->elementDecorators,
-            'label' => 'Password',
+            'label' => 'Hasło:',
             'required' => true,
             'filters' => array(
                 'StringTrim'
@@ -99,7 +86,7 @@ class My_Forms_Register extends Zend_Form
  
         $passwordAgain = new Zend_Form_Element_Password('passwordAgain', array(
             'decorators' => $this->elementDecorators,
-            'label' => 'Password again',
+            'label' => 'Powtórz hasło:',
             'required' => true,
             'filters' => array(
                 'StringTrim'
@@ -112,7 +99,7 @@ class My_Forms_Register extends Zend_Form
  
         $submit = new Zend_Form_Element_Submit('register', array(
             'decorators' => $this->buttonDecorators,
-            'label' => 'Register',
+            'label' => 'Rejestruj',
             'class' => 'input-submit'
         ));
  
@@ -120,7 +107,6 @@ class My_Forms_Register extends Zend_Form
             $firstName,
             $lastName,
             $email,
-            $emailAgain,
             $username,
             $password,
             $passwordAgain,
