@@ -20,6 +20,16 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
         'is_active'
     );
     
+    private $coulmnListForSquad = array(
+        'id',
+        'name',
+        'surname',
+        'position',
+        'city',
+        '(YEAR(NOW()) - YEAR(date_of_birth)) as age',
+        'photo'
+    );
+    
     /**
      * Zwraca listę wszystkich zawodników Kilo Wiejskiej
      * 
@@ -27,7 +37,7 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
      */
     public function getAllKiloPlayers(){
         $select = $this->select()
-                ->from($this->_name)
+                ->from($this->_name, $this->coulmnListForSquad)
                 ->setIntegrityCheck(false)
                 ->joinLeft('teams',$this->_name.'.team_id = teams.id','')
                 ->joinLeft('performances',$this->_name.'.id = performances.player_id','count(distinct performances.id) as performances')

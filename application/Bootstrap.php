@@ -3,6 +3,15 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 
+    protected function _initAuth()
+    {
+        Zend_Registry::set('auth', Zend_Auth::getInstance());
+        $this->bootstrap(array(
+            'frontController'
+        ));
+        $this->getResource('frontController')->registerPlugin(new My_Controller_Plugin_Auth());
+    }
+    
     protected function _initPage(){
         $this->bootstrap(array(
             'view'
