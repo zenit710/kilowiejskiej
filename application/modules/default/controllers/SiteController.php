@@ -13,6 +13,8 @@ class SiteController extends Zend_Controller_Action
         $url = $this->getRequest()->getParam('url');
         $sitesMapper = new Application_Model_DbTable_Sites();
         $this->view->site = $site = $sitesMapper->getSiteByUrl($url);
+        
+        $this->getInvokeArg('bootstrap')->getResource('view')->headTitle($site['title']);
     }
 
     public function teamAction()
@@ -20,6 +22,9 @@ class SiteController extends Zend_Controller_Action
         $playersMapper = new Application_Model_DbTable_Players();
         $players = $playersMapper->getAllKiloPlayers();
         $this->view->players = $players;
+        
+        $this->getInvokeArg('bootstrap')->getResource('view')->headTitle('Skład');
+        
     }
     
     public function mediaAction()
@@ -52,6 +57,8 @@ class SiteController extends Zend_Controller_Action
             $mail->addTo($sendTo);
             $mail->send($transport);
         }
+        
+        $this->getInvokeArg('bootstrap')->getResource('view')->headTitle('Kontakt');
     }
     
 }
