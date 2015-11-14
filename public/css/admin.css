@@ -1,12 +1,63 @@
 body{
-    margin-top: 10px;
+    margin: 0;
 }
 
 ul#panels, ul#panels ul{
     list-style-type: none;
     display: block;
+    padding: 0;
+}
+
+ul#panels > li > div {
+    border-bottom: 1px solid #D0B837;
+    padding: 5px;
+    cursor: pointer;
+}
+
+ul#panels > li > div[data-active=true] {
+    background: #D0B837;
+    color: #000;
 }
 
 li{
     display: block;
+}
+
+ul#panels ul{
+    display: none;
+    padding-left: 5px;
+}
+
+.admin_panel {
+    padding: 0;
+    padding-top: 10px;
+    background: #030303;
+    color: #D0B837;
+    min-height: 100vh;
+}
+
+.admin_panel a{
+    color: #fff;
+}
+
+.content > table > thead > tr > th{
+    padding: 0;
+}
+
+thead{
+    border-bottom: 1px solid black;
+}
+
+table a,table a:hover, table a:active, table a:link, table a:visited{
+    color: #D0B837;
+}
+
+.content {
+    padding-top: 10px;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+input, select, textarea{
+    width: 100%;
 }
