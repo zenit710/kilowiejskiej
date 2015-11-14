@@ -66,7 +66,7 @@ class Application_Model_DbTable_News extends Zend_Db_Table_Abstract
         $select = $this->select()
                 ->from($this->_name)
                 ->setIntegrityCheck(false)
-                ->join('categories','category_id = categories.id',array('name as categoryName'))
+                ->join('categories','category_id = categories.id',array('name as categoryName','slug as category_slug'))
                 ->order('date DESC');
         
         return $this->fetchAll($select);

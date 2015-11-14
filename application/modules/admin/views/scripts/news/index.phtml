@@ -1,9 +1,28 @@
+<div id="fb-root"></div>
+<script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '1652268505057180',
+        xfbml      : true,
+        version    : 'v2.5'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/pl_PL/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+     }(document, 'script', 'facebook-jssdk'));
+</script>
 <table class="col-md-12">
     <thead>
         <tr>
             <th class="col-md-3">Data</th>
             <th class="col-md-3">Tytuł</th>
             <th class="col-md-2">Kategoria</th>
+            <th class="col-md-1">Udostępnij</th>
             <th class="col-md-1">Edytuj</th>
             <th class="col-md-1">Usuń</th>
         </tr>
@@ -14,6 +33,7 @@
             <td><?php echo $news->date ?></td>
             <td><?php echo $news->title ?></td>
             <td><?php echo $news->categoryName ?></td>
+            <td><div class="fb-share-button" data-href="<?php $this->url(array('category' => $news->category_slug, 'slug' => $news->slug),'news') ?>" data-layout="button"></div></td>
             <td><a href="/admin/news/edit?id=<?php echo $news->id ?>" title="Edytuj artykuł">Edytuj</a></td>
             <td><a href="/admin/news/delete?id=<?php echo $news->id ?>" title="Usuń artykuł">Usuń</a></td>
         </tr>
