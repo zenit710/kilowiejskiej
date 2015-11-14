@@ -61,3 +61,32 @@ table a,table a:hover, table a:active, table a:link, table a:visited{
 input, select, textarea{
     width: 100%;
 }
+
+#kw_logo{
+    text-align:center;
+}
+
+#logout{
+    width: 80px;
+    margin: 0 auto;
+    color: #333333;
+    text-align: center;
+    cursor: pointer;
+}
+
+#logout img{
+    width:30px;
+}
+
+#logout_link{
+    text-decoration: none;
+}
+
+#login input {
+    width: 300px;
+}
+
+#login form{
+    width: 300px;
+    margin: 0 auto;
+}

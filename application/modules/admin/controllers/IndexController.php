@@ -19,6 +19,8 @@ class Admin_IndexController extends Zend_Controller_Action
     
     public function loginAction()
     {
+        $this->_helper->layout->disableLayout();
+        
         // redirect logged in users
         if (Zend_Registry::getInstance()->get('auth')->hasIdentity()) {
             $this->_redirect('/admin');

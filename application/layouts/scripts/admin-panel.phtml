@@ -14,6 +14,9 @@
 </head>
 <body>
     <div class="admin_panel col-md-2">
+        <div id="kw_logo">
+            <img src="<?php echo $this->baseUrl('img/kwft_65.png'); ?>" alt="Stowarzyszenie Kilo Wiejskiej Futsal Team"/>
+        </div>
         <ul id="panels">
             <li>
                 <div>Artykuły</div>
@@ -72,6 +75,12 @@
                 </ul>
             </li>
         </ul>
+        <a href="/admin/index/logout" title="Wyloguj się" id="logout_link">
+            <div id="logout">
+                <img src="<?php echo $this->baseUrl('img/logout.png'); ?>" alt="Wyloguj się"/>
+                <div>Wyloguj się</div>
+            </div>
+        </a>
     </div>
     <div class="content col-md-10">
         <?php echo $this->layout()->content; ?>

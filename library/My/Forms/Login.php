@@ -52,12 +52,12 @@ class My_Forms_Login extends Zend_Form
             'class' => 'input-password'
         ));
  
-        $rememberMe = new Zend_Form_Element_Checkbox('rememberMe', array(
+        /*$rememberMe = new Zend_Form_Element_Checkbox('rememberMe', array(
             'decorators' => $this->checkboxDecorators,
             'label' => 'Zapamiętaj?',
             'required' => true,
             'class' => 'input-checkbox'
-        ));
+        ));*/
  
         $submit = new Zend_Form_Element_Submit('login', array(
             'decorators' => $this->buttonDecorators,
@@ -68,7 +68,7 @@ class My_Forms_Login extends Zend_Form
         $this->addElements(array(
             $username,
             $password,
-            $rememberMe,
+            //$rememberMe,
             $submit
         ));
     }
