@@ -524,3 +524,7 @@ h3,h4,h5,h6{
     margin: 0 15px 0 0;
     color: #C00202;
 }
+
+.fb-share-button{
+    float: right;
+}

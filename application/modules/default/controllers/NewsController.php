@@ -19,8 +19,10 @@ class NewsController extends Zend_Controller_Action
         $slug = $this->getRequest()->getParam('slug');
         $newsMapper = new Application_Model_DbTable_News();
         $this->view->news = $news = $newsMapper->getByCategoryAndSlug($category, $slug);
+        $this->view->currentLink = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         
         $this->getInvokeArg('bootstrap')->getResource('view')->headTitle($news['title']); 
+        
     }
 
 }
