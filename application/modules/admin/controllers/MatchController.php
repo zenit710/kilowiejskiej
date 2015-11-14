@@ -65,9 +65,7 @@ class Admin_MatchController extends Zend_Controller_Action
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
             $this->matchesMapper->update($values, 'id='.$id);
-            if($values['is_played']){
-                $this->prepareTable($values['season_id']);
-            }
+            $this->prepareTable($values['season_id']);
             $this->redirect('/admin/match');
         }
     }
@@ -191,9 +189,151 @@ class Admin_MatchController extends Zend_Controller_Action
         }
     }
  
-    private function prepareTable($id)
+    private function prepareTable($season_id)
     {
+        $matches = $this->matchesMapper->getAllBySeasonId($season_id);
+        $teamsAlreadySaved = $this->seasonsDataMapper->getSavedTeamInSeason($season_id);
         
+        $teamData = array();
+                
+        $valuesArray = array(
+            'season_id' => $season_id,
+            'team_id' => 0,
+            'wins' => 0,
+            'draws' => 0,
+            'loses' => 0,
+            'goals_scored' => 0,
+            'goals_lost' => 0,
+            'points' => 0,
+            'rank' => 0
+        );
+        
+        foreach($matches as $match)
+        {
+            $homeId = $match['home_id'];
+            $homeGoals = $match['home_goals'];
+            $awayId = $match['away_id'];
+            $awayGoals = $match['away_goals'];
+
+            if(!isset($teamData[$homeId])){
+                $teamData[$homeId] = $valuesArray;
+                $teamData[$homeId]['team_id'] = $homeId;
+            }
+            
+            if(!isset($teamData[$awayId])){
+                $teamData[$awayId] = $valuesArray;
+                $teamData[$awayId]['team_id'] = $awayId;
+            }
+            
+            if($match->is_played){
+                if($homeGoals>$awayGoals){
+                    $teamData[$homeId]['wins']++;
+                    $teamData[$homeId]['points']+= 3;
+                    $teamData[$awayId]['loses']++;
+                } else if($homeGoals<$awayGoals){
+                    $teamData[$homeId]['loses']++;
+                    $teamData[$awayId]['wins']++;
+                    $teamData[$awayId]['points']+= 3;
+                } else {
+                    $teamData[$homeId]['draws']++;
+                    $teamData[$homeId]['points']++;
+                    $teamData[$awayId]['draws']++;
+                    $teamData[$awayId]['points']++;
+                }
+
+                $teamData[$homeId]['goals_scored'] += $homeGoals;
+                $teamData[$homeId]['goals_lost'] += $awayGoals;
+                $teamData[$awayId]['goals_scored'] += $awayGoals;
+                $teamData[$awayId]['goals_lost'] += $homeGoals;
+            }
+        }
+        
+        $teamData = $this->makeRank($teamData, $matches);
+        
+        foreach($teamData as $key=>$team){
+            if(in_array($team['team_id'], $teamsAlreadySaved)) {
+                $this->seasonsDataMapper->update($team, 'team_id = '.$team['team_id']);
+                unset($teamData[$key]);
+            }
+        }
+        
+        if(count($teamData)){
+            $this->seasonsDataMapper->insert($teamData);
+        }
+    }
+    
+    private function makeRank($teamArray, $matches)
+    {
+        $teamArray = $this->sortByPoints($teamArray);
+        $previous = null;
+        foreach($teamArray as $key=>$value) {
+            if($previous == null){
+                $previous = $key;
+            } else {
+                if($teamArray[$previous]['points'] == $value['points']){
+                    if($this->iAmBetter($previous, $key, $matches)){
+                        $teamArray[$previous]['rank']++;
+                        $value['rank']--;
+                    }
+                }
+            }
+        }
+        
+        return $teamArray;
+    }
+    
+    private function sortByPoints($teamArray)
+    {
+        $ranks = array();
+        $points = array();
+        foreach($teamArray as $key=>$value) {
+            $index = $this->findPlaceToInsert($value['points'],$points);
+            if(!count($ranks) || $index== count($ranks)){
+                $ranks[] = $key;
+            } else {
+                $ranks = array_splice($ranks, $index, 0, $key);
+            }
+            if(!count($points) || $index== count($points)){
+                $points[] = $key;
+            } else {
+                $points = array_splice($ranks, $index, 0, $key);
+            }
+        }
+        foreach($teamArray as $key=>$value) {
+            $teamArray[$key]['rank'] = array_search($key, $ranks)+1;
+        }
+        
+        return $teamArray;
+    }
+    
+    private function findPlaceToInsert($points,$array)
+    {
+        if(!count($array)){
+            return 0;
+        }
+        for($i = 0; $i < count($array); $i++){
+            if($points>$array[$i]) {
+                echo $i;
+                return $i;
+            }
+        }
+        return count($array);
+    }
+    
+    private function iAmBetter($prev, $me, $matches){
+        foreach($matches as $match){
+            if($match['home_id'] == $prev && $match['away_id'] == $me){
+                if($match['away_goals'] > $match['home_goals']){
+                    return true;
+                }
+            }
+            if($match['away_id'] == $prev && $match['home_id'] == $me){
+                if($match['home_goals'] > $match['away_goals']){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
     
 }

@@ -28,5 +28,14 @@ class Application_Model_DbTable_Matches extends Zend_Db_Table_Abstract
         return $this->fetchRow($select);
     }
     
+    public function getAllBySeasonId($id)
+    {
+        $select = $this->select()
+                ->from($this->_name)
+                ->where('season_id = ?', $id);
+        
+        return $this->fetchAll($select);
+    }
+    
 }
 
