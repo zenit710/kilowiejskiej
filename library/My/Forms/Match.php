@@ -29,6 +29,7 @@ class My_Forms_Match extends Zend_Form {
         ));
         $this->addElement('text','date',array(
             'label' => 'Data i godzina:',
+            'placeholder' => 'yyyy-mm-dd hh:mm:ss',
             'required' => true
         ));
         $this->addElement('select','home_name',array(

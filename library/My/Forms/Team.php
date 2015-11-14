@@ -12,10 +12,10 @@ class My_Forms_Team extends Zend_Form {
             'label' => 'Nazwa drużyny:',
             'required' => true
         ));
-        $this->addElement('file','photo',array(
-            'label' => 'Zdjęcie drużyny:',
-            'required' => false
-        ));
+//        $this->addElement('file','photo',array(
+//            'label' => 'Zdjęcie drużyny:',
+//            'required' => false
+//        ));
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj',
             'ignore' => true

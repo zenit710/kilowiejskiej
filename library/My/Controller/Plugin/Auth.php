@@ -46,6 +46,40 @@ class My_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
             }
  
         }
+        // for users and seasons
+        else if ($this->_module == 'admin' && in_array($this->_controller, array('user','season'))) {
+ 
+            // access resources (controllers)
+            // usually there will be more access resources
+            $acl->add(new Zend_Acl_Resource('index'));
+            $acl->add(new Zend_Acl_Resource('category'));
+            $acl->add(new Zend_Acl_Resource('match'));
+            $acl->add(new Zend_Acl_Resource('news'));
+            $acl->add(new Zend_Acl_Resource('player'));
+            $acl->add(new Zend_Acl_Resource('season'));
+            $acl->add(new Zend_Acl_Resource('seasonData'));
+            $acl->add(new Zend_Acl_Resource('site'));
+            $acl->add(new Zend_Acl_Resource('team'));
+            $acl->add(new Zend_Acl_Resource('user'));
+            $acl->add(new Zend_Acl_Resource('error'));
+ 
+            // access roles
+            $acl->addRole(new Zend_Acl_Role('USER'));
+            $acl->addRole(new Zend_Acl_Role('MODERATOR'));
+            $acl->addRole(new Zend_Acl_Role('ADMIN'));
+ 
+            // access rules
+            $acl->allow('ADMIN'); // allow administrators everywhere
+ 
+            $role = $auth->getIdentity()
+            ? $auth->getIdentity()->permissions : 'USER';
+ 
+            if (!$acl->isAllowed($role, $this->_controller, $this->_action)) {
+                $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('Redirector');
+                $redirector->gotoUrlAndExit('/admin/index/login');
+            }
+ 
+        }
         // for admin module
         else if ($this->_module == 'admin' && $this->_action != 'login'  && $this->_action != 'register') {
  
@@ -80,6 +114,6 @@ class My_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
                 $redirector->gotoUrlAndExit('/admin/index/login');
             }
  
-        }
+        } 
     }
 }

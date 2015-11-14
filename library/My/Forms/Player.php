@@ -41,12 +41,13 @@ class My_Forms_Player extends Zend_Form {
         ));
         $this->addElement('text','date_of_birth',array(
             'label' => 'Data utodzenia:',
+            'placeholder' => 'yyyy-mm-dd',
             'required' => true
         ));
-        $this->addElement('file','photo',array(
-            'label' => 'Zdjęcie',
-            'required' => false
-        ));
+//        $this->addElement('file','photo',array(
+//            'label' => 'Zdjęcie',
+//            'required' => false
+//        ));
         $this->addElement('select','team_id',array(
             'label' => 'Drużyna:',
             'required' => true,
