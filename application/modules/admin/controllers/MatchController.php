@@ -266,14 +266,39 @@ class Admin_MatchController extends Zend_Controller_Action
     {
         $teamArray = $this->sortByPoints($teamArray);
         $previous = null;
-        foreach($teamArray as $key=>$value) {
-            if($previous == null){
-                $previous = $key;
-            } else {
-                if($teamArray[$previous]['points'] == $value['points']){
-                    if($this->iAmBetter($previous, $key, $matches)){
+        $change = true;
+        while($change){
+            $change = false;
+            foreach($teamArray as $key=>$value) {
+                if($previous == null){
+                    $previous = $key;
+                } else {
+                    $goalsBalancePrev = $teamArray[$previous]['goals_scored'] - $teamArray[$previous]['goals_lost'];
+                    $goalsBalance = $value['goals_scored'] - $value['goals_lost'];
+                    if(
+                        $teamArray[$previous]['points'] == $value['points'] &&
+                        $goalsBalance> $goalsBalancePrev
+                    ){
                         $teamArray[$previous]['rank']++;
                         $value['rank']--;
+                        $change= true;
+                    }
+                }
+            }
+        }
+        $change = true;
+        while($change){
+            $change = false;
+            foreach($teamArray as $key=>$value) {
+                if($previous == null){
+                    $previous = $key;
+                } else {
+                    if($teamArray[$previous]['points'] == $value['points']){
+                        if($this->iAmBetter($previous, $key, $matches)){
+                            $teamArray[$previous]['rank']++;
+                            $value['rank']--;
+                            $change= true;
+                        }
                     }
                 }
             }
