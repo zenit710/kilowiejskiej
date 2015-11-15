@@ -22,7 +22,7 @@ class Admin_UserController extends Zend_Controller_Action
         $permissions = $this->usersMapper->getPermissions($id);
         $form = new My_Forms_User();
         $form->populate($permissions->toArray());
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();

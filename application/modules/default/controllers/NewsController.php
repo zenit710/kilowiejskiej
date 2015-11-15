@@ -21,12 +21,14 @@ class NewsController extends Zend_Controller_Action
         $this->view->news = $news = $newsMapper->getByCategoryAndSlug($category, $slug);
         $this->view->currentLink = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         
+        $filter = new Zend\Filter\StripTags();
+        
         $this->getInvokeArg('bootstrap')->getResource('view')->headTitle($news['title']); 
         $this->view->doctype('XHTML1_RDFA');
         $this->getInvokeArg('bootstrap')->getResource('view')->headMeta()
                 ->setProperty('og:type', 'article') 
                 ->setProperty('og:title', $news['title']) 
-                ->setProperty('og:description', $news['description']) 
+                ->setProperty('og:description', $filter->filter($news['description'])) 
                 ->setProperty('og:image', "http://$_SERVER[HTTP_HOST]/img/kwft_150.png"); 
         
     }

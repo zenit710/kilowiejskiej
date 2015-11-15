@@ -31,28 +31,27 @@ class My_Forms_Contact extends Zend_Form {
         
         $this->addElement('text','name',array(
             'required' => true,
-//            'validators' => array(
-//                'alnum'
-//            ),
+            'validators' => array(
+                array('Alpha',false, array(
+                    'messages' => array(Zend_Validate_Alpha::NOT_ALPHA => 'Możesz użyć tylko liter!')
+                ))
+            ),
             'placeholder' => 'Imię i nazwisko',
             'class' => 'col-xs-12'
         ));
         $this->addElement('text','mail',array(
             'required' => true,
-//            'validators' => array(
-//                array('regex',false,array(
-//                    'pattern' => '^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$',
-//                    'messages' => 'Nieprawidłowy adres e-mail!'
-//                ))
-//            ),
+            'validators' => array(
+                array('regex',false,array(
+                    'pattern' => '/^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$/',
+                    'messages' => 'Nieprawidłowy adres e-mail!'
+                ))
+            ),
             'placeholder' => 'Adres e-mail',
             'class' => 'col-xs-12'
         ));
         $this->addElement('text','title',array(
             'required' => true,
-//            'validators' => array(
-//                'alnum'
-//            ),
             'placeholder' => 'Tytuł wiadomości',
             'class' => 'col-xs-12'
         ));

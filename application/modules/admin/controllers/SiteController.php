@@ -19,7 +19,7 @@ class Admin_SiteController extends Zend_Controller_Action
     public function addAction()
     {
         $form = new My_Forms_Site();
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
@@ -38,7 +38,7 @@ class Admin_SiteController extends Zend_Controller_Action
         }
         $form = new My_Forms_Site();
         $form->populate($site->toArray());
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();

@@ -35,7 +35,7 @@ class SiteController extends Zend_Controller_Action
     public function contactAction()
     {
         $form = new My_Forms_Contact();
-        echo $form->render();
+        $this->view->form = $form;
         
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             exit;

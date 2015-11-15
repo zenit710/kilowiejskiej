@@ -20,7 +20,7 @@ class Admin_CategoryController extends Zend_Controller_Action
     public function addAction()
     {
         $form = new My_Forms_Category();
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
@@ -39,7 +39,7 @@ class Admin_CategoryController extends Zend_Controller_Action
         }
         $form = new My_Forms_Category();
         $form->populate($category->toArray());
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();

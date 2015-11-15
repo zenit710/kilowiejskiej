@@ -35,7 +35,7 @@ class Admin_MatchController extends Zend_Controller_Action
         $this->view->teamIds = $this->getTeamIds($teams);
         $seasons = $this->prepareSeasonsArray($this->seasonsMapper->getAllActive());
         $form = new My_Forms_Match($teamsArray, $seasons);
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
@@ -60,7 +60,7 @@ class Admin_MatchController extends Zend_Controller_Action
         $seasons = $this->prepareSeasonsArray($this->seasonsMapper->getAllActive());
         $form = new My_Forms_Match($teamsArray, $seasons);
         $form->populate($match->toArray());
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
@@ -82,7 +82,7 @@ class Admin_MatchController extends Zend_Controller_Action
         $performancesIds = $this->performancesMapper->getIdsByMatchId($id);
         
         $form = new My_Forms_PlayersMatch($playersArray, $goals);
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();

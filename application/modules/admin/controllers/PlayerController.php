@@ -23,7 +23,7 @@ class Admin_PlayerController extends Zend_Controller_Action
         $teams = $this->teamsMapper->getAllTeamNameIdPairs();
         $teamsArray = $this->prepareTeamsArray($teams);
         $form = new My_Forms_Player($teamsArray);
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
@@ -43,7 +43,7 @@ class Admin_PlayerController extends Zend_Controller_Action
         $teamsArray = $this->prepareTeamsArray($teams);
         $form = new My_Forms_Player($teamsArray);
         $form->populate($player->toArray());
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();

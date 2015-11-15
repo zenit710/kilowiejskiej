@@ -25,6 +25,15 @@ class My_Forms_Match extends Zend_Form {
         $this->addElement('text','stage',array(
             'label' => 'Kolejka:',
             'required' => true,
+            'validators' => array(
+                array('int',true,array(
+                    'messages' => 'Numer kolejki musi być liczbą!'
+                )),
+                array('greaterThan',false,array(
+                    'min' => 0,
+                    'messages' => 'Numer kolejki musi być dodatni!'
+                ))
+            ),
             'min' => 0
         ));
         $this->addElement('text','date',array(

@@ -19,7 +19,7 @@ class Admin_SeasonController extends Zend_Controller_Action
     public function addAction()
     {
         $form = new My_Forms_Season();
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
@@ -37,7 +37,7 @@ class Admin_SeasonController extends Zend_Controller_Action
         }
         $form = new My_Forms_Season();
         $form->populate($season->toArray());
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();

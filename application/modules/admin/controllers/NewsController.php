@@ -23,7 +23,7 @@ class Admin_NewsController extends Zend_Controller_Action
         $categories = $this->categoriesMapper->getAllNamesWithId();
         $categoriesArray = $this->prepareCategoriesArray($categories);
         $form = new My_Forms_News($categoriesArray);
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
@@ -46,7 +46,7 @@ class Admin_NewsController extends Zend_Controller_Action
         $categoriesArray = $this->prepareCategoriesArray($categories);
         $form = new My_Forms_News($categoriesArray);
         $form->populate($news->toArray());
-        echo $form->render();
+        $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
