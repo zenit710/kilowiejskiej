@@ -27,6 +27,9 @@ class Admin_PlayerController extends Zend_Controller_Action
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
+            if(!$values['photo']){
+                unset($values['photo']);
+            }
             $this->playersMapper->insert($values);
             $this->redirect('/admin/player');
         }
@@ -47,6 +50,9 @@ class Admin_PlayerController extends Zend_Controller_Action
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
+            if(!$values['photo']){
+                unset($values['photo']);
+            }
             $this->playersMapper->update($values,'id = '.$id);
             $this->redirect('/admin/player');
         }

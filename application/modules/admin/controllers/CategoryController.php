@@ -25,6 +25,9 @@ class Admin_CategoryController extends Zend_Controller_Action
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
             $values['slug'] = $this->generateSlug($values['name']);
+            if(!$values['picture']){
+                unset($values['picture']);
+            }
             $this->categoriesMapper->insert($values);
             $this->redirect('/admin/category');
         }
@@ -44,6 +47,9 @@ class Admin_CategoryController extends Zend_Controller_Action
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
             $values['slug'] = $this->generateSlug($values['name']);
+            if(!$values['picture']){
+                unset($values['picture']);
+            }
             $this->categoriesMapper->update($values, 'id = '.$id);
             $this->redirect('/admin/category');
         }

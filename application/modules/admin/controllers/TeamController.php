@@ -23,6 +23,9 @@ class Admin_TeamController extends Zend_Controller_Action
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
+            if(!$values['photo']){
+                unset($values['photo']);
+            }
             $this->teamsMapper->insert($values);
             $this->redirect('/admin/team');
         }
@@ -38,6 +41,9 @@ class Admin_TeamController extends Zend_Controller_Action
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
+            if(!$values['photo']){
+                unset($values['photo']);
+            }
             $this->teamsMapper->update($values,'id = '.$id);
             $this->redirect('/admin/team');
         }

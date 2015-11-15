@@ -30,6 +30,9 @@ class Admin_NewsController extends Zend_Controller_Action
             $values['author_id'] = 1;
             $values['date'] = date("Y-m-d H:i:s");
             $values['slug'] = $this->generateSlug($values['title']);
+            if(!$values['main_photo']){
+                unset($values['main_photo']);
+            }
             $this->newsMapper->insert($values);
             $this->redirect('/admin/news');
         }
@@ -51,6 +54,9 @@ class Admin_NewsController extends Zend_Controller_Action
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
             $values['slug'] = $this->generateSlug($values['title']);
+            if(!$values['main_photo']){
+                unset($values['main_photo']);
+            }
             $this->newsMapper->update($values,'id = '.$id);
             $this->redirect('/admin/news');
         }
