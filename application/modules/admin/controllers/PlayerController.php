@@ -44,7 +44,7 @@ class Admin_PlayerController extends Zend_Controller_Action
         }
         $teams = $this->teamsMapper->getAllTeamNameIdPairs();
         $teamsArray = $this->prepareTeamsArray($teams);
-        $form = new My_Forms_Player($teamsArray);
+        $form = new My_Forms_Player($teamsArray,$player['photo']);
         $form->populate($player->toArray());
         $this->view->form = $form;
         

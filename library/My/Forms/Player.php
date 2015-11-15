@@ -14,9 +14,11 @@ class My_Forms_Player extends Zend_Form {
         'Pomocnik' => 'Pomocnik',
         'Napastnik' => 'Napastnik'
     );
+    private $img = null;
     
-    public function __construct($teams, $options = null) {
+    public function __construct($teams, $img, $options = null) {
         $this->teams = $teams;
+        $this->img = $img;
         parent::__construct($options);
     }
     
@@ -68,8 +70,33 @@ class My_Forms_Player extends Zend_Form {
         $this->addElement('file','photo',array(
             'label' => 'Zdjęcie',
             'destination' => realpath(APPLICATION_PATH . '/../public/img/kw/player'),
-            'required' => false
+            'required' => false,
+            'validators' => array(
+                array('extension',true,'jpg,png,gif')
+            ),
+            'accept' => 'image/*'
         ));
+        $this->photo->getValidator('Extension')->setMessage('Nipoprawne rozszerzenie. Możesz dodawać tylko .jpg,.png,.gif');
+        $this->addElement(
+            'hidden',
+            'preview',
+            array(
+                'label' => 'Aktualny obraz:',
+                'required' => false,
+                'ignore' => true,
+                'autoInsertNotEmptyValidator' => false,
+                'decorators' => array(
+                    array(
+                        'HtmlTag', array(
+                            'tag'  => 'img',
+                            'id'   => 'preview',
+                            $this->img ? 'src' : '' => '/img/kw/player/' . $this->img
+                        )
+                    )
+                )
+            )
+        );
+        $this->preview->clearValidators();
         $this->addElement('select','team_id',array(
             'label' => 'Drużyna:',
             'required' => true,

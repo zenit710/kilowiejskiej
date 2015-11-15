@@ -40,7 +40,7 @@ class Admin_CategoryController extends Zend_Controller_Action
         if(!$category){
             return;
         }
-        $form = new My_Forms_Category();
+        $form = new My_Forms_Category($category['picture']);
         $form->populate($category->toArray());
         $this->view->form = $form;
         

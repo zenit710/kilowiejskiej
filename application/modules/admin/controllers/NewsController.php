@@ -47,7 +47,7 @@ class Admin_NewsController extends Zend_Controller_Action
         }
         $categories = $this->categoriesMapper->getAllNamesWithId();
         $categoriesArray = $this->prepareCategoriesArray($categories);
-        $form = new My_Forms_News($categoriesArray);
+        $form = new My_Forms_News($categoriesArray,$news['main_photo']);
         $form->populate($news->toArray());
         $this->view->form = $form;
         
