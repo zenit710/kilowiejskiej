@@ -25,8 +25,8 @@ class Admin_CategoryController extends Zend_Controller_Action
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
             $values['slug'] = $this->generateSlug($values['name']);
-            $values['picture'] = $this->preparePicture($values['slug']);
             $this->categoriesMapper->insert($values);
+            $this->redirect('/admin/category');
         }
     }
     
@@ -44,8 +44,8 @@ class Admin_CategoryController extends Zend_Controller_Action
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
             $values['slug'] = $this->generateSlug($values['name']);
-            $values['picture'] = $this->preparePicture($values['slug']);
             $this->categoriesMapper->update($values, 'id = '.$id);
+            $this->redirect('/admin/category');
         }
     }
     
@@ -66,26 +66,6 @@ class Admin_CategoryController extends Zend_Controller_Action
         $powtorzen = 1;
         $string = preg_replace_callback('#(['.$znaki.'])\1{'.$powtorzen.',}#', create_function('$a', 'return substr($a[0], 0,'.$powtorzen.');'), $string);
         return $string;
-    }
-    
-    private function preparePicture($name)
-    {
-        $tmp = $_FILES['picture']['tmp_name'];
-        $size = $_FILES['picture']['size'];
-        $picName = $_FILES['picture']['name'];
-        //$type = $_FILES['picture']['type'];
-        $ext = substr($picName,strpos($picName,'.'));
-        $newPicName = $name.$ext;
-        if (is_uploaded_file($tmp)) {
-            if ($size > self::MAX_FILE_SIZE) {
-                echo 'Błąd! Plik jest za duży!';
-            } else {
-                move_uploaded_file($tmp, $_SERVER['DOCUMENT_ROOT'].'/img/kw/cat/'.$newPicName);
-                return $newPicName;
-            }
-        } else {
-           echo 'Błąd przy przesyłaniu danych!';
-        }
     }
 
 }

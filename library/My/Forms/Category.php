@@ -12,10 +12,11 @@ class My_Forms_Category extends Zend_Form {
             'label' => 'Nazwa kategorii:',
             'required' => true
         ));
-//        $this->addElement('file','picture',array(
-//            'label' => 'Domyślna grafika:',
-//            'required' => false
-//        ));
+        $this->addElement('file','picture',array(
+            'label' => 'Domyślna grafika:',
+            'destination' => realpath(APPLICATION_PATH . '/../public/img/kw/cat'),
+            'required' => false
+        ));
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj',
             'ignore' => true

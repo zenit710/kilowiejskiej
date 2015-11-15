@@ -15,6 +15,8 @@ class SiteController extends Zend_Controller_Action
         $this->view->site = $site = $sitesMapper->getSiteByUrl($url);
         
         $this->getInvokeArg('bootstrap')->getResource('view')->headTitle($site['title']);
+        $this->getInvokeArg('bootstrap')->getResource('view')->headMeta()
+                ->setName('keywords', $site['keywords']);
     }
 
     public function teamAction()

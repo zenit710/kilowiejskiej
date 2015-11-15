@@ -29,7 +29,8 @@ class NewsController extends Zend_Controller_Action
                 ->setProperty('og:type', 'article') 
                 ->setProperty('og:title', $news['title']) 
                 ->setProperty('og:description', $filter->filter($news['description'])) 
-                ->setProperty('og:image', "http://$_SERVER[HTTP_HOST]/img/kwft_150.png"); 
+                ->setProperty('og:image', "http://$_SERVER[HTTP_HOST]/img/kwft_150.png")
+                ->appendName('keywords', $news['tags']); 
         
     }
 

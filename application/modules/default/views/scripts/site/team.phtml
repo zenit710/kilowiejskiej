@@ -7,7 +7,7 @@
         <?php foreach($this->players as $player): ?>
             <div class="player">
                 <div class="player_photo col-md-2 col-xs-4">
-                    <img src="<?php echo $player->photo != null ? $player->photo : 'img/player.png'; ?>" alt="Player" />
+                    <img src="<?php $photo = $player->photo != null ? $player->photo : 'player.png'; echo $this->baseUrl('img/kw/player/'.$photo); ?>" alt="Player" />
                 </div>
                 <div class="player_info col-md-4 col-xs-8">
                     <div class="player_personal">

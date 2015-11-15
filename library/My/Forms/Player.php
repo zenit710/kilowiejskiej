@@ -65,10 +65,11 @@ class My_Forms_Player extends Zend_Form {
             ),
             'required' => true
         ));
-//        $this->addElement('file','photo',array(
-//            'label' => 'Zdjęcie',
-//            'required' => false
-//        ));
+        $this->addElement('file','photo',array(
+            'label' => 'Zdjęcie',
+            'destination' => realpath(APPLICATION_PATH . '/../public/img/kw/player'),
+            'required' => false
+        ));
         $this->addElement('select','team_id',array(
             'label' => 'Drużyna:',
             'required' => true,
