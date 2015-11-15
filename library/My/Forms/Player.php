@@ -24,10 +24,20 @@ class My_Forms_Player extends Zend_Form {
     {
         $this->addElement('text','name',array(
             'label' => 'Imię:',
+            'validators' => array(
+                array('alpha', false, array(
+                    'messages' => 'Imię może składać się tylko z liter'
+                ))
+            ),
             'required' => true
         ));
         $this->addElement('text','surname',array(
             'label' => 'Nazwisko:',
+            'validators' => array(
+                array('alpha', false, array(
+                    'messages' => 'Nazwisko może składać się tylko z liter'
+                ))
+            ),
             'required' => true
         ));
         $this->addElement('select','position',array(
@@ -37,11 +47,22 @@ class My_Forms_Player extends Zend_Form {
         ));
         $this->addElement('text','city',array(
             'label' => 'Miejscowość:',
+            'validators' => array(
+                array('alpha', false, array(
+                    'messages' => 'Miejscowość może składać się tylko z liter'
+                ))
+            ),
             'required' => false
         ));
         $this->addElement('text','date_of_birth',array(
             'label' => 'Data utodzenia:',
             'placeholder' => 'yyyy-mm-dd',
+            'validators' => array(
+                array('regex',false,array(
+                    'pattern' => '/\d{4}-\d{2}-\d{2}/',
+                    'messages' => 'Nieprawidłowy format daty! YYYY-MM-DD'
+                ))
+            ),
             'required' => true
         ));
 //        $this->addElement('file','photo',array(

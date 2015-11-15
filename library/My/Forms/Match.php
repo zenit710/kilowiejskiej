@@ -39,6 +39,12 @@ class My_Forms_Match extends Zend_Form {
         $this->addElement('text','date',array(
             'label' => 'Data i godzina:',
             'placeholder' => 'yyyy-mm-dd hh:mm:ss',
+            'validators' => array(
+                array('regex',false,array(
+                    'pattern' => '/\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/',
+                    'messages' => 'Nieprawidłowy format daty! YYYY-MM-DD HH:MM:SS'
+                ))
+            ),
             'required' => true
         ));
         $this->addElement('select','home_name',array(
@@ -54,11 +60,29 @@ class My_Forms_Match extends Zend_Form {
         $this->addElement('text','home_goals',array(
             'label' => 'Bramki gospodarza:',
             'required' => false,
+            'validators' => array(
+                array('int',true,array(
+                    'messages' => 'Liczba bramek musi być liczbą nieujemną!'
+                )),
+                array('greaterThan',false,array(
+                    'min' => -1,
+                    'messages' => 'Liczba bramek musi być liczbą nieujemną!'
+                ))
+            ),
             'min' => 0
         ));
         $this->addElement('text','away_goals',array(
             'label' => 'Bramki gościa:',
             'required' => false,
+            'validators' => array(
+                array('int',true,array(
+                    'messages' => 'Liczba bramek musi być liczbą nieujemną!'
+                )),
+                array('greaterThan',false,array(
+                    'min' => -1,
+                    'messages' => 'Liczba bramek musi być liczbą nieujemną!'
+                ))
+            ),
             'min' => 0
         ));
         $this->addElement('checkbox','is_played',array(

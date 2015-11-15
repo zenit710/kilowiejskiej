@@ -90,3 +90,7 @@ input, select, textarea{
     width: 300px;
     margin: 0 auto;
 }
+
+.errors{
+    color: red;
+}

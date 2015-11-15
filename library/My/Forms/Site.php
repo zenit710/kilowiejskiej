@@ -22,6 +22,15 @@ class My_Forms_Site extends Zend_Form {
         ));
         $this->addElement('text','order',array(
             'label' => 'Kolejność w menu:',
+            'validators' => array(
+                array('int', true, array(
+                    'messages' => 'Kolejność może być tylko liczbą'
+                )),
+                array('greaterThan', false, array(
+                    'min' => 0,
+                    'messages' => 'Liczba musi być większa dodatania'
+                ))
+            ),
             'required' => true
         ));
         $this->addElement('text','outside_url',array(

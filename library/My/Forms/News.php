@@ -36,10 +36,10 @@ class My_Forms_News extends Zend_Form {
             'required' => true,
             'multiOptions' => $this->categories
         ));
-        $this->addElement('file','main_photo',array(
-            'label' => 'Zdjęcie główne:',
-            'required' => false
-        ));
+//        $this->addElement('file','main_photo',array(
+//            'label' => 'Zdjęcie główne:',
+//            'required' => false
+//        ));
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj artykuł',
             'ignore' => true
