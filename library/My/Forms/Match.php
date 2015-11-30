@@ -89,8 +89,6 @@ class My_Forms_Match extends Zend_Form {
             'label' => 'Rozegrany:',
             'required' => true
         ));
-        $this->addElement('hidden','home_id',array());
-        $this->addElement('hidden','away_id',array());
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj mecz',
             'ignore' => true

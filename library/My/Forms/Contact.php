@@ -22,6 +22,7 @@ class My_Forms_Contact extends Zend_Form {
         ));
         $this->setDecorators(array(
             'FormElements',
+            'Errors',
             array(
                 array('data'=>'HtmlTag'),
                 array('tag'=>'div', 'class'=>'contact_form')
@@ -31,11 +32,6 @@ class My_Forms_Contact extends Zend_Form {
         
         $this->addElement('text','name',array(
             'required' => true,
-            'validators' => array(
-                array('Alpha',false, array(
-                    'messages' => array(Zend_Validate_Alpha::NOT_ALPHA => 'Możesz użyć tylko liter!')
-                ))
-            ),
             'placeholder' => 'Imię i nazwisko',
             'class' => 'col-xs-12'
         ));

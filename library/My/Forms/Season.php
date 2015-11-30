@@ -10,11 +10,6 @@ class My_Forms_Season extends Zend_Form {
     {
         $this->addElement('text','name',array(
             'label' => 'Nazwa sezonu:',
-            'validators' => array(
-                array('alpha', false, array(
-                    'messages' => 'Nazwa może składać się tylko z liter'
-                ))
-            ),
             'required' => true
         ));
         $this->addElement('text','period',array(

@@ -38,7 +38,7 @@ class Admin_MatchController extends Zend_Controller_Action
         $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
-            $values = $form->getValues();
+            $values = $this->prepareValues($form->getValues());
             $this->matchesMapper->insert($values);
             if($values['is_played']){
                 $this->prepareTable($values['season_id']);
@@ -59,11 +59,13 @@ class Admin_MatchController extends Zend_Controller_Action
         $this->view->teamIds = $this->getTeamIds($teams);
         $seasons = $this->prepareSeasonsArray($this->seasonsMapper->getAllActive());
         $form = new My_Forms_Match($teamsArray, $seasons);
+        $match['home_name'] .= '_'.$match['home_id'];
+        $match['away_name'] .= '_'.$match['away_id'];
         $form->populate($match->toArray());
         $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
-            $values = $form->getValues();
+            $values = $this->prepareValues($form->getValues());
             $this->matchesMapper->update($values, 'id='.$id);
             $this->prepareTable($values['season_id']);
             $this->redirect('/admin/match');
@@ -129,7 +131,7 @@ class Admin_MatchController extends Zend_Controller_Action
         if($teams) {
             $teamsArray = array();
             foreach($teams as $team) {
-                $teamsArray[$team->name] = $team->name;
+                $teamsArray[$team->name.'_'.$team->id] = $team->name;
             }
             return $teamsArray;
         }
@@ -152,10 +154,9 @@ class Admin_MatchController extends Zend_Controller_Action
     {
         $i = 0;
         foreach($values as $key=>$value) {
-            if(strpos('scorer', $key) === 0 && $value) {
+            if(strpos($key,'scorer') === 0 && $value) {
                 if(isset($scorersIds[$i])){
                     $this->scorersMapper->update(array('player_id' => $value), 'id='.$scorersIds[$i]);
-                    $i++;
                 } else {
                     $data = array(
                         'season_id' => $seasonId,
@@ -164,6 +165,7 @@ class Admin_MatchController extends Zend_Controller_Action
                     );
                     $this->scorersMapper->insert($data);
                 }
+                $i++;
             }
         }
     }
@@ -172,10 +174,9 @@ class Admin_MatchController extends Zend_Controller_Action
     {
         $i = 0;
         foreach($values as $key=>$value) {
-            if(strpos('player', $key) === 0 && $value) {
+            if(strpos($key,'player') === 0 && $value) {
                 if(isset($performancesIds[$i])){
                     $this->performancesMapper->update(array('player_id' => $value), 'id='.$performancesIds[$i]);
-                    $i++;
                 } else {
                     $data = array(
                         'season_id' => $seasonId,
@@ -185,8 +186,23 @@ class Admin_MatchController extends Zend_Controller_Action
                     );
                     $this->performancesMapper->insert($data);
                 }
+                $i++;
             }
         }
+    }
+    
+    private function prepareValues($values){
+        if(!isset($values['home_name']) || !isset($values['away_name'])){
+            return $values;
+        }
+        $homeTeamData = explode('_',$values['home_name']);
+        $awayTeamData = explode('_',$values['away_name']);
+        $values['home_name'] = $homeTeamData[0];
+        $values['home_id'] = $homeTeamData[1];
+        $values['away_name'] = $awayTeamData[0];
+        $values['away_id'] = $awayTeamData[1];
+                
+        return $values;
     }
  
     private function prepareTable($season_id)
@@ -207,7 +223,7 @@ class Admin_MatchController extends Zend_Controller_Action
             'points' => 0,
             'rank' => 0
         );
-        
+
         foreach($matches as $match)
         {
             $homeId = $match['home_id'];
@@ -247,9 +263,9 @@ class Admin_MatchController extends Zend_Controller_Action
                 $teamData[$awayId]['goals_lost'] += $homeGoals;
             }
         }
-        
+
         $teamData = $this->makeRank($teamData, $matches);
-        
+
         foreach($teamData as $key=>$team){
             if(in_array($team['team_id'], $teamsAlreadySaved)) {
                 $this->seasonsDataMapper->update($team, 'team_id = '.$team['team_id']);
@@ -257,33 +273,51 @@ class Admin_MatchController extends Zend_Controller_Action
             }
         }
         
-        if(count($teamData)){
-            $this->seasonsDataMapper->insert($teamData);
+        foreach($teamData as $team){
+            $this->seasonsDataMapper->insert($team);
+            unset($teamData[$key]);
         }
     }
     
     private function makeRank($teamArray, $matches)
     {
         $teamArray = $this->sortByPoints($teamArray);
+        
+        function rankCompare($a,$b) {
+            if ($a['rank'] == $b['rank']) {
+                return 0;
+            }
+            return ($a['rank'] < $b['rank']) ? -1 : 1;
+        }
+        
+        uasort($teamArray, 'rankCompare');
+        
         $previous = null;
         $change = true;
         while($change){
             $change = false;
             foreach($teamArray as $key=>$value) {
                 if($previous == null){
-                    $previous = $key;
+                    
                 } else {
                     $goalsBalancePrev = $teamArray[$previous]['goals_scored'] - $teamArray[$previous]['goals_lost'];
                     $goalsBalance = $value['goals_scored'] - $value['goals_lost'];
-                    if(
-                        $teamArray[$previous]['points'] == $value['points'] &&
-                        $goalsBalance> $goalsBalancePrev
-                    ){
-                        $teamArray[$previous]['rank']++;
-                        $value['rank']--;
-                        $change= true;
+                    if($teamArray[$previous]['points'] == $value['points']){
+                        $toChange = false;
+                        if($goalsBalance> $goalsBalancePrev ||
+                            ($goalsBalance== $goalsBalancePrev && $teamArray[$previous]['goals_scored'] < $value['goals_scored'])
+                        ) {
+                            $toChange = true;
+                        }
+                        if($toChange){
+                            $teamArray[$previous]['rank']++;
+                            $teamArray[$key]['rank']--;
+                            $change= true;
+                            uasort($teamArray, 'rankCompare');
+                        }
                     }
                 }
+                $previous = $key;
             }
         }
         $change = true;
@@ -298,6 +332,7 @@ class Admin_MatchController extends Zend_Controller_Action
                             $teamArray[$previous]['rank']++;
                             $value['rank']--;
                             $change= true;
+                            uasort($teamArray, 'rankCompare');
                         }
                     }
                 }
@@ -314,14 +349,14 @@ class Admin_MatchController extends Zend_Controller_Action
         foreach($teamArray as $key=>$value) {
             $index = $this->findPlaceToInsert($value['points'],$points);
             if(!count($ranks) || $index== count($ranks)){
-                $ranks[] = $key;
+                array_push($ranks,$key);
             } else {
-                $ranks = array_splice($ranks, $index, 0, $key);
+                array_splice($ranks, $index, 0, $key);
             }
             if(!count($points) || $index== count($points)){
-                $points[] = $key;
-            } else {
-                $points = array_splice($ranks, $index, 0, $key);
+                array_push($points,$value['points']);
+            }else {
+                array_splice($points, $index, 0, $value['points']);
             }
         }
         foreach($teamArray as $key=>$value) {
@@ -338,7 +373,6 @@ class Admin_MatchController extends Zend_Controller_Action
         }
         for($i = 0; $i < count($array); $i++){
             if($points>$array[$i]) {
-                echo $i;
                 return $i;
             }
         }

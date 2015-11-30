@@ -2,7 +2,7 @@
     <article class="news">
         <div class="news_header">
             <div class="news_header_date">
-                <?php //echo $this->news->date['day'] ?><div class="news_header_month"><?php //echo $this->news->date['month'] ?></div>
+                <?php echo $this->news->date['day'] ?><div class="news_header_month"><?php echo $this->news->date['month'] ?></div>
             </div>
             <h1><a href="#" title="<?php echo $this->news->title ?>" /><?php echo $this->news->title ?></a></h1>
         </div>
@@ -12,16 +12,16 @@
     </article>
 </div>
 <div class="col-md-1"></div>
-<div class="widgets_column col-md-5">
-    
+<div class="image_column col-md-5">
+    <?php if($this->news->main_photo): ?>
+        <img src="<?php echo $this->baseUrl('img/kw/news/'.$this->news->main_photo) ?>" alt="<?php echo $this->news->title ?>" />
+    <?php endif; ?>
 </div>
 <script type="text/javascript">
     $('#myTabs a').click(function (e) {
         e.preventDefault();
         $(this).tab('show');
-    })
+    });
 </script>
-
-<div class="fb-share-button" data-href="<?php echo $this->currentLink ?>" data-layout="box_count"></div>
 
 <div class="fb-comments col-xs-12" data-href="<?php echo $this->currentLink ?>" data-width="100%" data-numposts="5"></div>

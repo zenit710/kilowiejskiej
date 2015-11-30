@@ -9,6 +9,7 @@
     <link href='<?php echo $this->baseUrl('css/style.css') ?>' rel='stylesheet' type='text/css' />
     <script src="<?php echo $this->baseUrl('js/jquery.min.js') ?>"></script>
     <script src='<?php echo $this->baseUrl('js/bootstrap.js') ?>'></script>
+    <script src='<?php echo $this->baseUrl('js/footer.js') ?>'></script>
     <?php echo $this->headTitle(); ?>
 </head>
 <body>
@@ -51,11 +52,11 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="/">Strona główna</a></li>
-                    <li><a href="<?php echo $this->url(array('url' => 'o-nas'), 'site') ?>">O nas</a></li>
-                    <li><a href="<?php echo $this->url(array(),'team') ?>">Skład</a></li>
+                    <li <?php if(!($this->about_page || $this->squad_page || $this->contact_page)): ?>class="active" <?php endif; ?>><a href="/">Strona główna</a></li>
+                    <li <?php if($this->about_page): ?>class="active" <?php endif; ?>><a href="<?php echo $this->url(array('url' => 'o-nas'), 'site') ?>">O nas</a></li>
+                    <li <?php if($this->squad_page): ?>class="active" <?php endif; ?>><a href="<?php echo $this->url(array(),'team') ?>">Skład</a></li>
                     <!--<li><a href="<?php echo $this->url(array(),'media') ?>">Multimedia</a></li>-->
-                    <li><a href="<?php echo $this->url(array(),'contact') ?>">Kontakt</a></li>
+                    <li <?php if($this->contact_page): ?>class="active" <?php endif; ?>><a href="<?php echo $this->url(array(),'contact') ?>">Kontakt</a></li>
                 </ul>
             </div>
         </div>
@@ -81,11 +82,18 @@
                 <table class="footer_events_table">
                     <tr>
                         <td>Turniej Mikołajkowy</td>
-                        <td>06.12.2015 r.</td>
+                        <?php 
+                        $startTimeStamp = time();
+                        $endTimeStamp = strtotime("2015/12/06 23:59:59");
+                        $timeDiff = abs($endTimeStamp - $startTimeStamp);
+                        $numberDays = $timeDiff/86400;
+                        $numberDays = intval($numberDays);
+                        ?>
+                        <td>06.12.2015 r. - pozostało <?php echo $numberDays ?> dni</td>
                     </tr>
                     <tr>
                         <td>Liga Wakacyjna Glewiec</td>
-                        <td>24.05.2016 r.</td>
+                        <td>-</td>
                     </tr>
                 </table>
                 <div class="separator"></div>

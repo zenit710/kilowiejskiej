@@ -14,6 +14,8 @@ class SiteController extends Zend_Controller_Action
         $sitesMapper = new Application_Model_DbTable_Sites();
         $this->view->site = $site = $sitesMapper->getSiteByUrl($url);
         
+        $this->view->about_page = true;
+        
         $this->getInvokeArg('bootstrap')->getResource('view')->headTitle($site['title']);
         $this->getInvokeArg('bootstrap')->getResource('view')->headMeta()
                 ->setName('keywords', $site['keywords']);
@@ -24,6 +26,7 @@ class SiteController extends Zend_Controller_Action
         $playersMapper = new Application_Model_DbTable_Players();
         $players = $playersMapper->getAllKiloPlayers();
         $this->view->players = $players;
+        $this->view->squad_page = true;
         
         $this->getInvokeArg('bootstrap')->getResource('view')->headTitle('Skład');
         
@@ -38,18 +41,19 @@ class SiteController extends Zend_Controller_Action
     {
         $form = new My_Forms_Contact();
         $this->view->form = $form;
+        $this->getInvokeArg('bootstrap')->getResource('view')->headTitle('Kontakt');
+        $this->view->contact_page = true;
         
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
-            exit;
             $values = $form->getValues();
             $html= 'Wiadomość od: '.$values['name'].'<br /><br />';
             $html.= $values['message'];
-            
-            $config = Zend_Registry::get('config')->mail->config;
-            $smtp = Zend_Registry::get('config')->mail->smtp;
+//            
+//            $config = Zend_Registry::get('config')->mail->config;
+//            $smtp = Zend_Registry::get('config')->mail->smtp;
             $sendTo = Zend_Registry::get('config')->mail->to;
 
-            $transport = new Zend_Mail_Transport_Smtp($smtp, (array)$config);
+//            $transport = new Zend_Mail_Transport_Smtp($smtp, (array)$config);
             
             $mail = new Zend_Mail('utf-8');
             $mail->setFrom($values['mail']);
@@ -57,10 +61,8 @@ class SiteController extends Zend_Controller_Action
             $mail->setSubject($values['title']);
             $mail->setBodyHtml($html);
             $mail->addTo($sendTo);
-            $mail->send($transport);
+            $mail->send();//$transport);
         }
-        
-        $this->getInvokeArg('bootstrap')->getResource('view')->headTitle('Kontakt');
     }
     
 }

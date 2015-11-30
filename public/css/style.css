@@ -168,6 +168,14 @@ h3,h4,h5,h6{
     float: right;
     text-transform: uppercase;
     border: 1px solid #8e8e8e;
+    transition: background .4s;
+}
+
+.footer_description button:hover{
+    color: #030303;
+    background: #8e8e8e;
+    transition: background .4s;
+    border: 1px solid #8e8e8e;
 }
 
 .footer_logo{
@@ -536,8 +544,19 @@ h3,h4,h5,h6{
     bottom: 0;
     margin: 0 15px 0 0;
     color: #C00202;
+    transition: background .4s;
+}
+
+#contact_form_submit:hover{
+    background: #8e8e8e;
+    color: #eeeeee;
+    transition: background .4s;
 }
 
 .fb-share-button{
     float: right;
+}
+
+.image_column img{
+    max-width: 100%;
 }

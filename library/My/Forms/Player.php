@@ -49,11 +49,6 @@ class My_Forms_Player extends Zend_Form {
         ));
         $this->addElement('text','city',array(
             'label' => 'Miejscowość:',
-            'validators' => array(
-                array('alpha', false, array(
-                    'messages' => 'Miejscowość może składać się tylko z liter'
-                ))
-            ),
             'required' => false
         ));
         $this->addElement('text','date_of_birth',array(
