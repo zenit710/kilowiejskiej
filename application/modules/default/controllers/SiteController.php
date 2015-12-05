@@ -14,7 +14,11 @@ class SiteController extends Zend_Controller_Action
         $sitesMapper = new Application_Model_DbTable_Sites();
         $this->view->site = $site = $sitesMapper->getSiteByUrl($url);
         
-        $this->view->about_page = true;
+        if($url == 'o-nas'){
+            $this->view->about_page = true;
+        } else {
+            $this->view->turniej_page = true;
+        }
         
         $this->getInvokeArg('bootstrap')->getResource('view')->headTitle($site['title']);
         $this->getInvokeArg('bootstrap')->getResource('view')->headMeta()

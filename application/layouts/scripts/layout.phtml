@@ -52,11 +52,12 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li <?php if(!($this->about_page || $this->squad_page || $this->contact_page)): ?>class="active" <?php endif; ?>><a href="/">Strona główna</a></li>
+                    <li <?php if(!($this->about_page || $this->squad_page || $this->contact_page || $this->turniej_page)): ?>class="active" <?php endif; ?>><a href="/">Strona główna</a></li>
                     <li <?php if($this->about_page): ?>class="active" <?php endif; ?>><a href="<?php echo $this->url(array('url' => 'o-nas'), 'site') ?>">O nas</a></li>
                     <li <?php if($this->squad_page): ?>class="active" <?php endif; ?>><a href="<?php echo $this->url(array(),'team') ?>">Skład</a></li>
                     <!--<li><a href="<?php echo $this->url(array(),'media') ?>">Multimedia</a></li>-->
                     <li <?php if($this->contact_page): ?>class="active" <?php endif; ?>><a href="<?php echo $this->url(array(),'contact') ?>">Kontakt</a></li>
+                    <li <?php if($this->turniej_page): ?>class="active" <?php endif; ?>><a href="<?php echo $this->url(array('url' => 'turniej-mikolajkowy'), 'site') ?>">Turniej mikołajkowy</a></li>
                 </ul>
             </div>
         </div>

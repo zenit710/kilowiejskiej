@@ -28,19 +28,32 @@ class Application_Model_DbTable_News extends Zend_Db_Table_Abstract
     );
     
     /**
-     * Zwraca newsy, które będą wyświetlone na stronie głównej
+     * Zwraca newsy, które będą wyświetlone na stronie głównej wraz z paginacją
      * 
-     * @return Zend_Db_Table_Rowset
+     * @return Zend_Paginator
      */
-    public function getNewsForHomepage(){
+    public function getNewsForHomepage($page){
         $select = $this->select()
                 ->from($this->_name, $this->columnListForHomepage)
                 ->setIntegrityCheck(false)
                 ->join('categories',$this->_name.'.category_id = categories.id','slug as category_slug')
-                ->order('date DESC')
-                ->limit(self::HOMEPAGE_NEWS_LIMIT);
+                ->order('date DESC');
         
-        return $this->fetchAll($select);
+        $rowCount = $this->select()
+                ->from($this->_name, array(
+                    Zend_Paginator_Adapter_DbSelect::ROW_COUNT_COLUMN => "count($this->_name.id)"
+                ))
+                ->setIntegrityCheck(false)
+                ->join('categories',$this->_name.'.category_id = categories.id','slug as category_slug');
+        
+        $adapter = new Zend_Paginator_Adapter_DbSelect($select);
+        $adapter->setRowCount($rowCount);
+        
+        $paginator = new Zend_Paginator($adapter);
+        $paginator->setCurrentPageNumber($page);
+        $paginator->setItemCountPerPage(self::HOMEPAGE_NEWS_LIMIT);
+        
+        return $paginator;
     }
     
     /**

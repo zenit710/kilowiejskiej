@@ -3,18 +3,19 @@
         <article class="news">
             <div class="news_header">
                 <div class="news_header_date">
-                    <?php echo $news->date['day'] ?><div class="news_header_month"><?php echo $news->date['month'] ?></div>
+                    <?php echo $news['date']['day'] ?><div class="news_header_month"><?php echo $news['date']['month'] ?></div>
                 </div>
-                <h3><a href="<?php echo $this->url(array('category' => $news->category_slug, 'slug' => $news->slug),'news'); ?>" title="<?php echo $news->title ?>" /><?php echo $news->title ?></a></h3>
+                <h3><a href="<?php echo $this->url(array('category' => $news['category_slug'], 'slug' => $news['slug']),'news'); ?>" title="<?php echo $news['title'] ?>" /><?php echo $news['title'] ?></a></h3>
             </div>
             <div class="news_content">
-                <?php echo $news->description ?>
+                <?php echo $news['description'] ?>
             </div>
             <div class="news_more">
-                <a href="<?php echo $this->url(array('category' => $news->category_slug, 'slug' => $news->slug),'news'); ?>" title="<?php echo $news->title ?>" />Czytaj więcej...</a>
+                <a href="<?php echo $this->url(array('category' => $news['category_slug'], 'slug' => $news['slug']),'news'); ?>" title="<?php echo $news['title'] ?>" />Czytaj więcej...</a>
             </div>
         </article>
     <?php endforeach; ?>
+    <?php echo $this->paginationControl($this->paginator, 'Sliding', 'pagination.phtml') ?>
 </div>
 <div class="col-md-1"></div>
 <div class="widgets_column col-md-5">

@@ -3,7 +3,7 @@
 class IndexController extends Zend_Controller_Action
 {
 
-    private $monthNames = array('Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru');
+    private $monthNames = array('Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru');    
     
     public function init()
     {
@@ -12,11 +12,14 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        $page = $this->_getParam('page',1);
+        
         // GET NEWS FOR HOMEPAGE
         $newsMapper = new Application_Model_DbTable_News();
-        $news = $newsMapper->getNewsForHomepage();
-        $this->view->news = $this->prepareNewsForHomepage($news);
-        
+        $paginator = $newsMapper->getNewsForHomepage($page);
+        $this->view->news = $this->prepareNewsForHomepage($paginator->getItemsByPage($page));
+        $this->view->paginator = $paginator;
+                
         // GET INFO ABOUT ACTUAL SEASON
         $seasonMapper = new Application_Model_DbTable_Seasons();
         $this->view->seasonInfo = $seasonMapper->getActualSeasonInfo();
@@ -50,12 +53,13 @@ class IndexController extends Zend_Controller_Action
      * @return Zend_Db_Table_Rowset
      */
     public function prepareNewsForHomepage($newsList){
-        foreach($newsList as $news){
-            $timestamp = strtotime($news->date);
+        foreach($newsList as &$news){
+            $timestamp = strtotime($news['date']);
             $day = date('j',$timestamp);
             $month = $this->monthNames[date('n',$timestamp) -1];
-            $news->date = array('day' => $day, 'month' => $month);
+            $news['date'] = array('day' => $day, 'month' => $month);
         }
+        
         return $newsList;
     }
 
