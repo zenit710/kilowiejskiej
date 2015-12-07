@@ -1,0 +1,33 @@
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">
+                <img src="<?php echo $this->baseUrl('img/kwft_65.png'); ?>" alt="Stowarzyszenie Kilo Wiejskiej Futsal Team" width="65px" style="float: left; margin-right: 20px;"/>
+                Stowarzyszenie <br /> Kilo Wiejskiej Futsal Team
+            </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li <?php if(!$this->currentPage): ?>class="active" <?php endif; ?>>
+                    <a href="/">Strona główna</a>
+                </li>
+                <?php foreach($this->sites as $item): ?>
+                    <li <?php if($this->currentPage == $item->title): ?>class="active" <?php endif; ?>>
+                        <?php if(empty($item->outside_url)): ?>
+                            <a href="<?php echo $this->url(array('url' => $item->url),'site'); ?>"><?php echo $item->title ?></a>
+                        <?php else: ?>
+                            <a href="<?php echo $item->outside_url ?>"><?php echo $item->title ?></a>
+                        <?php endif; ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </div>
+</nav>
