@@ -37,6 +37,16 @@ class Application_Model_DbTable_Sites extends Zend_Db_Table_Abstract
         
         return $this->fetchRow($select);
     }
+    
+    public function getMenuElements()
+    {
+        $select = $this->select()
+                ->from($this->_name)
+                ->where($this->_name.'.order > ?', 0)
+                ->order('order ASC');
+        
+        return $this->fetchAll($select);
+    }
 
 }
 
