@@ -95,6 +95,8 @@ class Admin_IndexController extends Zend_Controller_Action
     
     public function registerAction()
     {
+        $this->_helper->layout->disableLayout();
+        
         // redirect logged in users
         if (Zend_Registry::getInstance()->get('auth')->hasIdentity()) {
             $this->_redirect('/admin');
@@ -118,11 +120,11 @@ class Admin_IndexController extends Zend_Controller_Action
                 // if both passwords do not match
                 $this->view->error = 'Wprowadzone hasła różnią się';
             } else {
-                $data['permissions'] = 'MODERATOR';
+                $data['permissions'] = 'USER';
                 $data['is_banned'] = 1;
                 $this->usersMapper->add($data);
                 $this->view->success = 'Zarejestrowano! Musisz poczekać na weryfikację'
-                        . ' zanim będziesz mógł się zarejestrować.';
+                        . ' zanim będziesz mógł się zalogować.';
             }
         }
 

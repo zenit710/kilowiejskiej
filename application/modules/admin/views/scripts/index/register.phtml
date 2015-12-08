@@ -1,8 +1,27 @@
-<?php
-    echo $this->form;
-    if($this->error){
-        echo $this->error;
-    }
-    if($this->success){
-        echo $this->success;
-    }
+<?php echo $this->doctype(); ?>
+<html>
+<head>
+    <meta name='author' content='Kamil Małek' />
+    <?php echo $this->headMeta(); ?>
+    <link rel="shortcut icon" href="<?php echo $this->baseUrl('favicon.ico') ?>" type="image/x-icon">
+    <link rel="icon" href="<?php echo $this->baseUrl('favicon.ico') ?>" type="image/x-icon">
+    <link href='<?php echo $this->baseUrl('css/bootstrap.css') ?>' rel='stylesheet' type='text/css' />
+    <link href='<?php echo $this->baseUrl('css/admin.css') ?>' rel='stylesheet' type='text/css' />
+    <script src="<?php echo $this->baseUrl('js/jquery.min.js') ?>"></script>
+    <script src='<?php echo $this->baseUrl('js/bootstrap.js') ?>'></script>
+    <?php echo $this->headTitle(); ?>
+</head>
+<body>
+    <div class="container" id="login">
+        <?php
+            echo $this->form;
+            if($this->error){
+                echo $this->error;
+            }
+            if($this->success){
+                echo $this->success;
+            }
+        ?>
+    </div>
+</body>
+</html>
