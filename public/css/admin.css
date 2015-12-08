@@ -52,6 +52,10 @@ table a,table a:hover, table a:active, table a:link, table a:visited{
     color: #D0B837;
 }
 
+tr:nth-child(2n) {
+    background: #EEE;
+}
+
 .content {
     padding-top: 10px;
     height: 100vh;

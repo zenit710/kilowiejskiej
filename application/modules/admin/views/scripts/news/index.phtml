@@ -23,16 +23,19 @@
             <th class="col-md-3">Tytuł</th>
             <th class="col-md-2">Kategoria</th>
             <th class="col-md-1">Edytuj</th>
+            <th class="col-md-1">Udostępnij</th>
             <th class="col-md-1">Usuń</th>
         </tr>
     </thead>
     <tbody>
         <?php foreach($this->news as $news): ?>
+        <?php $shareUrl = "https://www.facebook.com/dialog/share?app_id=1652268505057180&display=popup&href=http://kilowiejskiej.pl".$this->url(array('category' => $news->category_slug, 'slug' => $news->slug),'news')."&redirect_uri=http://kilowiejskiej.pl/" ?>
         <tr>
             <td><?php echo $news->date ?></td>
             <td><?php echo $news->title ?></td>
             <td><?php echo $news->categoryName ?></td>
             <td><a href="/admin/news/edit?id=<?php echo $news->id ?>" title="Edytuj artykuł">Edytuj</a></td>
+            <td><a style='color: #204d74' href="<?php echo $shareUrl ?>" target="_blank" title="Udostępnij na FB">Udostępnij</a></td>
             <td><a href="/admin/news/delete?id=<?php echo $news->id ?>" title="Usuń artykuł">Usuń</a></td>
         </tr>
         <?php endforeach; ?>
