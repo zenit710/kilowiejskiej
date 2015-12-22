@@ -3,6 +3,8 @@
 class IndexController extends Zend_Controller_Action
 {
 
+    const PAGE_RANGE = 5;
+    
     private $monthNames = array('Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru');    
     
     public function init()
@@ -18,6 +20,7 @@ class IndexController extends Zend_Controller_Action
         $newsMapper = new Application_Model_DbTable_News();
         $paginator = $newsMapper->getNewsForHomepage($page);
         $this->view->news = $this->prepareNewsForHomepage($paginator->getItemsByPage($page));
+        $paginator->setPageRange(self::PAGE_RANGE);
         $this->view->paginator = $paginator;
                 
         // GET INFO ABOUT ACTUAL SEASON
