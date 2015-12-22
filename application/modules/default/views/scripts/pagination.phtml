@@ -4,9 +4,9 @@
 <?php if (isset($this->previous)): ?>
   <a href="<?php echo $this->url(array('page' => $this->previous),'index_page'); ?>">
     &lt; Poprzednia strona
-  </a> |
+  </a>
 <?php else: ?>
-  <span class="disabled">&lt; Previous</span> |
+  <span class="disabled">&lt; Poprzednia strona</span>
 <?php endif; ?>
  
 <!-- Numbered page links -->
@@ -14,9 +14,9 @@
   <?php if ($page != $this->current): ?>
     <a href="<?php echo $this->url(array('page' => $page),'index_page'); ?>">
         <?php echo $page; ?>
-    </a> |
+    </a>
   <?php else: ?>
-    <?php echo $page; ?> |
+    <span><?php echo $page; ?></span>
   <?php endif; ?>
 <?php endforeach; ?>
  
@@ -26,7 +26,7 @@
     Następna strona &gt;
   </a>
 <?php else: ?>
-  <span class="disabled">Next &gt;</span>
+  <span class="disabled">Następna strona &gt;</span>
 <?php endif; ?>
 </div>
 <?php endif; ?>

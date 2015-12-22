@@ -560,3 +560,23 @@ h3,h4,h5,h6{
 .image_column img{
     max-width: 100%;
 }
+
+/*  PAGINATION */
+
+.paginationControl{
+    text-align: center;
+}
+
+.paginationControl a, .paginationControl span{
+    display: inline-block;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 10px;
+    margin: 1px;
+    line-height: 40px;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 5px;
+    border-right: 1px solid #8E8E8E;
+    border-bottom: 1px solid #8E8E8E;
+}
