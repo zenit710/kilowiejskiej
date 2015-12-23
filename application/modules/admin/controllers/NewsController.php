@@ -68,7 +68,12 @@ class Admin_NewsController extends Zend_Controller_Action
         $this->newsMapper->delete('id = '.$id);
         $this->redirect('/admin/news');
     }
-    
+
+    /**
+     * Przygotowuje tablicę dostępnych kategorii
+     * @param array $categories
+     * @return array
+     */
     private function prepareCategoriesArray($categories)
     {
         if($categories) {
@@ -81,7 +86,11 @@ class Admin_NewsController extends Zend_Controller_Action
         return null;
     }
 
-
+    /**
+     * Przygotowuje slug na podstawie tytułu artykuł€
+     * @param string $string
+     * @return string
+     */
     private function generateSlug($string)
     {
         $string = strtr($string, 'ĘęÓóĄąŚśŁłŹźŻżĆćŃń', 'EeOoAaSsLlZzZzCcNn');

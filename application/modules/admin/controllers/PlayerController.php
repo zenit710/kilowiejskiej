@@ -65,6 +65,11 @@ class Admin_PlayerController extends Zend_Controller_Action
         $this->redirect('/admin/player');
     }
 
+    /**
+     * Przygotowuje tablicę dostępnych drużyn
+     * @param array $teams
+     * @return array
+     */
     private function prepareTeamsArray($teams)
     {
         if($teams) {

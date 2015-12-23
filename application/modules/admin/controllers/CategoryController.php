@@ -62,6 +62,12 @@ class Admin_CategoryController extends Zend_Controller_Action
         $this->redirect('/admin/category');
     }
 
+
+    /**
+     * Konwertuje nazwę kategorii na slug
+     * @param string $string
+     * @return string
+     */
     private function generateSlug($string)
     {
         $string = strtr($string, 'ĘęÓóĄąŚśŁłŹźŻżĆćŃń', 'EeOoAaSsLlZzZzCcNn');
