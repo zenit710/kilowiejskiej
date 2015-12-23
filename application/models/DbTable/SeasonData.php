@@ -3,8 +3,16 @@
 class Application_Model_DbTable_SeasonData extends Zend_Db_Table_Abstract
 {
 
+    /**
+     * Nazwa tabeli
+     * @var string $_name
+     */
     protected $_name = 'seasondata';
 
+    /**
+     * Pełna lista kolumn
+     * @var array $columnListFull
+     */
     private $columnListFull = array(
         'id',
         'season_id',
@@ -18,6 +26,11 @@ class Application_Model_DbTable_SeasonData extends Zend_Db_Table_Abstract
         'rank',
         'is_withdrawn'
     );
+
+    /**
+     * Lista kolumn na potrzeby strony głównej
+     * @var array $columnListFull
+     */
     private $columnListForHomepage = array(
         'points',
         'rank',
@@ -42,7 +55,12 @@ class Application_Model_DbTable_SeasonData extends Zend_Db_Table_Abstract
         
         return $this->fetchAll($select);
     }
-    
+
+    /**
+     * Zwraca listę zespołów uczestniczących w sezonie o danym ID
+     * @param integer $season_id
+     * @return array
+     */
     public function getSavedTeamInSeason($season_id)
     {
         $select = $this->select()

@@ -3,8 +3,16 @@
 class Application_Model_DbTable_Seasons extends Zend_Db_Table_Abstract
 {
 
+    /**
+     * Nazwa tabeli
+     * @var string $_name
+     */
     protected $_name = 'seasons';
 
+    /**
+     * Pełna lista kolumn
+     * @var array $columnListFull
+     */
     private $columnListFull = array(
         'id',
         'name',
@@ -26,6 +34,11 @@ class Application_Model_DbTable_Seasons extends Zend_Db_Table_Abstract
         return $this->fetchRow($select);
     }
 
+    /**
+     * Zwraca dane sezonu o danym ID
+     * @param integer $id
+     * @return Zend_Db_Table_Row
+     */
     public function getById($id)
     {
         $select = $this->select()
@@ -34,7 +47,11 @@ class Application_Model_DbTable_Seasons extends Zend_Db_Table_Abstract
         
         return $this->fetchRow($select);
     }
-    
+
+    /**
+     * Zwraca listę aktywnych sezonów
+     * @return Zend_Db_Table_Rowset
+     */
     public function getAllActive()
     {
         $select = $this->select()

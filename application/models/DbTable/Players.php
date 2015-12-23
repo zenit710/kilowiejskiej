@@ -3,9 +3,22 @@
 class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'players';
-    
+    /**
+     * Poprawna nazwa drużyny Kilo Wiejskiej
+     * @var string TEAM
+     */
     const TEAM = 'Kilo Wiejskiej';
+
+    /**
+     * Nazwa tabeli
+     * @var string $_name
+     */
+    protected $_name = 'players';
+
+    /**
+     * Pełna lista kolumn
+     * @var array $columnListFull
+     */
     private $columnListFull = array(
         'id',
         'name',
@@ -19,7 +32,11 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
         'is_junior',
         'is_active'
     );
-    
+
+    /**
+     * Lista kokumn potrzebna do wyświetlenia aktualnych zawdoników Kilo
+     * @var array $columnListFull
+     */
     private $coulmnListForSquad = array(
         'id',
         'name',
@@ -49,7 +66,11 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
         
         return $this->fetchAll($select);
     }
- 
+
+    /**
+     * Zwraca wszystkich zawodników
+     * @return Zend_Db_Table_Rowset
+     */
     public function getAll()
     {
         $select = $this->select()
@@ -60,7 +81,12 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
         
         return $this->fetchAll($select);
     }
-    
+
+    /**
+     * Zwraca zawodnika o danym ID
+     * @param integer $id
+     * @return Zend_Db_Table_Row
+     */
     public function getById($id)
     {
         $select = $this->select()

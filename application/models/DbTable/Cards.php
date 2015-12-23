@@ -3,9 +3,22 @@
 class Application_Model_DbTable_Cards extends Zend_Db_Table_Abstract
 {
 
+    /**
+     * Liczba zawodników do pobrania
+     * @var integer MAX_TOP_SCORERS
+     */
+    const MAX_TOP_SCORERS = 5;
+
+    /**
+     * Nazwa tabeli
+     * @var string $_name
+     */
     protected $_name = 'cards';
 
-    const MAX_TOP_SCORERS = 5;
+    /**
+     * Pełna lista kolumn
+     * @var array $columnListFull
+     */
     private $columnListFull = array(
         'id',
         'season_id',

@@ -2,10 +2,22 @@
 
 class Application_Model_DbTable_Scorers extends Zend_Db_Table_Abstract
 {
-
-    protected $_name = 'scorers';
-    
+    /**
+     * Ilość zwracanych strzelców
+     * @var integer MAX_TOP_SCORERS
+     */
     const MAX_TOP_SCORERS = 5;
+
+    /**
+     * Nazwa tabeli
+     * @var string $_name
+     */
+    protected $_name = 'scorers';
+
+    /**
+     * Pełna lista kolumn
+     * @var array $columnListFull
+     */
     private $columnListFull = array(
         'id',
         'season_id',
@@ -34,6 +46,11 @@ class Application_Model_DbTable_Scorers extends Zend_Db_Table_Abstract
         return $this->fetchAll($select);
     }
 
+    /**
+     * Zwraca listę strzelców meczu o danym ID
+     * @param integer $id
+     * @return array
+     */
     public function getIdsByMatchId($id)
     {
         $select = $this->select()
@@ -46,6 +63,11 @@ class Application_Model_DbTable_Scorers extends Zend_Db_Table_Abstract
         return $scorersIds;
     }
 
+    /**
+     * Wyciąga ID zawodników z listy zawodników
+     * @param Zend_Db_Table_Rowset $scorers
+     * @return array
+     */
     private function getIdsFromScorers($scorers){
         $ids = array();
         foreach($scorers as $scorer){
