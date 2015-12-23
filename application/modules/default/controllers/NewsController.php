@@ -39,7 +39,12 @@ class NewsController extends Zend_Controller_Action
                 ->appendName('keywords', $news['tags']); 
         
     }
-    
+
+    /**
+     * Przygotowuje datę dodania newsa do wyświetlenia na stronie
+     * @param Zend_Db_Table_Row $news
+     * @return Zend_Db_Table_Row
+     */
     public function prepareNewsDate($news){
         $timestamp = strtotime($news->date);
         $day = date('j',$timestamp);

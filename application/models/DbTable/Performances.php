@@ -3,9 +3,22 @@
 class Application_Model_DbTable_Performances extends Zend_Db_Table_Abstract
 {
 
+    /**
+     * Liczba strzelców do pobrania
+     * @var integer MAX_TOP_SCORERS
+     */
+    const MAX_TOP_SCORERS = 5;
+
+    /**
+     * Nazwa tabeli
+     * @var string $_name
+     */
     protected $_name = 'performances';
 
-    const MAX_TOP_SCORERS = 5;
+    /**
+     * Pełna lista kolumn
+     * @var array $columnListFull
+     */
     private $columnListFull = array(
         'id',
         'season_id',
@@ -34,7 +47,12 @@ class Application_Model_DbTable_Performances extends Zend_Db_Table_Abstract
                 
         return $this->fetchAll($select);
     }
-    
+
+    /**
+     * Zwraca listę zawodników, którzy wystąpili w meczu o danym ID
+     * @param integer $id
+     * @return array
+     */
     public function getIdsByMatchId($id)
     {
         $select = $this->select()
@@ -47,6 +65,11 @@ class Application_Model_DbTable_Performances extends Zend_Db_Table_Abstract
         return $performancesIds;
     }
 
+    /**
+     * Zwraca ID zawodników zawodników, któzy zaliczyli występ
+     * @param Zend_Db_Table_Rowset $performances
+     * @return array
+     */
     private function getIdsFromPerformances($performances){
         $ids = array();
         foreach($performances as $performance){

@@ -54,7 +54,12 @@ class Admin_SiteController extends Zend_Controller_Action
         $this->sitesMapper->delete('id = '.$id);
         $this->redirect('/admin/site');
     }
-    
+
+    /**
+     * Przygotowuje slug na podstawie nazwy strony
+     * @param string $string
+     * @return string
+     */
     private function generateSlug($string)
     {
         $string = strtr($string, 'ĘęÓóĄąŚśŁłŹźŻżĆćŃń', 'EeOoAaSsLlZzZzCcNn');

@@ -3,9 +3,22 @@
 class Application_Model_DbTable_News extends Zend_Db_Table_Abstract
 {
 
-    protected $_name = 'news';
-    
+    /**
+     * Liczba artykułów na stronie głównej
+     * @var integer HOMEPAGE_NEWS_LIMIT
+     */
     const HOMEPAGE_NEWS_LIMIT = 5;
+
+    /**
+     * Nazwa tabeli
+     * @var string $_name
+     */
+    protected $_name = 'news';
+
+    /**
+     * Pełna lista kolumn
+     * @var array $columnListFull
+     */
     private $columnListFull = array(
         'id',
         'title',
@@ -18,6 +31,11 @@ class Application_Model_DbTable_News extends Zend_Db_Table_Abstract
         'main_photo',
         'slug'
     );
+
+    /**
+     * Lista kolumn na potrzeby strony głównej
+     * @var array $columnListFull
+     */
     private $columnListForHomepage = array(
         'id',
         'title',
@@ -73,7 +91,11 @@ class Application_Model_DbTable_News extends Zend_Db_Table_Abstract
         
         return $this->fetchRow($select);
     }
-    
+
+    /**
+     * Zwraca wszystkie artykuły
+     * @return Zend_Db_Table_Rowset
+     */
     public function getAll()
     {
         $select = $this->select()
@@ -84,7 +106,12 @@ class Application_Model_DbTable_News extends Zend_Db_Table_Abstract
         
         return $this->fetchAll($select);
     }
-    
+
+    /**
+     * Zwraca artykuł o danym ID
+     * @param integer $id
+     * @return Zend_Db_Table_Row
+     */
     public function getById($id)
     {
         $select = $this->select()

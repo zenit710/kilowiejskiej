@@ -101,7 +101,12 @@ class Admin_MatchController extends Zend_Controller_Action
         $this->matchesMapper->delete('id='.$id);
         $this->redirect('/admin/match');
     }
-    
+
+    /**
+     * Przygotowuje tablicę aktywnych sezonów
+     * @param array $seasons
+     * @return array/null
+     */
     private function prepareSeasonsArray($seasons)
     {
         if($seasons) {
@@ -113,7 +118,12 @@ class Admin_MatchController extends Zend_Controller_Action
         }
         return null;
     }
-    
+
+    /**
+     * Przygotowuje tablicę dostępnych zawodników
+     * @param array $players
+     * @return array/null
+     */
     private function preparePlayersArray($players)
     {
         if($players) {
@@ -125,7 +135,12 @@ class Admin_MatchController extends Zend_Controller_Action
         }
         return null;
     }
-    
+
+    /**
+     * Przygotowuje tablicę dostępnych drużyn
+     * @param array $teams
+     * @return array/null
+     */
     private function prepareTeamsArray($teams)
     {
         if($teams) {
@@ -137,7 +152,12 @@ class Admin_MatchController extends Zend_Controller_Action
         }
         return null;
     }
-    
+
+    /**
+     * Zwraca ID drużyn
+     * @param array $teams
+     * @return array/null
+     */
     private function getTeamIds($teams)
     {
         if($teams) {
@@ -149,7 +169,14 @@ class Admin_MatchController extends Zend_Controller_Action
         }
         return null;
     }
-    
+
+    /**
+     * Zapisuje strzelców
+     * @param array $values
+     * @param integer $scorersIds
+     * @param integer $seasonId
+     * @param integer $matchId
+     */
     private function saveScorers($values, $scorersIds, $seasonId, $matchId)
     {
         $i = 0;
@@ -169,7 +196,15 @@ class Admin_MatchController extends Zend_Controller_Action
             }
         }
     }
-    
+
+    /**
+     * Zapisuje dane o występach zawodników
+     * @param array $values
+     * @param integer $performancesIds
+     * @param integer $seasonId
+     * @param integer $matchId
+     * @param integer $teamId
+     */
     private function savePerformances($values, $performancesIds, $seasonId, $matchId, $teamId)
     {
         $i = 0;
@@ -190,7 +225,13 @@ class Admin_MatchController extends Zend_Controller_Action
             }
         }
     }
-    
+
+
+    /**
+     * Przygotowuje dane o meczu
+     * @param array $values
+     * @return array
+     */
     private function prepareValues($values){
         if(!isset($values['home_name']) || !isset($values['away_name'])){
             return $values;
@@ -204,7 +245,11 @@ class Admin_MatchController extends Zend_Controller_Action
                 
         return $values;
     }
- 
+
+    /**
+     * Przygotowuje tabelę do zapisu
+     * @param integer $season_id
+     */
     private function prepareTable($season_id)
     {
         $matches = $this->matchesMapper->getAllBySeasonId($season_id);
@@ -278,7 +323,13 @@ class Admin_MatchController extends Zend_Controller_Action
             unset($teamData[$key]);
         }
     }
-    
+
+    /**
+     * Ustala pozycje zespołów w tabeli
+     * @param array $teamArray
+     * @param array $matches
+     * @return array
+     */
     private function makeRank($teamArray, $matches)
     {
         $teamArray = $this->sortByPoints($teamArray);
@@ -341,7 +392,12 @@ class Admin_MatchController extends Zend_Controller_Action
         
         return $teamArray;
     }
-    
+
+    /**
+     * Przypisauje zespołom pozycje na podstawie ilości zdobytych punktów
+     * @param array $teamArray
+     * @return array
+     */
     private function sortByPoints($teamArray)
     {
         $ranks = array();
@@ -365,7 +421,13 @@ class Admin_MatchController extends Zend_Controller_Action
         
         return $teamArray;
     }
-    
+
+    /**
+     * Wyszukuje miejsce, na którym powinien znaleźć się zespół
+     * @param integer $points
+     * @param array $array
+     * @return integer
+     */
     private function findPlaceToInsert($points,$array)
     {
         if(!count($array)){
@@ -378,7 +440,14 @@ class Admin_MatchController extends Zend_Controller_Action
         }
         return count($array);
     }
-    
+
+    /**
+     * Sprawdza, czy dany zespół jest lepszy od poprzedzającego go w tabeli
+     * @param array $prev
+     * @param array $me
+     * @param array $matches
+     * @return boolean
+     */
     private function iAmBetter($prev, $me, $matches){
         foreach($matches as $match){
             if($match['home_id'] == $prev && $match['away_id'] == $me){
