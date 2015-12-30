@@ -9,6 +9,23 @@
     <link href='<?php echo $this->baseUrl('css/admin.css') ?>' rel='stylesheet' type='text/css' />
     <script src="<?php echo $this->baseUrl('js/jquery.min.js') ?>"></script>
     <script src='<?php echo $this->baseUrl('js/bootstrap.js') ?>'></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('js/datetimepicker/jquery.datetimepicker.css') ?>" />
+    <script src="<?php echo $this->baseUrl('js/datetimepicker/build/jquery.datetimepicker.full.js') ?>"></script>
+    <script>
+        $(document).ready(function() {
+            $('input[type=datetime]').datetimepicker({
+                lang: 'pl',
+                step: 10,
+                dayOfWeekStart: 1,
+                format: 'Y-m-d H:i:00'
+            });
+            $('input[type=date]').datetimepicker({
+                lang: 'pl',
+                timepicker: false,
+                format: 'Y-m-d'
+            });
+        })
+    </script>
     <?php echo $this->headTitle(); ?>
 </head>
 <body>

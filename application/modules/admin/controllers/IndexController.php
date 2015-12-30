@@ -75,6 +75,9 @@ class Admin_IndexController extends Zend_Controller_Action
                     // store user object in the session
                     $authStorage = $auth->getStorage();
                     $authStorage->write($user);
+                    // save loggin info in database
+                    $date = new DateTime();
+                    $this->usersMapper->update(array('last_login' => $date->format('Y-m-d H:i:s')), "id=".$user->id);
                     $this->_redirect('/admin');
                     break;
 
@@ -122,6 +125,8 @@ class Admin_IndexController extends Zend_Controller_Action
             } else {
                 $data['permissions'] = 'USER';
                 $data['is_banned'] = 1;
+                $date = new DateTime();
+                $data['registration_date'] = $date->format('Y-m-d H:i:s');
                 $this->usersMapper->add($data);
                 $this->view->success = 'Zarejestrowano! Musisz poczekać na weryfikację'
                         . ' zanim będziesz mógł się zalogować.';

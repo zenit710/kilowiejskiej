@@ -96,6 +96,29 @@ class My_Forms_Register extends Zend_Form
             ),
             'class' => 'input-password'
         ));
+
+        $city = new Zend_Form_Element_Text('city', array(
+            'decorators' => $this->elementDecorators,
+            'label' => 'Miasto:',
+            'filters' => array(
+                'StringTrim'
+            ),
+            'validators' => array(
+                array('StringLength', false, array(0, 63))
+            )
+        ));
+
+        $dateOfBirth = new Glitch_Form_Element_Text_Date('date_of_birth', array(
+            'type' => 'date',
+            'label' => 'Data urodzenia:',
+            'placeholder' => 'yyyy-mm-dd',
+            'validators' => array(
+                array('regex',false,array(
+                    'pattern' => '/\d{4}-\d{2}-\d{2}/',
+                    'messages' => 'Nieprawidłowy format daty! YYYY-MM-DD'
+                ))
+            ),
+        ));
  
         $submit = new Zend_Form_Element_Submit('register', array(
             'decorators' => $this->buttonDecorators,
@@ -110,6 +133,8 @@ class My_Forms_Register extends Zend_Form
             $username,
             $password,
             $passwordAgain,
+            $city,
+            $dateOfBirth,
             $submit
         ));
     }
