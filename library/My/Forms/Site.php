@@ -20,19 +20,12 @@ class My_Forms_Site extends Zend_Form {
             'label' => 'Słowa kluczowe:',
             'required' => false
         ));
-        $this->addElement('text','order',array(
+        $this->addElement(new Glitch_Form_Element_Text_Number('order',array(
+            'type' => 'number',
             'label' => 'Kolejność w menu:',
-            'validators' => array(
-                array('int', true, array(
-                    'messages' => 'Kolejność może być tylko liczbą'
-                )),
-                array('greaterThan', false, array(
-                    'min' => 0,
-                    'messages' => 'Liczba musi być większa dodatania'
-                ))
-            ),
-            'required' => true
-        ));
+            'required' => true,
+            'min' => 0
+        )));
         $this->addElement('text','outside_url',array(
             'label' => 'Link zewnętrzny:',
             'required' => false

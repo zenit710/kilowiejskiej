@@ -8,7 +8,7 @@ class My_Forms_Team extends Zend_Form {
     
     private $img = null;
     
-    public function __construct($img,$options = null) {
+    public function __construct($img = null, $options = null) {
         $this->img = $img;
         parent::__construct($options);
     }

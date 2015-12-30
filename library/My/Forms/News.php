@@ -9,7 +9,7 @@ class My_Forms_News extends Zend_Form {
     private $categories = null;
     private $img = null;
     
-    public function __construct($categories, $img, $options = null) {
+    public function __construct($categories, $img = null, $options = null) {
         $this->categories = $categories;
         $this->img = $img;
         parent::__construct($options);
