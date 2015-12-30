@@ -29,7 +29,7 @@ class My_Forms_Match extends Zend_Form {
             'min' => 0
         )));
         $this->addElement(new Glitch_Form_Element_Text_DateTime('date',array(
-            'type' => 'date',
+            'type' => 'datetime',
             'label' => 'Data i godzina:',
             'placeholder' => 'yyyy-mm-dd hh:mm:ss',
             'validators' => array(
