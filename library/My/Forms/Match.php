@@ -22,21 +22,14 @@ class My_Forms_Match extends Zend_Form {
             'required' => true,
             'multiOptions' => $this->seasons
         ));
-        $this->addElement('text','stage',array(
+        $this->addElement(new Glitch_Form_Element_Text_Number('stage',array(
+            'type' => 'number',
             'label' => 'Kolejka:',
             'required' => true,
-            'validators' => array(
-                array('int',true,array(
-                    'messages' => 'Numer kolejki musi być liczbą!'
-                )),
-                array('greaterThan',false,array(
-                    'min' => 0,
-                    'messages' => 'Numer kolejki musi być dodatni!'
-                ))
-            ),
             'min' => 0
-        ));
-        $this->addElement('text','date',array(
+        )));
+        $this->addElement(new Glitch_Form_Element_Text_DateTime('date',array(
+            'type' => 'date',
             'label' => 'Data i godzina:',
             'placeholder' => 'yyyy-mm-dd hh:mm:ss',
             'validators' => array(
@@ -46,7 +39,7 @@ class My_Forms_Match extends Zend_Form {
                 ))
             ),
             'required' => true
-        ));
+        )));
         $this->addElement('select','home_name',array(
             'label' => 'Gospodarz:',
             'required' => true,
@@ -57,34 +50,18 @@ class My_Forms_Match extends Zend_Form {
             'required' => true,
             'multiOptions' => $this->teams
         ));
-        $this->addElement('text','home_goals',array(
+        $this->addElement(new Glitch_Form_Element_Text_Number('home_goals',array(
+            'type' => 'number',
             'label' => 'Bramki gospodarza:',
             'required' => false,
-            'validators' => array(
-                array('int',true,array(
-                    'messages' => 'Liczba bramek musi być liczbą nieujemną!'
-                )),
-                array('greaterThan',false,array(
-                    'min' => -1,
-                    'messages' => 'Liczba bramek musi być liczbą nieujemną!'
-                ))
-            ),
             'min' => 0
-        ));
-        $this->addElement('text','away_goals',array(
+        )));
+        $this->addElement(new Glitch_Form_Element_Text_Number('away_goals',array(
+            'type' => 'number',
             'label' => 'Bramki gościa:',
             'required' => false,
-            'validators' => array(
-                array('int',true,array(
-                    'messages' => 'Liczba bramek musi być liczbą nieujemną!'
-                )),
-                array('greaterThan',false,array(
-                    'min' => -1,
-                    'messages' => 'Liczba bramek musi być liczbą nieujemną!'
-                ))
-            ),
             'min' => 0
-        ));
+        )));
         $this->addElement('checkbox','is_played',array(
             'label' => 'Rozegrany:',
             'required' => true

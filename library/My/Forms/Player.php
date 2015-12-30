@@ -16,7 +16,7 @@ class My_Forms_Player extends Zend_Form {
     );
     private $img = null;
     
-    public function __construct($teams, $img, $options = null) {
+    public function __construct($teams, $img = null, $options = null) {
         $this->teams = $teams;
         $this->img = $img;
         parent::__construct($options);
