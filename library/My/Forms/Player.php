@@ -51,7 +51,8 @@ class My_Forms_Player extends Zend_Form {
             'label' => 'Miejscowość:',
             'required' => false
         ));
-        $this->addElement('text','date_of_birth',array(
+        $this->addElement(new Glitch_Form_Element_Text_Date('date_of_birth',array(
+            'type' => 'date',
             'label' => 'Data utodzenia:',
             'placeholder' => 'yyyy-mm-dd',
             'validators' => array(
@@ -61,7 +62,7 @@ class My_Forms_Player extends Zend_Form {
                 ))
             ),
             'required' => true
-        ));
+        )));
         $this->addElement('file','photo',array(
             'label' => 'Zdjęcie',
             'destination' => realpath(APPLICATION_PATH . '/../public/img/kw/player'),

@@ -7,10 +7,27 @@
     <link rel="icon" href="<?php echo $this->baseUrl('favicon.ico') ?>" type="image/x-icon">
     <link href='<?php echo $this->baseUrl('css/bootstrap.css') ?>' rel='stylesheet' type='text/css' />
     <link href='<?php echo $this->baseUrl('css/admin.css') ?>' rel='stylesheet' type='text/css' />
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->baseUrl('js/datetimepicker/jquery.datetimepicker.css') ?>" />
     <script src="<?php echo $this->baseUrl('js/jquery.min.js') ?>"></script>
     <script src='<?php echo $this->baseUrl('js/bootstrap.js') ?>'></script>
     <script src='<?php echo $this->baseUrl('js/admin_panel.js') ?>'></script>
     <script src='<?php echo $this->baseUrl('js/tinymce/tinymce.min.js') ?>'></script>
+    <script src="<?php echo $this->baseUrl('js/datetimepicker/build/jquery.datetimepicker.full.js') ?>"></script>
+    <script>
+        $(document).ready(function() {
+            $('input[type=datetime]').datetimepicker({
+                lang: 'pl',
+                step: 10,
+                dayOfWeekStart: 1,
+                format: 'Y-m-d H:i:00'
+            });
+            $('input[type=date]').datetimepicker({
+                lang: 'pl',
+                timepicker: false,
+                format: 'Y-m-d'
+            });
+        })
+    </script>
     <script>
         tinymce.init({
             selector:'textarea',
