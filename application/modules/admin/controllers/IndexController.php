@@ -75,6 +75,9 @@ class Admin_IndexController extends Zend_Controller_Action
                     // store user object in the session
                     $authStorage = $auth->getStorage();
                     $authStorage->write($user);
+                    // save loggin info in database
+                    $date = new DateTime();
+                    $this->usersMapper->update(array('last_login' => $date->format('Y-m-d H:i:s')), "id=".$user->id);
                     $this->_redirect('/admin');
                     break;
 
