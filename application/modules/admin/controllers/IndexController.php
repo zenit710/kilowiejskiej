@@ -72,12 +72,12 @@ class Admin_IndexController extends Zend_Controller_Action
                         // do not remember the session
                         Zend_Session::forgetMe();
                     }
+                    // save loggin info in database
+                    $date = new \DateTime("now");
+                    $this->usersMapper->update(array('last_login' => $date->format('Y-m-d H:i:s')), "id=".$user->id);
                     // store user object in the session
                     $authStorage = $auth->getStorage();
                     $authStorage->write($user);
-                    // save loggin info in database
-                    $date = new DateTime();
-                    $this->usersMapper->update(array('last_login' => $date->format('Y-m-d H:i:s')), "id=".$user->id);
                     $this->_redirect('/admin');
                     break;
 
@@ -125,7 +125,7 @@ class Admin_IndexController extends Zend_Controller_Action
             } else {
                 $data['permissions'] = 'USER';
                 $data['is_banned'] = 1;
-                $date = new DateTime();
+                $date = new \DateTime("now");
                 $data['registration_date'] = $date->format('Y-m-d H:i:s');
                 $this->usersMapper->add($data);
                 $this->view->success = 'Zarejestrowano! Musisz poczekać na weryfikację'
