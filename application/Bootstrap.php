@@ -3,6 +3,11 @@
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
 
+    protected function _initTimezone()
+    {
+        date_default_timezone_set('Europe/Warsaw');
+    }
+
     protected function _initAuth()
     {
         Zend_Registry::set('auth', Zend_Auth::getInstance());
