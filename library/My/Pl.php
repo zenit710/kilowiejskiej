@@ -6,7 +6,7 @@ class My_Pl
     const ASCII_ALL = 'acelnoszzACELNOSZZ';
 
     //ąćęłńóśźżĄĆĘŁŃÓŚŹŻ
-    const ISO_ALL = "\xb1\xe6\xea\xb3\xf1\xf3\...";
+    const ISO_ALL = "\xb1\xe6\xea\xb3\xf1\xf3\xbc\xbf\xa1\xc6\xca\xa3\xd1\xd3\xa6\xac\xaf";
 
     //ąśźĄŚŹ
     const ISO_SPECIFIC = "\xb1\xb6\xbc\xa1\xa6\xac";
