@@ -3,6 +3,8 @@
 class Application_Model_DbTable_Matches extends Zend_Db_Table_Abstract
 {
 
+    const KILO_WIEJSKIEJ = 'Kilo Wiejskiej';
+
     /**
      * Nazwa tabeli
      * @var string $_name
@@ -53,6 +55,46 @@ class Application_Model_DbTable_Matches extends Zend_Db_Table_Abstract
                 ->where('season_id = ?', $id);
         
         return $this->fetchAll($select);
+    }
+
+    /**
+     * Zwraca poprzedni mecz
+     * @return Zend_Db_Table_Row
+     */
+    public function getPreviousMatch()
+    {
+        $select = $this->select()
+            ->from($this->_name)
+            ->setIntegrityCheck(false)
+            ->join(array('h' => 'teams'), 'h.id ='.$this->_name.'.home_id')
+            ->join(array('a' => 'teams'), 'a.id ='.$this->_name.'.away_id')
+            ->where('is_played = ?', 1)
+            ->where('h.name = ?', self::KILO_WIEJSKIEJ)
+            ->orWhere('a.name = ?', self::KILO_WIEJSKIEJ)
+            ->order($this->_name.'.date DESC')
+            ->limit(1);
+
+        return $this->fetchRow($select);
+    }
+
+    /**
+     * Zwraca następny mecz
+     * @return Zend_Db_Table_Row
+     */
+    public function getPreviousMatch()
+    {
+        $select = $this->select()
+            ->from($this->_name)
+            ->setIntegrityCheck(false)
+            ->join(array('h' => 'teams'), 'h.id ='.$this->_name.'.home_id')
+            ->join(array('a' => 'teams'), 'a.id ='.$this->_name.'.away_id')
+            ->where('is_played = ?', 0)
+            ->where('h.name = ?', self::KILO_WIEJSKIEJ)
+            ->orWhere('a.name = ?', self::KILO_WIEJSKIEJ)
+            ->order($this->_name.'.date ASC')
+            ->limit(1);
+
+        return $this->fetchRow($select);
     }
     
 }
