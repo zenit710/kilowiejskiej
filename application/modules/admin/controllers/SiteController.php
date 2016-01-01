@@ -23,7 +23,7 @@ class Admin_SiteController extends Zend_Controller_Action
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
-            $values['url'] = $this->generateSlug($values['title']);
+            $values['url'] = My_Slugs::string2slug($values['title']);
             $this->sitesMapper->insert($values);
             $this->redirect('/admin/site');
         }
@@ -42,7 +42,7 @@ class Admin_SiteController extends Zend_Controller_Action
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
-            $values['url'] = $this->generateSlug($values['title']);
+            $values['url'] = My_Slugs::string2slug($values['title']);
             $this->sitesMapper->update($values,'id = '.$id);
             $this->redirect('/admin/site');
         }
@@ -53,23 +53,6 @@ class Admin_SiteController extends Zend_Controller_Action
         $id = $this->getParam('id');
         $this->sitesMapper->delete('id = '.$id);
         $this->redirect('/admin/site');
-    }
-
-    /**
-     * Przygotowuje slug na podstawie nazwy strony
-     * @param string $string
-     * @return string
-     */
-    private function generateSlug($string)
-    {
-        $string = strtr($string, 'ĘęÓóĄąŚśŁłŹźŻżĆćŃń', 'EeOoAaSsLlZzZzCcNn');
-        $string = strtr($string, 'ˇ¦¬±¶Ľ','ASZasz');
-        $string = preg_replace("'[[:punct:][:space:]]'",'-',$string);
-        $string = strtolower($string);
-        $znaki = '-'; 
-        $powtorzen = 1;
-        $string = preg_replace_callback('#(['.$znaki.'])\1{'.$powtorzen.',}#', create_function('$a', 'return substr($a[0], 0,'.$powtorzen.');'), $string);
-        return $string;
     }
 
 }

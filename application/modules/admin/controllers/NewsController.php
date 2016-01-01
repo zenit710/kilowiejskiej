@@ -29,7 +29,7 @@ class Admin_NewsController extends Zend_Controller_Action
             $values = $form->getValues();
             $values['author_id'] = 1;
             $values['date'] = date("Y-m-d H:i:s");
-            $values['slug'] = $this->generateSlug($values['title']);
+            $values['slug'] = My_Slugs::string2slug($values['title']);
             if(!$values['main_photo']){
                 unset($values['main_photo']);
             }
@@ -53,7 +53,7 @@ class Admin_NewsController extends Zend_Controller_Action
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
-            $values['slug'] = $this->generateSlug($values['title']);
+            $values['slug'] = My_Slugs::string2slug($values['title']);
             if(!$values['main_photo']){
                 unset($values['main_photo']);
             }
@@ -84,23 +84,6 @@ class Admin_NewsController extends Zend_Controller_Action
             return $categoriesArray;
         }
         return null;
-    }
-
-    /**
-     * Przygotowuje slug na podstawie tytułu artykuł€
-     * @param string $string
-     * @return string
-     */
-    private function generateSlug($string)
-    {
-        $string = strtr($string, 'ĘęÓóĄąŚśŁłŹźŻżĆćŃń', 'EeOoAaSsLlZzZzCcNn');
-        $string = strtr($string, 'ˇ¦¬±¶Ľ','ASZasz');
-        $string = preg_replace("'[[:punct:][:space:]]'",'-',$string);
-        $string = strtolower($string);
-        $znaki = '-'; 
-        $powtorzen = 1;
-        $string = preg_replace_callback('#(['.$znaki.'])\1{'.$powtorzen.',}#', create_function('$a', 'return substr($a[0], 0,'.$powtorzen.');'), $string);
-        return $string;
     }
 
 }
