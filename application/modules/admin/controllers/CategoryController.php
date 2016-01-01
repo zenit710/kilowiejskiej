@@ -24,7 +24,7 @@ class Admin_CategoryController extends Zend_Controller_Action
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
-            $values['slug'] = $this->generateSlug($values['name']);
+            $values['slug'] = My_Slugs::string2slug($values['name']);
             if(!$values['picture']){
                 unset($values['picture']);
             }
@@ -46,7 +46,7 @@ class Admin_CategoryController extends Zend_Controller_Action
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
-            $values['slug'] = $this->generateSlug($values['name']);
+            $values['slug'] = My_Slugs::string2slug($values['name']);
             if(!$values['picture']){
                 unset($values['picture']);
             }
@@ -60,24 +60,6 @@ class Admin_CategoryController extends Zend_Controller_Action
         $id = $this->getParam('id');
         $this->categoriesMapper->delete('id = '.$id);
         $this->redirect('/admin/category');
-    }
-
-
-    /**
-     * Konwertuje nazwę kategorii na slug
-     * @param string $string
-     * @return string
-     */
-    private function generateSlug($string)
-    {
-        $string = strtr($string, 'ĘęÓóĄąŚśŁłŹźŻżĆćŃń', 'EeOoAaSsLlZzZzCcNn');
-        $string = strtr($string, 'ˇ¦¬±¶Ľ','ASZasz');
-        $string = preg_replace("'[[:punct:][:space:]]'",'-',$string);
-        $string = strtolower($string);
-        $znaki = '-'; 
-        $powtorzen = 1;
-        $string = preg_replace_callback('#(['.$znaki.'])\1{'.$powtorzen.',}#', create_function('$a', 'return substr($a[0], 0,'.$powtorzen.');'), $string);
-        return $string;
     }
 
 }
