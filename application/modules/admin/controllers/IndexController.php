@@ -130,6 +130,7 @@ class Admin_IndexController extends Zend_Controller_Action
                 $this->usersMapper->add($data);
                 $this->view->success = 'Zarejestrowano! Musisz poczekać na weryfikację'
                         . ' zanim będziesz mógł się zalogować.';
+                $form->clearElements();
             }
         }
 

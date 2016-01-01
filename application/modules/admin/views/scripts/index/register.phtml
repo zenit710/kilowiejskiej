@@ -32,13 +32,17 @@
     <div class="container" id="login">
         <?php
             echo $this->form;
-            if($this->error){
-                echo $this->error;
-            }
-            if($this->success){
-                echo $this->success;
-            }
         ?>
+        <?php if($this->error): ?>
+            <div class="alert alert-danger" role="alert">
+                <?php echo $this->error; ?>
+            </div>
+        <?php endif; ?>
+        <?php if($this->success): ?>
+            <div class="alert alert-success" role="alert">
+                <?php echo $this->success; ?>
+            </div>
+        <?php endif; ?>
     </div>
 </body>
 </html>
