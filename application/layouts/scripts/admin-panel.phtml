@@ -70,12 +70,14 @@
                     <li><a href="/admin/site/add" title="Dodaj stronę">Dodaj stronę</a></li>
                 </ul>
             </li>
+            <?php if (Zend_Registry::getInstance()->get('auth')->getIdentity()->permissions === 'ADMIN'): ?>
             <li>
                 <div>Użytkownicy</div>
                 <ul>
                     <li><a href="/admin/user" title="Użytkownicy">Lista</a></li>
                 </ul>
             </li>
+            <?php endif; ?>
             <p></p>
             <li>
                 <div>Drużyny</div>
@@ -91,6 +93,7 @@
                     <li><a href="/admin/match/add" title="Dodaj mecz">Dodaj mecz</a></li>
                 </ul>
             </li>
+            <?php if (Zend_Registry::getInstance()->get('auth')->getIdentity()->permissions === 'ADMIN'): ?>
             <li>
                 <div>Sezony</div>
                 <ul>
@@ -98,6 +101,7 @@
                     <li><a href="/admin/season/add" title="Dodaj sezon">Dodaj sezon</a></li>
                 </ul>
             </li>
+            <?php endif; ?>
             <li>
                 <div>Zawodnicy</div>
                 <ul>
