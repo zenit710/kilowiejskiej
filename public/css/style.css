@@ -580,3 +580,14 @@ h3,h4,h5,h6{
     border-right: 1px solid #8E8E8E;
     border-bottom: 1px solid #8E8E8E;
 }
+
+/* MATCHES WIDGET */
+.matches-widget-content {
+    text-align: center;
+    overflow: hidden;
+}
+
+.col-xs-1.score, .col-xs-1.sep{
+    line-height: 100px;
+    color: #C00202;
+}

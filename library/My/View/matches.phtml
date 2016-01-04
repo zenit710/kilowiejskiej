@@ -1,0 +1,52 @@
+<div class="widget matches-widget">
+    <div class="header">
+        Mecze
+    </div>
+    <div class="separator"></div>
+    <div class="widget_content">
+        <ul role="tablist" class="nav nav-tabs" id="ranking_tabs">
+            <li class="active" role="presentation"><a aria-expanded="true" aria-controls="next" data-toggle="tab" role="tab" id="next-match-tab" href="#nextMatch">Najbliższy</a></li>
+            <li role="presentation" class=""><a aria-controls="previous" data-toggle="tab" id="previous-match-tab" role="tab" href="#previousMatch" aria-expanded="false">Ostatni</a></li>
+        </ul>
+        <div class="tab-content" id="matches_tab_content">
+            <div aria-labelledby="next-match-tab" id="nextMatch" class="tab-pane fade active in" role="tabpanel">
+                <div class="matches-widget-content">
+                    <?php if($this->nextMatch): ?>
+                        <div class="col-xs-4 team">
+                            <img src="<?php echo $this->baseUrl('img/kwft_65.png') ?>" alt="<?php echo $this->nextMatch->home_name ?>" />
+                            <?php echo $this->nextMatch->home_name ?>
+                        </div>
+                        <div class="col-xs-1 score"><?php echo $this->nextMatch->home_goals; ?></div>
+                        <div class="col-xs-1 sep">:</div>
+                        <div class="col-xs-1 score"><?php echo $this->nextMatch->away_goals; ?></div>
+                        <div class="col-xs-4 team">
+                            <img src="<?php echo $this->baseUrl('img/kwft_65.png') ?>" alt="<?php echo $this->nextMatch->away_name ?>" />
+                            <div><?php echo $this->nextMatch->away_name ?></div>
+                        </div>
+                    <?php else: ?>
+                        <div class="no_data">Nie ma zaplanowanych meczy!</div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div aria-labelledby="previous-match-tab" id="previousMatch" class="tab-pane fade" role="tabpanel">
+                <div class="matches-widget-content">
+                    <?php if($this->previousMatch): ?>
+                        <div class="col-xs-4 team">
+                            <img src="<?php echo $this->baseUrl('img/kwft_65.png') ?>" alt="<?php echo $this->previousMatch->home_name ?>" />
+                            <?php echo $this->previousMatch->home_name ?>
+                        </div>
+                        <div class="col-xs-1 score"><?php echo $this->previousMatch->home_goals; ?></div>
+                        <div class="col-xs-1 sep">:</div>
+                        <div class="col-xs-1 score"><?php echo $this->previousMatch->away_goals; ?></div>
+                        <div class="col-xs-4 team">
+                            <img src="<?php echo $this->baseUrl('img/kwft_65.png') ?>" alt="<?php echo $this->previousMatch->away_name ?>" />
+                            <div><?php echo $this->previousMatch->away_name ?></div>
+                        </div>
+                    <?php else: ?>
+                        <div class="no_data">Nie ma rozegranych meczy!</div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

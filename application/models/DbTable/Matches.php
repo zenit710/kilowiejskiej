@@ -63,14 +63,15 @@ class Application_Model_DbTable_Matches extends Zend_Db_Table_Abstract
      */
     public function getPreviousMatch()
     {
+        $team = self::KILO_WIEJSKIEJ;
+
         $select = $this->select()
             ->from($this->_name)
             ->setIntegrityCheck(false)
-            ->join(array('h' => 'teams'), 'h.id ='.$this->_name.'.home_id')
-            ->join(array('a' => 'teams'), 'a.id ='.$this->_name.'.away_id')
+            ->join(array('h' => 'teams'), 'h.id ='.$this->_name.'.home_id', 'h.name as home_name')
+            ->join(array('a' => 'teams'), 'a.id ='.$this->_name.'.away_id', 'a.name as away_name')
             ->where('is_played = ?', 1)
-            ->where('h.name = ?', self::KILO_WIEJSKIEJ)
-            ->orWhere('a.name = ?', self::KILO_WIEJSKIEJ)
+            ->where("h.name='$team' OR a.name='$team'")
             ->order($this->_name.'.date DESC')
             ->limit(1);
 
@@ -81,16 +82,17 @@ class Application_Model_DbTable_Matches extends Zend_Db_Table_Abstract
      * Zwraca następny mecz
      * @return Zend_Db_Table_Row
      */
-    public function getPreviousMatch()
+    public function getNextMatch()
     {
+        $team = self::KILO_WIEJSKIEJ;
+
         $select = $this->select()
             ->from($this->_name)
             ->setIntegrityCheck(false)
-            ->join(array('h' => 'teams'), 'h.id ='.$this->_name.'.home_id')
-            ->join(array('a' => 'teams'), 'a.id ='.$this->_name.'.away_id')
+            ->join(array('h' => 'teams'), 'h.id ='.$this->_name.'.home_id', 'h.name as home_name')
+            ->join(array('a' => 'teams'), 'a.id ='.$this->_name.'.away_id', 'a.name as away_name')
             ->where('is_played = ?', 0)
-            ->where('h.name = ?', self::KILO_WIEJSKIEJ)
-            ->orWhere('a.name = ?', self::KILO_WIEJSKIEJ)
+            ->where("h.name='$team' OR a.name='$team'")
             ->order($this->_name.'.date ASC')
             ->limit(1);
 
