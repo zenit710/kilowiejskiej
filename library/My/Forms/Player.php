@@ -53,7 +53,7 @@ class My_Forms_Player extends Zend_Form {
         ));
         $this->addElement(new Glitch_Form_Element_Text_Date('date_of_birth',array(
             'type' => 'date',
-            'label' => 'Data utodzenia:',
+            'label' => 'Data urodzenia:',
             'placeholder' => 'yyyy-mm-dd',
             'validators' => array(
                 array('regex',false,array(
@@ -62,6 +62,16 @@ class My_Forms_Player extends Zend_Form {
                 ))
             ),
             'required' => true
+        )));
+        $this->addElement(new Glitch_Form_Element_Text_Number('height', array(
+            'type' => 'number',
+            'label' => 'Wzrost w cm:',
+            'required' => false
+        )));
+        $this->addElement(new Glitch_Form_Element_Text_Number('weight', array(
+            'type' => 'number',
+            'label' => 'Waga w kg:',
+            'required' => false
         )));
         $this->addElement('file','photo',array(
             'label' => 'Zdjęcie',
