@@ -1,0 +1,82 @@
+<div class="widget matches-widget">
+    <div class="header">
+        Mecze
+    </div>
+    <div class="separator"></div>
+    <div class="widget_content">
+        <ul role="tablist" class="nav nav-tabs" id="ranking_tabs">
+            <li class="active" role="presentation"><a aria-expanded="true" aria-controls="next" data-toggle="tab" role="tab" id="next-match-tab" href="#nextMatch">Najbliższy</a></li>
+            <li role="presentation" class=""><a aria-controls="previous" data-toggle="tab" id="previous-match-tab" role="tab" href="#previousMatch" aria-expanded="false">Ostatni</a></li>
+        </ul>
+        <div class="tab-content" id="matches_tab_content">
+            <div aria-labelledby="next-match-tab" id="nextMatch" class="tab-pane fade active in" role="tabpanel">
+                <div class="matches-widget-content">
+                    <?php if($this->nextMatch): ?>
+                        <div class="col-xs-4 team">
+                            <?php
+                                $nh_logo = 'img/kw/team/';
+                                $nh_logo .= $this->nextMatch->home_logo ? : '_default_.png';
+                                $na_logo = 'img/kw/team/';
+                                $na_logo .= $this->nextMatch->away_logo ? : '_default_.png';
+                            ?>
+                            <img src="<?php echo $this->baseUrl($nh_logo) ?>" alt="<?php echo $this->nextMatch->home_name ?>" />
+                            <?php echo $this->nextMatch->home_name ?>
+                        </div>
+                        <div class="score-container col-xs-4">
+                            <div class="col-xs-4 score"><?php echo $this->nextMatch->home_goals; ?></div>
+                            <div class="col-xs-2 sep">:</div>
+                            <div class="col-xs-4 score"><?php echo $this->nextMatch->away_goals; ?></div>
+                        </div>
+                        <div class="col-xs-4 team">
+                            <img src="<?php echo $this->baseUrl($na_logo) ?>" alt="<?php echo $this->nextMatch->away_name ?>" />
+                            <div><?php echo $this->nextMatch->away_name ?></div>
+                        </div>
+                        <div class="col-xs-12">
+                            <?php echo $this->nextMatch->date ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="no_data">Nie ma zaplanowanych meczy!</div>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div aria-labelledby="previous-match-tab" id="previousMatch" class="tab-pane fade" role="tabpanel">
+                <div class="matches-widget-content">
+                    <?php if($this->previousMatch): ?>
+                        <div class="col-xs-4 team">
+                            <?php
+                                $ph_logo = 'img/kw/team/';
+                                $ph_logo .= $this->previousMatch->home_logo ? : '_default_.png';
+                                $pa_logo = 'img/kw/team/';
+                                $pa_logo .= $this->previousMatch->away_logo ? : '_default_.png';
+                            ?>
+                            <img src="<?php echo $this->baseUrl($ph_logo) ?>" alt="<?php echo $this->previousMatch->home_name ?>" />
+                            <?php echo $this->previousMatch->home_name ?>
+                        </div>
+                        <div class="score-container col-xs-4">
+                            <div class="col-xs-4 score"><?php echo $this->previousMatch->home_goals; ?></div>
+                            <div class="col-xs-2 sep">:</div>
+                            <div class="col-xs-4 score"><?php echo $this->previousMatch->away_goals; ?></div>
+                        </div>
+                        <div class="col-xs-4 team">
+                            <img src="<?php echo $this->baseUrl($pa_logo) ?>" alt="<?php echo $this->previousMatch->away_name ?>" />
+                            <div><?php echo $this->previousMatch->away_name ?></div>
+                        </div>
+                        <div class="col-xs-12">
+                            <?php echo $this->previousMatch->date ?>
+                        </div>
+                    <?php else: ?>
+                        <div class="no_data">Nie ma rozegranych meczy!</div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        setInterval(function() {
+            $('.matches-widget #ranking_tabs li[class!="active"] a').click();
+        }, 5000);
+    });
+</script>

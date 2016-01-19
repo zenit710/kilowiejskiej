@@ -580,3 +580,20 @@ h3,h4,h5,h6{
     border-right: 1px solid #8E8E8E;
     border-bottom: 1px solid #8E8E8E;
 }
+
+/* MATCHES WIDGET */
+.matches-widget-content {
+    text-align: center;
+    overflow: hidden;
+    height: 150px;
+}
+
+.matches-widget .score-container .score, .matches-widget .score-container .sep{
+    line-height: 100px;
+    color: #C00202;
+}
+
+.matches-widget .team img {
+    width: 65px;
+    height: 65px;
+}
