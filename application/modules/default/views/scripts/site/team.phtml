@@ -19,6 +19,24 @@
                         <div class="player_weight">waga: <?php echo $player->weight ? $player->weight.' kg' : '-' ?></div>
                         <div class="player_city">miejsce zamieszkania: <?php echo $player->city ?></div>
                     </div>
+                    <div class="player_stats">
+                        <div class="player_stat col-xs-3">
+                            <img src="<?php echo $this->baseUrl('img/favicon.png') ?>" alt="Występy" />
+                            <?php echo $player->performances!= null ? $player->performances : 0; ?>
+                        </div>
+                        <div class="player_stat col-xs-3">
+                            <img src="<?php echo $this->baseUrl('img/favicon.png') ?>" alt="Bramki" />
+                            <?php echo $player->goals!= null ? $player->goals : 0; ?>
+                        </div>
+                        <div class="player_stat col-xs-3">
+                            <img src="<?php echo $this->baseUrl('img/favicon.png') ?>" alt="Żółte kartki" />
+                            <?php echo $player->cards!= null ? $player->cards : 0; ?>
+                        </div>
+                        <div class="player_stat col-xs-3">
+                            <img src="<?php echo $this->baseUrl('img/favicon.png') ?>" alt="Czerwone kartki" />
+                            <?php echo $player->cards!= null ? $player->cards : 0; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         <?php endforeach; ?>

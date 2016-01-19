@@ -444,8 +444,10 @@ h3,h4,h5,h6{
 
 .player{
     border: 1px solid #8E8E8E;
+    border-radius: 4px;
     overflow: hidden;
     margin-bottom: 30px;
+    height: 280px;
 }
 
 .player > div {
@@ -460,7 +462,7 @@ h3,h4,h5,h6{
 
 .player_photo{
     float: left;
-    height: 150px;
+    height: 280px;
     overflow: hidden;
 }
 
@@ -471,29 +473,28 @@ h3,h4,h5,h6{
     position: relative;
 }
 
-.player .player_info{
-    padding-left: 5px;
+.player_personal {
+    margin-top: 40px;
 }
 
-.player_personal{
-    position: absolute;
-    top: 50%;
-    transform: translateY(25%);
+.player .player_info{
+    padding-left: 5px;
 }
 
 .player_name, .player_position{
     color: #c00202;
 }
 
-.player_stat{
-    padding: 20px 0;
-    text-align:center;
-    border-right: 1px solid #8e8e8e;
-    margin: 35px 0;
+.player_position {
+    margin-bottom: 20px;
 }
 
-.player_stat:last-child{
-    border-right: 0;
+.player_stats {
+    margin-top: 20px;
+}
+
+.player_stat{
+    text-align:center;
 }
 
 .player_stat_count{
