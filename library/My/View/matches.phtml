@@ -75,8 +75,19 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        setInterval(function() {
-            $('.matches-widget #ranking_tabs li[class!="active"] a').click();
-        }, 5000);
+        var switcher = null;
+
+        initSwitchLoop();
+
+        $('.matches-widget #ranking_tabs li[class!="active"] a').click(function() {
+            clearInterval(switcher);
+            initSwitchLoop();
+        });
+
+        function initSwitchLoop() {
+            switcher = setInterval(function() {
+                $('.matches-widget #ranking_tabs li[class!="active"] a').click();
+            }, 5000);
+        }
     });
 </script>
