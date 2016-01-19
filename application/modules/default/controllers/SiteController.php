@@ -3,6 +3,9 @@
 class SiteController extends Zend_Controller_Action
 {
 
+    const SQUAD_SITE = 'Skład';
+    const CONTACT_SITE = 'Kontakt';
+
     public function init()
     {
         /* Initialize action controller here */
@@ -14,12 +17,8 @@ class SiteController extends Zend_Controller_Action
         $sitesMapper = new Application_Model_DbTable_Sites();
         $this->view->site = $site = $sitesMapper->getSiteByUrl($url);
         
-        if($url == 'o-nas'){
-            $this->view->about_page = true;
-        } else {
-            $this->view->turniej_page = true;
-        }
-        
+        $this->view->currentPage = $site->title;
+
         $this->getInvokeArg('bootstrap')->getResource('view')->headTitle($site['title']);
         $this->getInvokeArg('bootstrap')->getResource('view')->headMeta()
                 ->setName('keywords', $site['keywords']);
@@ -30,8 +29,9 @@ class SiteController extends Zend_Controller_Action
         $playersMapper = new Application_Model_DbTable_Players();
         $players = $playersMapper->getAllKiloPlayers();
         $this->view->players = $players;
-        $this->view->squad_page = true;
-        
+
+        $this->view->currentPage = self::SQUAD_SITE;
+
         $this->getInvokeArg('bootstrap')->getResource('view')->headTitle('Skład');
         
     }
@@ -46,7 +46,8 @@ class SiteController extends Zend_Controller_Action
         $form = new My_Forms_Contact();
         $this->view->form = $form;
         $this->getInvokeArg('bootstrap')->getResource('view')->headTitle('Kontakt');
-        $this->view->contact_page = true;
+
+        $this->view->currentPage = self::CONTACT_SITE;
         
         if ($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
             $values = $form->getValues();
