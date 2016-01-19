@@ -43,7 +43,7 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
         'surname',
         'position',
         'city',
-        '(YEAR(NOW()) - YEAR(date_of_birth)) as age',
+        'TIMESTAMPDIFF(YEAR,date_of_birth,CURDATE()) as age',
         'photo'
     );
     
