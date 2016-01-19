@@ -587,7 +587,7 @@ h3,h4,h5,h6{
     overflow: hidden;
 }
 
-.col-xs-1.score, .col-xs-1.sep{
+.matches-widget .score-container .score, .matches-widget .score-container .sep{
     line-height: 100px;
     color: #C00202;
 }

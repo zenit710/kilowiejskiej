@@ -16,12 +16,17 @@
                             <img src="<?php echo $this->baseUrl('img/kwft_65.png') ?>" alt="<?php echo $this->nextMatch->home_name ?>" />
                             <?php echo $this->nextMatch->home_name ?>
                         </div>
-                        <div class="col-xs-1 score"><?php echo $this->nextMatch->home_goals; ?></div>
-                        <div class="col-xs-1 sep">:</div>
-                        <div class="col-xs-1 score"><?php echo $this->nextMatch->away_goals; ?></div>
+                        <div class="score-container col-xs-4">
+                            <div class="col-xs-4 score"><?php echo $this->nextMatch->home_goals; ?></div>
+                            <div class="col-xs-2 sep">:</div>
+                            <div class="col-xs-4 score"><?php echo $this->nextMatch->away_goals; ?></div>
+                        </div>
                         <div class="col-xs-4 team">
                             <img src="<?php echo $this->baseUrl('img/kwft_65.png') ?>" alt="<?php echo $this->nextMatch->away_name ?>" />
                             <div><?php echo $this->nextMatch->away_name ?></div>
+                        </div>
+                        <div class="col-xs-12">
+                            <?php echo $this->nextMatch->date ?>
                         </div>
                     <?php else: ?>
                         <div class="no_data">Nie ma zaplanowanych meczy!</div>
@@ -35,12 +40,17 @@
                             <img src="<?php echo $this->baseUrl('img/kwft_65.png') ?>" alt="<?php echo $this->previousMatch->home_name ?>" />
                             <?php echo $this->previousMatch->home_name ?>
                         </div>
-                        <div class="col-xs-1 score"><?php echo $this->previousMatch->home_goals; ?></div>
-                        <div class="col-xs-1 sep">:</div>
-                        <div class="col-xs-1 score"><?php echo $this->previousMatch->away_goals; ?></div>
+                        <div class="score-container col-xs-4">
+                            <div class="col-xs-4 score"><?php echo $this->previousMatch->home_goals; ?></div>
+                            <div class="col-xs-2 sep">:</div>
+                            <div class="col-xs-4 score"><?php echo $this->previousMatch->away_goals; ?></div>
+                        </div>
                         <div class="col-xs-4 team">
                             <img src="<?php echo $this->baseUrl('img/kwft_65.png') ?>" alt="<?php echo $this->previousMatch->away_name ?>" />
                             <div><?php echo $this->previousMatch->away_name ?></div>
+                        </div>
+                        <div class="col-xs-12">
+                            <?php echo $this->previousMatch->date ?>
                         </div>
                     <?php else: ?>
                         <div class="no_data">Nie ma rozegranych meczy!</div>
