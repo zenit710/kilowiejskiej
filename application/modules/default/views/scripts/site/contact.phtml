@@ -39,3 +39,8 @@
         <?php echo $this->form ?>
     </div>
 </div>
+<?php if ($this->mailSend): ?>
+    <script>
+        alert('<?php echo $this->mailSend ?>');
+    </script>
+<?php endif; ?>
