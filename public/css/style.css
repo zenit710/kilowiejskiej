@@ -585,6 +585,7 @@ h3,h4,h5,h6{
 .matches-widget-content {
     text-align: center;
     overflow: hidden;
+    height: 150px;
 }
 
 .matches-widget .score-container .score, .matches-widget .score-container .sep{
