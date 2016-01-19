@@ -26,6 +26,8 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
         'position',
         'city',
         'date_of_birth',
+        'height',
+        'weight',
         'photo',
         'team_id',
         'professionl_team',
@@ -43,7 +45,9 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
         'surname',
         'position',
         'city',
-        '(YEAR(NOW()) - YEAR(date_of_birth)) as age',
+        'height',
+        'weight',
+        'TIMESTAMPDIFF(YEAR,date_of_birth,CURDATE()) as age',
         'photo'
     );
     
@@ -59,7 +63,8 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
                 ->joinLeft('teams',$this->_name.'.team_id = teams.id','')
                 ->joinLeft('performances',$this->_name.'.id = performances.player_id','count(distinct performances.id) as performances')
                 ->joinLeft('scorers',$this->_name.'.id = scorers.player_id','count(distinct scorers.id) as goals')
-                ->joinLeft('cards',$this->_name.'.id = cards.player_id','count(distinct cards.id) as cards')
+                ->joinLeft('cards as yellow',$this->_name.'.id = yellow.player_id AND yellow.card = "yellow"','count(distinct yellow.id) as yellowCards')
+                ->joinLeft('cards as red',$this->_name.'.id = red.player_id  AND red.card = "red"','count(distinct red.id) as redCards')
                 ->group($this->_name.'.id')
                 ->where('teams.name = ?',self::TEAM)
                 ->order('position');
