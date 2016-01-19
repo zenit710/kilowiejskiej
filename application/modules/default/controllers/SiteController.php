@@ -53,20 +53,18 @@ class SiteController extends Zend_Controller_Action
             $values = $form->getValues();
             $html= 'Wiadomość od: '.$values['name'].'<br /><br />';
             $html.= $values['message'];
-//            
-//            $config = Zend_Registry::get('config')->mail->config;
-//            $smtp = Zend_Registry::get('config')->mail->smtp;
-            $sendTo = Zend_Registry::get('config')->mail->to;
 
-//            $transport = new Zend_Mail_Transport_Smtp($smtp, (array)$config);
-            
+            $sendTo = Zend_Registry::get('config')->mail->to;
             $mail = new Zend_Mail('utf-8');
             $mail->setFrom($values['mail']);
             $mail->setReplyTo($values['mail']);
             $mail->setSubject($values['title']);
             $mail->setBodyHtml($html);
             $mail->addTo($sendTo);
-            $mail->send();//$transport);
+            $mail->send();
+
+            $form->reset();
+            $this->view->mailSend = 'Twoja wiadomość została pomyślnie wysłana!';
         }
     }
     
