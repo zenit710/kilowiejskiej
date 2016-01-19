@@ -592,3 +592,8 @@ h3,h4,h5,h6{
     line-height: 100px;
     color: #C00202;
 }
+
+.matches-widget .team img {
+    width: 65px;
+    height: 65px;
+}
