@@ -26,6 +26,8 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
         'position',
         'city',
         'date_of_birth',
+        'height',
+        'weight',
         'photo',
         'team_id',
         'professionl_team',
@@ -43,6 +45,8 @@ class Application_Model_DbTable_Players extends Zend_Db_Table_Abstract
         'surname',
         'position',
         'city',
+        'height',
+        'weight',
         'TIMESTAMPDIFF(YEAR,date_of_birth,CURDATE()) as age',
         'photo'
     );

@@ -455,6 +455,7 @@ h3,h4,h5,h6{
 .player .separator{
     margin-top: 10px;
     margin-bottom: 10px;
+    border: 1px solid #8E8E8E;
 }
 
 .player_photo{
@@ -480,7 +481,7 @@ h3,h4,h5,h6{
     transform: translateY(25%);
 }
 
-.player_name{
+.player_name, .player_position{
     color: #c00202;
 }
 
