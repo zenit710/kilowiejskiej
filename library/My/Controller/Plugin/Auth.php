@@ -26,6 +26,7 @@ class My_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
             $acl->add(new Zend_Acl_Resource('news'));
             $acl->add(new Zend_Acl_Resource('site'));
             $acl->add(new Zend_Acl_Resource('error'));
+            $acl->add(new Zend_Acl_Resource('match'));
  
             // access roles
             $acl->addRole(new Zend_Acl_Role('USER'));
