@@ -13,7 +13,7 @@ html{
 }
 
 body{
-    background: #eee url(../img/tlo2.jpg) no-repeat top center;
+    background: #030303;
     font-family: Fira-regular;
     font-size: 14px;
     margin: 0;
@@ -91,6 +91,7 @@ h3,h4,h5,h6{
     background-color: #c00202;
     border: none;
     border-radius: 0px;
+    margin-bottom: 0;
 }
 
 .navbar-default .navbar-brand{
@@ -267,7 +268,8 @@ h3,h4,h5,h6{
 
 /* NEWS SITE */
 
-.content{
+.main.content{
+    background: #eee url(../img/tlo2.jpg) no-repeat top center;
     padding: 50px 0;
     color: #8e8e8e;
 }
@@ -450,6 +452,7 @@ h3,h4,h5,h6{
     margin-bottom: 30px;
     height: 250px;
     padding: 0;
+    text-align: left;
 }
 
 .player > div {
@@ -493,6 +496,7 @@ h3,h4,h5,h6{
 
 .player_stat{
     text-align:center;
+    padding: 0;
 }
 
 .player_stat_count{
