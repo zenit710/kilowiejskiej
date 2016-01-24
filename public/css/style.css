@@ -131,6 +131,7 @@ h3,h4,h5,h6{
 .navbar-default .navbar-nav  > li.active > a, .navbar-default .navbar-nav > li.active > a:focus, .navbar-default .navbar-nav > li.active > a:hover {
     background: none;
     color: #fff;
+    font-weight: bold;
 }
 
 /* FOOTER */
