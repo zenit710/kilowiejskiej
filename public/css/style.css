@@ -447,7 +447,8 @@ h3,h4,h5,h6{
     border-radius: 4px;
     overflow: hidden;
     margin-bottom: 30px;
-    height: 280px;
+    height: 250px;
+    padding: 0;
 }
 
 .player > div {
@@ -462,19 +463,15 @@ h3,h4,h5,h6{
 
 .player_photo{
     float: left;
-    height: 280px;
+    height: 250px;
     overflow: hidden;
 }
 
 .player_photo img{
-    max-width: 100%;
-    transform: translateY(-50%);
-    top: 50%;
-    position: relative;
 }
 
 .player_personal {
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .player .player_info{
