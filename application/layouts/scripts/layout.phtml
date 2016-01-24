@@ -9,7 +9,6 @@
     <link href='<?php echo $this->baseUrl('css/style.css') ?>' rel='stylesheet' type='text/css' />
     <script src="<?php echo $this->baseUrl('js/jquery.min.js') ?>"></script>
     <script src='<?php echo $this->baseUrl('js/bootstrap.js') ?>'></script>
-    <script src='<?php echo $this->baseUrl('js/footer.js') ?>'></script>
     <?php echo $this->headTitle(); ?>
 </head>
 <body>
@@ -38,8 +37,10 @@
     
     <?php echo $this->menu(); ?>
 
-    <div class="content container">
-        <?php echo $this->layout()->content; ?>
+    <div class="main content">
+        <div class="container">
+            <?php echo $this->layout()->content; ?>
+        </div>
     </div>
 
     <footer class="footer">
