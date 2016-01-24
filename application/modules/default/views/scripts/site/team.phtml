@@ -6,10 +6,10 @@
     <div class="content">
         <?php foreach($this->players as $player): ?>
             <div class="player col-md-5 col-md-offset-1">
-                <div class="player_photo col-xs-4">
-                    <img src="<?php $photo = $player->photo != null ? $player->photo : 'player.png'; echo $this->baseUrl('img/kw/player/'.$photo); ?>" alt="Player" />
+                <div class="player_photo col-xs-5">
+                    <img src="<?php $photo = $player->photo != null ? $player->photo : 'player.png'; echo $this->baseUrl('img/kw/player/'.$photo); ?>" alt="<?php echo $player->name.' '.$player->surname ?>" />
                 </div>
-                <div class="player_info col-xs-8">
+                <div class="player_info col-xs-7">
                     <div class="player_personal">
                         <div class="player_name"><?php echo $player->name.' '.$player->surname ?></div>
                         <div class="separator"></div>
@@ -24,7 +24,7 @@
                             <img src="<?php echo $this->baseUrl('img/perform.png') ?>" alt="Występy" />
                             <?php echo $player->performances!= null ? $player->performances : 0; ?>
                         </div>
-                        <div class="player_stat col-xs-3">
+                        <div class="player_stat col-xs-3" style="margin-top: 3px">
                             <img src="<?php echo $this->baseUrl('img/goal.png') ?>" alt="Bramki" />
                             <?php echo $player->goals!= null ? $player->goals : 0; ?>
                         </div>
