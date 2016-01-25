@@ -3,14 +3,27 @@
 class MatchController extends Zend_Controller_Action
 {
 
+    private $matchesMapper;
+    private $cardsMapper;
+    private $performancesMapper;
+    private $scorersMapper;
+
     public function init()
     {
-        /* Initialize action controller here */
+        $this->matchesMapper = new Application_Model_DbTable_Matches();
+        $this->cardsMapper = new Application_Model_DbTable_Cards();
+        $this->performancesMapper = new Application_Model_DbTable_Performances();
+        $this->scorersMapper = new Application_Model_DbTable_Scorers();
     }
 
     public function itemAction()
     {
-        
+        $id = $this->_getParam('id');
+
+        $this->view->match = $this->matchesMapper->getMatchInfoById($id);
+        $this->view->performances = $this->performancesMapper->getPerformancesByMatchId($id);
+        $this->view->scorers = $this->scorersMapper->getScorersByMatchId($id);
+        $this->view->cards = $this->cardsMapper->getCardsByMatchId($id);
     }
 
 }

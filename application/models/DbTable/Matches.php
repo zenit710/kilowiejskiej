@@ -4,6 +4,7 @@ class Application_Model_DbTable_Matches extends Zend_Db_Table_Abstract
 {
 
     const KILO_WIEJSKIEJ = 'Kilo Wiejskiej';
+    const KILO_ID = 15;
 
     /**
      * Nazwa tabeli
@@ -96,6 +97,26 @@ class Application_Model_DbTable_Matches extends Zend_Db_Table_Abstract
             ->order($this->_name.'.date ASC')
             ->limit(1);
 
+        return $this->fetchRow($select);
+    }
+
+    /**
+     * Zwraca informacje o meczu
+     * @param integer $id
+     * @return Zend_Db_Table_Row
+     */
+    public function getMatchInfoById($id)
+    {
+        $team = self::KILO_WIEJSKIEJ;
+
+        $select = $this->select()
+            ->from($this->_name)
+            ->setIntegrityCheck(false)
+            ->join(array('h' => 'teams'), 'h.id = '.$this->_name.'.home_id', array('h.name as home_name','h.logo as home_logo'))
+            ->join(array('a' => 'teams'), 'a.id = '.$this->_name.'.away_id', array('a.name as away_name','a.logo as away_logo'))
+            ->where($this->_name.'.id = ?',$id)
+            ->limit(1);
+        
         return $this->fetchRow($select);
     }
     
