@@ -601,3 +601,40 @@ h3,h4,h5,h6{
     width: 65px;
     height: 65px;
 }
+
+/* MATCH SITE */
+.match {
+    font-size: 18px;
+}
+
+.match-header {
+    height: 65px;
+    line-height: 65px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.match-header .home-logo img, .match-header .away-logo img {
+    width: 65px;
+}
+
+.match-header .kilo {
+    color: #990304;
+}
+
+.match-info {
+    margin-top: 50px;
+}
+
+.match-info.right {
+    text-align: right;
+}
+
+.match-info .match-scorer img, .match-info .match-card img {
+    margin-right: 10px;
+}
+
+.match-info.right .match-scorer img, .match-info.right .match-card img {
+    float: right;
+    margin-left: 10px;
+}
