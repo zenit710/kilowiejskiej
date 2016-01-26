@@ -638,3 +638,17 @@ h3,h4,h5,h6{
     float: right;
     margin-left: 10px;
 }
+
+.match-squad {
+    text-align: center;
+}
+
+.match-squad h1 {
+    color: #990304;
+    padding: 20px 0;
+    line-height: 26px;
+}
+
+.match-squad h1 img {
+    margin-right: 10px;
+}

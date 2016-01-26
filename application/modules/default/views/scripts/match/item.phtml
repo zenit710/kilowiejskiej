@@ -41,7 +41,10 @@
         <?php endforeach; ?>
     </div>
     <div class="match-squad">
-        Skład:
+        <h1>
+            <img src="<?php echo $this->baseUrl('img/perform.png') ?>" alt="Skład" />
+            Skład:
+        </h1>
         <?php foreach ($this->performances as $performance): ?>
             <div class="match-card">
                 <?php echo $performance->name.' '.$performance->surname ?>
