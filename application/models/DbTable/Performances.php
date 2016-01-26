@@ -8,6 +8,7 @@ class Application_Model_DbTable_Performances extends Zend_Db_Table_Abstract
      * @var integer MAX_TOP_SCORERS
      */
     const MAX_TOP_SCORERS = 5;
+    const KILO_ID = 15;
 
     /**
      * Nazwa tabeli
@@ -77,6 +78,23 @@ class Application_Model_DbTable_Performances extends Zend_Db_Table_Abstract
         }
         
         return $ids;
+    }
+
+    /**
+     * Zwraca zawodników, którzy wystąpili w meczu
+     * @param integer $id
+     * @return Zend_Db_Table_Rowset
+     */
+    public function getPerformancesByMatchId($id)
+    {
+        $select = $this->select()
+            ->from($this->_name,array())
+            ->setIntegrityCheck(false)
+            ->join('players','players.id = '.$this->_name.'.player_id', array('name','surname'))
+            ->where($this->_name.'.match_id = ?', $id)
+            ->where($this->_name.'.team_id = ?', self::KILO_ID);
+
+        return $this->fetchAll($select);
     }
     
 }

@@ -8,6 +8,7 @@ class Application_Model_DbTable_Cards extends Zend_Db_Table_Abstract
      * @var integer MAX_TOP_SCORERS
      */
     const MAX_TOP_SCORERS = 5;
+    const KILO_ID = 15;
 
     /**
      * Nazwa tabeli
@@ -45,6 +46,23 @@ class Application_Model_DbTable_Cards extends Zend_Db_Table_Abstract
                 ->order('cards DESC')
                 ->limit(self::MAX_TOP_SCORERS);
                 
+        return $this->fetchAll($select);
+    }
+
+    /**
+     * Zwraca info o kartkowiczach z danego meczu
+     * @param integer $id
+     * @return Zend_Db_Table_Rowset
+     */
+    public function getCardsByMatchId($id)
+    {
+        $select = $this->select()
+            ->from($this->_name,array('card'))
+            ->setIntegrityCheck(false)
+            ->join('players','players.id = '.$this->_name.'.player_id', array('name','surname'))
+            ->where($this->_name.'.match_id = ?', $id)
+            ->where($this->_name.'.team_id = ?', self::KILO_ID);
+
         return $this->fetchAll($select);
     }
     

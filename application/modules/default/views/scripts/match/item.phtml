@@ -1,0 +1,54 @@
+<div class="match">
+    <div class="match-header">
+        <div class="home-logo col-md-2">
+            <?php
+                $home_logo = 'img/kw/team/';
+                $home_logo .= $this->match->home_logo ? : '_default_.png' ;
+            ?>
+            <img src="<?php echo $this->baseUrl($home_logo) ?>" alt="<?php echo $this->match->home_name ?>" />
+        </div>
+        <div class="home-name col-md-3 <?php echo $this->match->home_name == 'Kilo Wiejskiej' ? 'kilo' : ''; ?>">
+            <?php echo $this->match->home_name; ?>
+        </div>
+        <div class="score col-md-2">
+            <div class="col-md-4 <?php echo $this->match->home_name == 'Kilo Wiejskiej' ? 'kilo' : ''; ?>"><?php echo $this->match->home_goals; ?></div>
+            <div class="col-md-2">:</div>
+            <div class="col-md-4 <?php echo $this->match->away_name == 'Kilo Wiejskiej' ? 'kilo' : ''; ?>"><?php echo $this->match->away_goals; ?></div>
+        </div>
+        <div class="away-name col-md-3 <?php echo $this->match->away_name == 'Kilo Wiejskiej' ? 'kilo' : ''; ?>">
+            <?php echo $this->match->away_name; ?>
+        </div>
+        <div class="away-logo col-md-2">
+            <?php
+                $away_logo = 'img/kw/team/';
+                $away_logo .= $this->match->away_logo ? : '_default_.png' ;
+            ?>
+            <img src="<?php echo $this->baseUrl($away_logo) ?>" alt="<?php echo $this->match->away_name ?>" />
+        </div>
+    </div>
+    <div class="match-info <?php echo $this->match->away_name == 'Kilo Wiejskiej' ? 'right' : ''; ?>">
+        <?php foreach ($this->scorers as $scorer): ?>
+            <div class="match-scorer">
+                <img src="<?php echo $this->baseUrl('img/goal.png') ?>" alt="goal" />
+                <?php echo $scorer->name.' '.$scorer->surname ?>
+            </div>
+        <?php endforeach; ?>
+        <?php foreach ($this->cards as $card): ?>
+            <div class="match-card">
+                <img src="<?php echo $this->baseUrl($card->card == 'yellow' ? 'img/yellow_card.png' : 'img/red_card.png') ?>" alt="card" />
+                <?php echo $card->name.' '.$card->surname ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    <div class="match-squad">
+        <h1>
+            <img src="<?php echo $this->baseUrl('img/perform.png') ?>" alt="Skład" />
+            Skład:
+        </h1>
+        <?php foreach ($this->performances as $performance): ?>
+            <div class="match-card">
+                <?php echo $performance->name.' '.$performance->surname ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
