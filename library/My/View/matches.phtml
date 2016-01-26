@@ -52,11 +52,11 @@
                             <img src="<?php echo $this->baseUrl($ph_logo) ?>" alt="<?php echo $this->previousMatch->home_name ?>" />
                             <?php echo $this->previousMatch->home_name ?>
                         </div>
-                        <div class="score-container col-xs-4">
+                        <a class="score-container col-xs-4" href="<?php echo $this->url(array('id' => $this->previousMatch->id),'match') ?>" title="Szczegóły meczu">
                             <div class="col-xs-4 score"><?php echo $this->previousMatch->home_goals; ?></div>
                             <div class="col-xs-2 sep">:</div>
                             <div class="col-xs-4 score"><?php echo $this->previousMatch->away_goals; ?></div>
-                        </div>
+                        </a>
                         <div class="col-xs-4 team">
                             <img src="<?php echo $this->baseUrl($pa_logo) ?>" alt="<?php echo $this->previousMatch->away_name ?>" />
                             <div><?php echo $this->previousMatch->away_name ?></div>
