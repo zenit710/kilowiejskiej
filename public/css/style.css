@@ -630,6 +630,10 @@ h3,h4,h5,h6{
     text-align: right;
 }
 
+.match-card, .match-scorer {
+    overflow: hidden;
+}
+
 .match-info .match-scorer img, .match-info .match-card img {
     margin-right: 10px;
 }
