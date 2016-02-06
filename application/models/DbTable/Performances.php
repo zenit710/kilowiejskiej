@@ -88,7 +88,7 @@ class Application_Model_DbTable_Performances extends Zend_Db_Table_Abstract
     public function getPerformancesByMatchId($id)
     {
         $select = $this->select()
-            ->from($this->_name,array())
+            ->from($this->_name,array('player_id'))
             ->setIntegrityCheck(false)
             ->join('players','players.id = '.$this->_name.'.player_id', array('name','surname'))
             ->where($this->_name.'.match_id = ?', $id)
