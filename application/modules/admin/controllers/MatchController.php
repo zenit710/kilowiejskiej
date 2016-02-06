@@ -3,6 +3,8 @@
 class Admin_MatchController extends Zend_Controller_Action
 {
 
+    const KILO_WIEJSKIEJ_ID = 15;
+
     private $matchesMapper;
     private $performancesMapper;
     private $playersMapper;
@@ -188,6 +190,7 @@ class Admin_MatchController extends Zend_Controller_Action
                     $data = array(
                         'season_id' => $seasonId,
                         'match_id' => $matchId,
+                        'team_id' => self::KILO_WIEJSKIEJ_ID,
                         'player_id' => $value
                     );
                     $this->scorersMapper->insert($data);
