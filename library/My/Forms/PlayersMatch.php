@@ -8,7 +8,6 @@ class My_Forms_PlayersMatch extends Zend_Form {
     
     private $players = null;
     private $scorersCount = null;
-    const PERFORMANCES_LIMIT = 15;
     
     public function __construct($players, $scorersCount, $options = null) {
         $this->players = $players;
@@ -30,7 +29,7 @@ class My_Forms_PlayersMatch extends Zend_Form {
             'legend' => 'Strzelcy:'
         ));
         $performances = array();
-        for($i = 0; $i< self::PERFORMANCES_LIMIT; $i++){
+        for($i = 0; $i< count($this->players) - 1; $i++){
             $this->addElement('select','player_'.$i,array(
                 'required' => true,
                 'multiOptions' => $this->players
@@ -44,5 +43,23 @@ class My_Forms_PlayersMatch extends Zend_Form {
             'label' => 'Aktualizuj',
             'ignore' => true
         ));
+    }
+
+    /**
+     * Wypełnia formularz jeśli dane meczy były już uzupełnione
+     *
+     * @param array $scorers
+     * @param array $performances
+     */
+    public function fill($scorers, $performances)
+    {
+        foreach ($scorers as $id=>$scorer) {
+            $this->getElement('scorer_'.$id)
+                ->setValue($scorer->player_id);
+        }
+        foreach ($performances as $id=>$performance) {
+            $this->getElement('player_'.$id)
+                ->setValue($performance->player_id);
+        }
     }
 }

@@ -84,8 +84,11 @@ class Admin_MatchController extends Zend_Controller_Action
         $goals = $home ? $match->home_goals : $match->away_goals ;
         $scorersIds = $this->scorersMapper->getIdsByMatchId($id);
         $performancesIds = $this->performancesMapper->getIdsByMatchId($id);
-        
+        $performances = $this->performancesMapper->getPerformancesByMatchId($id);
+        $scorers = $this->scorersMapper->getScorersByMatchId($id);
+
         $form = new My_Forms_PlayersMatch($playersArray, $goals);
+        $form->fill($scorers, $performances);
         $this->view->form = $form;
         
         if($this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost())) {
