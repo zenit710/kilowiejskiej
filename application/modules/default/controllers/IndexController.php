@@ -22,26 +22,6 @@ class IndexController extends Zend_Controller_Action
         $this->view->news = $this->prepareNewsForHomepage($paginator->getItemsByPage($page));
         $paginator->setPageRange(self::PAGE_RANGE);
         $this->view->paginator = $paginator;
-                
-        // GET INFO ABOUT ACTUAL SEASON
-        $seasonMapper = new Application_Model_DbTable_Seasons();
-        $this->view->seasonInfo = $seasonMapper->getActualSeasonInfo();
-        
-        // GET TABLE FOR ACTUAL SEASON
-        $seasonDataMapper = new Application_Model_DbTable_SeasonData();
-        $this->view->table = $seasonDataMapper->getHomepageTable();
-        
-        // GET TOP SCORERS
-        $scorersMapper = new Application_Model_DbTable_Scorers();
-        $this->view->scorers = $scorersMapper->getTopScorers();
-        
-        // GET MOST PERFORMANCES
-        $performancesMapper = new Application_Model_DbTable_Performances();
-        $this->view->performances = $performancesMapper->getMostPerformances();
-        
-        // GET MOST CARDS
-        $cardsMapper = new Application_Model_DbTable_Cards();
-        $this->view->cards = $cardsMapper->getMostCards();
     }
 
     public function introAction(){
