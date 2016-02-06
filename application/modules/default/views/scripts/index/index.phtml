@@ -19,23 +19,7 @@
 </div>
 <div class="col-md-1"></div>
 <div class="widgets_column col-md-5">
-    <div class="widget">
-        <div class="header">
-            <?php echo $this->seasonInfo->name ?>
-            <span class="season"><?php echo $this->seasonInfo->period ?></span>
-        </div>
-        <div class="widget_content">
-            <table class="table">
-                <?php foreach($this->table as $team): ?>
-                    <tr class="<?php echo $team->rank%2 ? 'table_n':'table_p'; echo $team->name == "Kilo Wiejskiej" ? " kilo" : null; ?>">
-                        <td><?php echo $team->rank ?>.</td>
-                        <td><?php echo $team->name ?></td>
-                        <td><?php echo $team->points ?> pkt.</td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-        </div>
-    </div>
+    <?php echo $this->table() ?>
     <div class="widget">
         <div class="header">
             Ranking zawodników Kilo Wiejskiej
