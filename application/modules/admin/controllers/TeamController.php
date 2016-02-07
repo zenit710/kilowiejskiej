@@ -35,7 +35,7 @@ class Admin_TeamController extends Zend_Controller_Action
     {
         $id = $this->getParam('id');
         $team = $this->teamsMapper->getById($id);
-        $form = new My_Forms_Team($team['photo']);
+        $form = new My_Forms_Team($team['photo'], $team['logo']);
         $form->populate($team->toArray());
         $this->view->form = $form;
         

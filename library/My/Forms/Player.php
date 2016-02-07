@@ -82,6 +82,13 @@ class My_Forms_Player extends Zend_Form {
             ),
             'accept' => 'image/*'
         ));
+        $dt = new DateTime('now');
+        $this->photo->addFilter(
+            new Zend_Filter_File_Rename(array(
+                'target' => $dt->getTimestamp() . '.' . pathinfo($this->photo->getFilename(),PATHINFO_EXTENSION),
+                'overwrite' => false
+            ))
+        );
         $this->photo->getValidator('Extension')->setMessage('Nipoprawne rozszerzenie. Możesz dodawać tylko .jpg,.png,.gif');
         $this->addElement(
             'hidden',
