@@ -47,6 +47,13 @@ class My_Forms_News extends Zend_Form {
             ),
             'accept' => 'image/*'
         ));
+        $dt = new DateTime('now');
+        $this->main_photo->addFilter(
+            new Zend_Filter_File_Rename(array(
+                'target' => $dt->getTimestamp() . '.' . pathinfo($this->main_photo->getFilename(),PATHINFO_EXTENSION),
+                'overwrite' => false
+            ))
+        );
         $this->main_photo->getValidator('Extension')->setMessage('Nipoprawne rozszerzenie. Możesz dodawać tylko .jpg,.png,.gif');
         $this->addElement(
             'hidden',
