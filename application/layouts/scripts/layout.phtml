@@ -43,43 +43,7 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer_description col-md-4">
-                <span class="span_kilo">Kilo Wiejskiej</span> to coś więcej niż drużyna - to styl życia.
-                <div class="separator"></div>
-                <div>Amatorska drużyna Kilo Wiejskiej powstała w 2011 roku z inicjatywy Damiana Łąkasa i swój debiut zaliczyła na turnieju w Sierosławicach (woj. Małopolskie). Zespół specjalizuje się głównie w piłce nożnej halowej.</div>
-                <a href="<?php echo $this->url(array('url' => 'o-nas'), 'site') ?>" title="O nas"><button>Dowiedz się więcej</button></a>
-            </div>
-            <div class="footer_logo col-md-4">
-                <img src="<?php echo $this->baseUrl('img/kwft_215.png'); ?>" alt="KWFT" />
-            </div>
-            <div class="footer_events col-md-4">
-                <div style="margin-bottom: 20px">Najbliższe turnieje organizowane przez <span class="span_kilo">Kilo Wiejskiej</span>:</div>
-                <table class="footer_events_table">
-                    <tr>
-                        <td>Turniej Mikołajkowy</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>Liga Wakacyjna Glewiec</td>
-                        <td>-</td>
-                    </tr>
-                </table>
-                <div class="separator"></div>
-                <table class="made_by">
-                    <tr>
-                        <td>CMS & Develop:</td>
-                        <td><a href="http://kamilmalek.pl" title="kamilmalek.pl">Kamil Małek</a></td>
-                    </tr>
-                    <tr>
-                        <td>Projekt:</td>
-                        <td>Piotr Pabiś</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </footer>
+    <?php echo $this->render('footer.phtml') ?>
 
 </body>
 </html>
