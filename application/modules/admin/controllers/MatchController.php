@@ -258,6 +258,10 @@ class Admin_MatchController extends Zend_Controller_Action
      */
     private function prepareTable($season_id)
     {
+        if ($this->seasonsMapper->isCup($season_id)) {
+            return;
+        }
+
         $matches = $this->matchesMapper->getAllBySeasonId($season_id);
         $teamsAlreadySaved = $this->seasonsDataMapper->getSavedTeamInSeason($season_id);
         

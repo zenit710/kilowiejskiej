@@ -20,6 +20,10 @@ class My_Forms_Season extends Zend_Form {
             'label' => 'Aktywny:',
             'required' => true
         ));
+        $this->addElement('checkbox','is_cup',array(
+            'label' => 'Puchar:',
+            'required' => true
+        ));
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj',
             'ignore' => true
