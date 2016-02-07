@@ -28,6 +28,14 @@ class My_Forms_Category extends Zend_Form {
             ),
             'accept' => 'image/*'
         ));
+        $dt = new DateTime('now');
+        $this->picture->addFilter(
+            new Zend_Filter_File_Rename(array(
+                'target' => $dt->getTimestamp() . '.' . pathinfo($this->picture->getFilename(),PATHINFO_EXTENSION),
+                'overwrite' => false
+            ))
+        );
+        $this->picture->getValidator('Extension')->setMessage('Nipoprawne rozszerzenie. Możesz dodawać tylko .jpg,.png,.gif');
         $this->addElement(
             'hidden',
             'preview',
@@ -48,7 +56,6 @@ class My_Forms_Category extends Zend_Form {
             )
         );
         $this->preview->clearValidators();
-        $this->picture->getValidator('Extension')->setMessage('Nipoprawne rozszerzenie. Możesz dodawać tylko .jpg,.png,.gif');
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj',
             'ignore' => true
