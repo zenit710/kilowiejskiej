@@ -120,6 +120,20 @@ class Application_Model_DbTable_News extends Zend_Db_Table_Abstract
         
         return $this->fetchRow($select);
     }
+
+    /**
+     * Sprawdza czy proponowany slug jest unikalny
+     * @param string $slug
+     * @return bool
+     */
+    public function isSlugUnique($slug)
+    {
+        $select = $this->select()
+                ->from($this->_name, array('count(*) as count'))
+                ->where('slug = ?',$slug);
+
+        return $this->fetchRow($select)->count ? false : true;
+    }
     
 }
 
