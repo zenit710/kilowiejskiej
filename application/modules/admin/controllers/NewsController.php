@@ -29,7 +29,12 @@ class Admin_NewsController extends Zend_Controller_Action
             $values = $form->getValues();
             $values['author_id'] = 1;
             $values['date'] = date("Y-m-d H:i:s");
-            $values['slug'] = My_Slugs::string2slug($values['title']);
+            $slug = My_Slugs::string2slug($values['title']);
+            if (!$this->newsMapper->isSlugUnique($slug)) {
+                $dt = new DateTime('now');
+                $slug = $dt->getTimestamp() . '-' . $slug;
+            }
+            $values['slug'] = $slug;
             if(!$values['main_photo']){
                 unset($values['main_photo']);
             }
