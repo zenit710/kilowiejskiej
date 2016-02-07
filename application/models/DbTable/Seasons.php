@@ -17,6 +17,7 @@ class Application_Model_DbTable_Seasons extends Zend_Db_Table_Abstract
         'id',
         'name',
         'period',
+        'is_cup',
         'is_active'
     );
     
@@ -29,6 +30,7 @@ class Application_Model_DbTable_Seasons extends Zend_Db_Table_Abstract
         $select = $this->select()
                 ->from($this->_name, $this->columnListFull)
                 ->where('is_active = ?', 1)
+                ->where('is_cup = ?', 0)
                 ->limit(1);
         
         return $this->fetchRow($select);
@@ -60,6 +62,20 @@ class Application_Model_DbTable_Seasons extends Zend_Db_Table_Abstract
         
         return $this->fetchAll($select);
     }
-    
+
+    /**
+     * Zwraca info, czy sezon jest pucharem, czy nie
+     * @param integer $seasonId
+     * @return bool
+     */
+    public function isCup($seasonId)
+    {
+        $select = $this->select()
+            ->from($this->_name, array('is_cup'))
+            ->where('id = ?', $seasonId)
+            ->limit(1);
+
+        return (bool)$this->fetchRow($select)->is_cup;
+    }
 }
 
