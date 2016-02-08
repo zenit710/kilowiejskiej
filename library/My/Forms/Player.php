@@ -92,7 +92,7 @@ class My_Forms_Player extends Zend_Form {
         $this->photo->getValidator('Extension')->setMessage('Nipoprawne rozszerzenie. Możesz dodawać tylko .jpg,.png,.gif');
         $this->addElement(
             'hidden',
-            'preview',
+            'preview_photo',
             array(
                 'label' => 'Aktualny obraz:',
                 'required' => false,
@@ -102,14 +102,14 @@ class My_Forms_Player extends Zend_Form {
                     array(
                         'HtmlTag', array(
                             'tag'  => 'img',
-                            'id'   => 'preview',
-                            $this->img ? 'src' : '' => '/img/kw/player/' . $this->img
+                            'id'   => 'preview_photo',
+                            'src'  => $this->img ? '/img/kw/team_photo/' . $this->img : ''
                         )
                     )
                 )
             )
         );
-        $this->preview->clearValidators();
+        $this->preview_photo->clearValidators();
         $this->addElement('select','team_id',array(
             'label' => 'Drużyna:',
             'required' => true,

@@ -38,7 +38,7 @@ class My_Forms_Category extends Zend_Form {
         $this->picture->getValidator('Extension')->setMessage('Nipoprawne rozszerzenie. Możesz dodawać tylko .jpg,.png,.gif');
         $this->addElement(
             'hidden',
-            'preview',
+            'preview_picture',
             array(
                 'label' => 'Aktualny obraz:',
                 'required' => false,
@@ -48,14 +48,14 @@ class My_Forms_Category extends Zend_Form {
                     array(
                         'HtmlTag', array(
                             'tag'  => 'img',
-                            'id'   => 'preview',
-                            $this->img ? 'src' : '' => '/img/kw/cat/' . $this->img
+                            'id'   => 'preview_picture',
+                            'src'  => $this->img ? '/img/kw/team_photo/' . $this->img : ''
                         )
                     )
                 )
             )
         );
-        $this->preview->clearValidators();
+        $this->preview_picture->clearValidators();
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj',
             'ignore' => true

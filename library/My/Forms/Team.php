@@ -40,7 +40,7 @@ class My_Forms_Team extends Zend_Form {
         $this->photo->getValidator('Extension')->setMessage('Nipoprawne rozszerzenie. Możesz dodawać tylko .jpg,.png,.gif');
         $this->addElement(
             'hidden',
-            'preview',
+            'preview_photo',
             array(
                 'label' => 'Aktualny obraz:',
                 'required' => false,
@@ -50,14 +50,14 @@ class My_Forms_Team extends Zend_Form {
                     array(
                         'HtmlTag', array(
                             'tag'  => 'img',
-                            'id'   => 'preview',
+                            'id'   => 'preview_photo',
                             'src'  => $this->photoImg ? '/img/kw/team_photo/' . $this->photoImg : ''
                         )
                     )
                 )
             )
         );
-        $this->preview->clearValidators();
+        $this->preview_photo->clearValidators();
         $this->addElement('file','logo',array(
             'label' => 'Logo drużyny:',
             'destination' => realpath(APPLICATION_PATH . '/../public/img/kw/team'),
@@ -76,7 +76,7 @@ class My_Forms_Team extends Zend_Form {
         $this->logo->getValidator('Extension')->setMessage('Nipoprawne rozszerzenie. Możesz dodawać tylko .jpg,.png,.gif');
         $this->addElement(
             'hidden',
-            'preview_1',
+            'preview_logo',
             array(
                 'label' => 'Aktualny obraz:',
                 'required' => false,
@@ -86,14 +86,14 @@ class My_Forms_Team extends Zend_Form {
                     array(
                         'HtmlTag', array(
                             'tag'  => 'img',
-                            'id'   => 'preview_1',
+                            'id'   => 'preview_logo',
                             'src'  => $this->logoImg ? '/img/kw/team/' . $this->logoImg : ''
                         )
                     )
                 )
             )
         );
-        $this->preview_1->clearValidators();
+        $this->preview_logo->clearValidators();
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj',
             'ignore' => true

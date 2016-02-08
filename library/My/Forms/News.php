@@ -57,7 +57,7 @@ class My_Forms_News extends Zend_Form {
         $this->main_photo->getValidator('Extension')->setMessage('Nipoprawne rozszerzenie. Możesz dodawać tylko .jpg,.png,.gif');
         $this->addElement(
             'hidden',
-            'preview',
+            'preview_main_photo',
             array(
                 'label' => 'Aktualny obraz:',
                 'required' => false,
@@ -67,14 +67,14 @@ class My_Forms_News extends Zend_Form {
                     array(
                         'HtmlTag', array(
                             'tag'  => 'img',
-                            'id'   => 'preview',
-                            $this->img ? 'src' : '' => '/img/kw/news/' . $this->img
+                            'id'   => 'preview_main_photo',
+                            'src'  => $this->img ? '/img/kw/team_photo/' . $this->img : ''
                         )
                     )
                 )
             )
         );
-        $this->preview->clearValidators();
+        $this->preview_main_photo->clearValidators();
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj artykuł',
             'ignore' => true
