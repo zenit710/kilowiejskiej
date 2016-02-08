@@ -49,7 +49,7 @@ class My_Forms_Category extends Zend_Form {
                         'HtmlTag', array(
                             'tag'  => 'img',
                             'id'   => 'preview_picture',
-                            'src'  => $this->img ? '/img/kw/team_photo/' . $this->img : ''
+                            'src'  => $this->img ? '/img/kw/cat/' . $this->img : ''
                         )
                     )
                 )

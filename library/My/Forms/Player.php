@@ -103,7 +103,7 @@ class My_Forms_Player extends Zend_Form {
                         'HtmlTag', array(
                             'tag'  => 'img',
                             'id'   => 'preview_photo',
-                            'src'  => $this->img ? '/img/kw/team_photo/' . $this->img : ''
+                            'src'  => $this->img ? '/img/kw/player/' . $this->img : ''
                         )
                     )
                 )
