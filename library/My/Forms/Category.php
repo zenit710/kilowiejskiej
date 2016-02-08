@@ -49,6 +49,7 @@ class My_Forms_Category extends Zend_Form {
                         'HtmlTag', array(
                             'tag'  => 'img',
                             'id'   => 'preview_picture',
+                            'style'=> 'max-width: 50%',
                             'src'  => $this->img ? '/img/kw/cat/' . $this->img : ''
                         )
                     )

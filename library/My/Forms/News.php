@@ -68,6 +68,7 @@ class My_Forms_News extends Zend_Form {
                         'HtmlTag', array(
                             'tag'  => 'img',
                             'id'   => 'preview_main_photo',
+                            'style'=> 'max-width: 50%',
                             'src'  => $this->img ? '/img/kw/news/' . $this->img : ''
                         )
                     )

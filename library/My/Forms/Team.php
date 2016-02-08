@@ -51,6 +51,7 @@ class My_Forms_Team extends Zend_Form {
                         'HtmlTag', array(
                             'tag'  => 'img',
                             'id'   => 'preview_photo',
+                            'style'=> 'max-width: 50%',
                             'src'  => $this->photoImg ? '/img/kw/team_photo/' . $this->photoImg : ''
                         )
                     )
@@ -87,6 +88,7 @@ class My_Forms_Team extends Zend_Form {
                         'HtmlTag', array(
                             'tag'  => 'img',
                             'id'   => 'preview_logo',
+                            'style'=> 'max-width: 50%',
                             'src'  => $this->logoImg ? '/img/kw/team/' . $this->logoImg : ''
                         )
                     )

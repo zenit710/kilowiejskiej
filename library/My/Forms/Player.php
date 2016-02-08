@@ -103,6 +103,7 @@ class My_Forms_Player extends Zend_Form {
                         'HtmlTag', array(
                             'tag'  => 'img',
                             'id'   => 'preview_photo',
+                            'style'=> 'max-width: 50%',
                             'src'  => $this->img ? '/img/kw/player/' . $this->img : ''
                         )
                     )
