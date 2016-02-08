@@ -1,3 +1,34 @@
+<?php
+function goalWord($count) {
+    if ($count == 1) {
+        return 'bramka';
+    } elseif ($count < 5) {
+        return 'bramki';
+    }
+
+    return 'bramek';
+}
+
+function performanceWord($count) {
+    if ($count == 1) {
+        return 'występ';
+    } elseif ($count < 5) {
+        return 'występy';
+    }
+
+    return 'występów';
+}
+
+function cardWord($count) {
+    if ($count == 1) {
+        return 'kartka';
+    } elseif ($count < 5) {
+        return 'kartki';
+    }
+
+    return 'kartek';
+}
+?>
 <div class="widget stats_widget">
     <div class="header">
         Ranking zawodników Kilo Wiejskiej
@@ -17,7 +48,7 @@
                             <tr class="<?php echo $i%2 ? 'table_n' : 'table_p' ?>">
                                 <td><?php echo $i; ?>.</td>
                                 <td><?php echo $scorer->name.' '.$scorer->surname; ?></td>
-                                <td><?php echo $scorer->goals ?> bramek</td>
+                                <td><?php echo $scorer->goals . ' ' . goalWord($scorer->goals) ?></td>
                             </tr>
                         <?php $i++;endforeach; ?>
                     </table>
@@ -32,7 +63,7 @@
                             <tr class="<?php echo $i%2 ? 'table_n' : 'table_p' ?>">
                                 <td><?php echo $i; ?>.</td>
                                 <td><?php echo $player->name.' '.$player->surname; ?></td>
-                                <td><?php echo $player->performances ?> występów</td>
+                                <td><?php echo $player->performances . ' ' .performanceWord($player->performances) ?></td>
                             </tr>
                         <?php $i++;endforeach; ?>
                     </table>
@@ -47,7 +78,7 @@
                             <tr class="<?php echo $i%2 ? 'table_n' : 'table_p' ?>">
                                 <td><?php echo $i; ?>.</td>
                                 <td><?php echo $player->name.' '.$player->surname; ?></td>
-                                <td><?php echo $player->cards ?> kartek</td>
+                                <td><?php echo $player->cards . ' ' . cardWord($player->cards) ?></td>
                             </tr>
                         <?php $i++;endforeach; ?>
                     </table>
