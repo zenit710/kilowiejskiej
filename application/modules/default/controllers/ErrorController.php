@@ -43,6 +43,11 @@ class ErrorController extends Zend_Controller_Action
         $this->view->request   = $errors->request;
     }
 
+    public function notFoundAction()
+    {
+        throw new My_Exception_NotFound();
+    }
+
     public function getLog()
     {
         $bootstrap = $this->getInvokeArg('bootstrap');

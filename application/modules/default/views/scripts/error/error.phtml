@@ -10,7 +10,7 @@
     <div id="error">
         <img src="<?php echo $this->baseUrl('img/kwft_215.png'); ?>" alt="Kilo Wiejskiej Futsal Team" />
         <?php
-            if ($this->exception) {
+            if ($this->exception && $this->exception->getMessage()) {
                 $this->message = $this->exception->getMessage();
             }
         ?>
