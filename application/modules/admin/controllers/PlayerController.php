@@ -30,6 +30,10 @@ class Admin_PlayerController extends Zend_Controller_Action
             if(!$values['photo']){
                 unset($values['photo']);
             }
+            if ($values['photo_delete']) {
+                $values['photo'] = NULL;
+            }
+            unset($values['photo_delete']);
             $this->playersMapper->insert($values);
             $this->redirect('/admin/player');
         }
@@ -53,6 +57,10 @@ class Admin_PlayerController extends Zend_Controller_Action
             if(!$values['photo']){
                 unset($values['photo']);
             }
+            if ($values['photo_delete']) {
+                $values['photo'] = NULL;
+            }
+            unset($values['photo_delete']);
             $this->playersMapper->update($values,'id = '.$id);
             $this->redirect('/admin/player');
         }
