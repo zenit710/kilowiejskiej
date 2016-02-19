@@ -54,7 +54,7 @@ class Admin_MatchController extends Zend_Controller_Action
         $id = $this->getParam('id');
         $match = $this->matchesMapper->getById($id);
         if(!$match){
-            return;
+            throw new My_Exception_NotFound('Nie ma takiego meczu!');
         }
         $teams = $this->teamsMapper->getAllTeamNameIdPairs();
         $teamsArray = $this->prepareTeamsArray($teams);
@@ -77,9 +77,12 @@ class Admin_MatchController extends Zend_Controller_Action
     public function fillAction()
     {
         $id = $this->getParam('id');
+        $match = $this->matchesMapper->getById($id);
+        if(!$match){
+            throw new My_Exception_NotFound('Nie ma takiego meczu!');
+        }
         $players = $this->playersMapper->getAllKiloPlayers();
         $playersArray = $this->preparePlayersArray($players);
-        $match = $this->matchesMapper->getById($id);
         $home = $match->home_name == 'Kilo Wiejskiej';
         $goals = $home ? $match->home_goals : $match->away_goals ;
         $scorersIds = $this->scorersMapper->getIdsByMatchId($id);

@@ -42,7 +42,7 @@ class Admin_CategoryController extends Zend_Controller_Action
         $id = $this->getParam('id');
         $category = $this->categoriesMapper->getById($id);
         if(!$category){
-            return;
+            throw new My_Exception_NotFound('Nie ma kategorii o podanym ID!');
         }
         $form = new My_Forms_Category($category['picture']);
         $form->populate($category->toArray());

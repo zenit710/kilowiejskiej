@@ -52,7 +52,7 @@ class Admin_NewsController extends Zend_Controller_Action
         $id = $this->getParam('id');
         $news = $this->newsMapper->getById($id);
          if(!$news){
-            return;
+            throw new My_Exception_NotFound('Nie ma takiego artykułu!');
         }
         $categories = $this->categoriesMapper->getAllNamesWithId();
         $categoriesArray = $this->prepareCategoriesArray($categories);

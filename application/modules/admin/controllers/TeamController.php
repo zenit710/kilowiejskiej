@@ -46,6 +46,9 @@ class Admin_TeamController extends Zend_Controller_Action
     {
         $id = $this->getParam('id');
         $team = $this->teamsMapper->getById($id);
+        if (!$team) {
+            throw new My_Exception_NotFound('Nie ma takiego zespołu!');
+        }
         $form = new My_Forms_Team($team['photo'], $team['logo']);
         $form->populate($team->toArray());
         $this->view->form = $form;
