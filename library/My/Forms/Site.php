@@ -31,7 +31,7 @@ class My_Forms_Site extends Zend_Form {
             'required' => false
         ));
         $this->addElement('submit','submit',array(
-            'label' => 'Dodaj stronę',
+            'label' => 'Zapisz stronę',
             'ignore' => true
         ));
     }

@@ -133,7 +133,7 @@ class My_Forms_Player extends Zend_Form {
             'checked' => 'checked'
         ));
         $this->addElement('submit','submit',array(
-            'label' => 'Dodaj zawodnika',
+            'label' => 'Zapisz zawodnika',
             'ignore' => true
         ));
     }

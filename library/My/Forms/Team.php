@@ -103,7 +103,7 @@ class My_Forms_Team extends Zend_Form {
             'label' => 'Usuń logo drużyny:'
         ));
         $this->addElement('submit','submit',array(
-            'label' => 'Dodaj',
+            'label' => 'Zapisz',
             'ignore' => true
         ));
     }

@@ -80,7 +80,7 @@ class My_Forms_News extends Zend_Form {
             'label' => 'Usuń zdjęcie główne:'
         ));
         $this->addElement('submit','submit',array(
-            'label' => 'Dodaj artykuł',
+            'label' => 'Zapisz artykuł',
             'ignore' => true
         ));
     }

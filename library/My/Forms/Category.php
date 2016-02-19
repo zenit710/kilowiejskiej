@@ -61,7 +61,7 @@ class My_Forms_Category extends Zend_Form {
             'label' => 'Usuń domyślną grafikę:'
         ));
         $this->addElement('submit','submit',array(
-            'label' => 'Dodaj',
+            'label' => 'Zapisz',
             'ignore' => true
         ));
     }

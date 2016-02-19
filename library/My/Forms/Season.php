@@ -25,7 +25,7 @@ class My_Forms_Season extends Zend_Form {
             'required' => true
         ));
         $this->addElement('submit','submit',array(
-            'label' => 'Dodaj',
+            'label' => 'Zapisz',
             'ignore' => true
         ));
     }
