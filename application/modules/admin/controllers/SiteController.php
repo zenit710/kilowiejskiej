@@ -34,7 +34,7 @@ class Admin_SiteController extends Zend_Controller_Action
         $id = $this->getParam('id');
         $site = $this->sitesMapper->getById($id);
         if(!$site){
-            return null;
+            throw new My_Exception_NotFound('Nie ma takiej strony!');
         }
         $form = new My_Forms_Site();
         $form->populate($site->toArray());

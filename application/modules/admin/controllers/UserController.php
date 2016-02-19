@@ -20,6 +20,9 @@ class Admin_UserController extends Zend_Controller_Action
     {
         $id = $this->getParam('id');
         $permissions = $this->usersMapper->getPermissions($id);
+        if (!$permissions) {
+            throw new My_Exception_NotFound('Nie ma takiego użytkownika!');
+        }
         $form = new My_Forms_User();
         $form->populate($permissions->toArray());
         $this->view->form = $form;

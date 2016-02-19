@@ -33,7 +33,7 @@ class Admin_SeasonController extends Zend_Controller_Action
         $id = $this->getParam('id');
         $season = $this->seasonsMapper->getById($id);
         if(!$season){
-            return;
+            throw new My_Exception_NotFound('Nie ma takiego sezonu!');
         }
         $form = new My_Forms_Season();
         $form->populate($season->toArray());

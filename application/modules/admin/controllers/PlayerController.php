@@ -44,7 +44,7 @@ class Admin_PlayerController extends Zend_Controller_Action
         $id = $this->getParam('id');
         $player = $this->playersMapper->getById($id);
         if(!$player){
-            return null;
+            throw new My_Exception_NotFound('Nie ma takiego zawodnika!');
         }
         $teams = $this->teamsMapper->getAllTeamNameIdPairs();
         $teamsArray = $this->prepareTeamsArray($teams);

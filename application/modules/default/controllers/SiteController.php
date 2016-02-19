@@ -16,6 +16,9 @@ class SiteController extends Zend_Controller_Action
         $url = $this->getRequest()->getParam('url');
         $sitesMapper = new Application_Model_DbTable_Sites();
         $this->view->site = $site = $sitesMapper->getSiteByUrl($url);
+        if (!$site) {
+            throw new My_Exception_NotFound('Strona, której szukasz, nie istnieje!');
+        }
         
         $this->view->currentPage = $site->title;
 

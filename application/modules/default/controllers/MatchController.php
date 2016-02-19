@@ -21,6 +21,9 @@ class MatchController extends Zend_Controller_Action
         $id = $this->_getParam('id');
 
         $this->view->match = $this->matchesMapper->getMatchInfoById($id);
+        if (!$this->view->match) {
+            throw new My_Exception_NotFound('Mecz, którego szukasz, nie istnieje!');
+        }
         $this->view->performances = $this->performancesMapper->getPerformancesByMatchId($id);
         $this->view->scorers = $this->scorersMapper->getScorersByMatchId($id);
         $this->view->cards = $this->cardsMapper->getCardsByMatchId($id);

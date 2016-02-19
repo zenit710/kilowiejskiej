@@ -40,10 +40,15 @@ class My_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
  
             $role = $auth->getIdentity()
             ? $auth->getIdentity()->permissions : 'USER';
- 
+            
+            if (!$acl->has($this->_controller)) {
+                $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('Redirector');
+                $redirector->gotoUrlAndExit('/404');
+            }
+
             if (!$acl->isAllowed($role, $this->_controller, $this->_action)) {
                 $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('Redirector');
-                $redirector->gotoUrlAndExit('error/denied');
+                $redirector->gotoUrlAndExit('/404');
             }
  
         }
@@ -74,6 +79,11 @@ class My_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
  
             $role = $auth->getIdentity()
             ? $auth->getIdentity()->permissions : 'USER';
+
+            if (!$acl->has($this->_controller)) {
+                $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('Redirector');
+                $redirector->gotoUrlAndExit('/404');
+            }
  
             if (!$acl->isAllowed($role, $this->_controller, $this->_action)) {
                 $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('Redirector');
@@ -109,6 +119,11 @@ class My_Controller_Plugin_Auth extends Zend_Controller_Plugin_Abstract
  
             $role = $auth->getIdentity()
             ? $auth->getIdentity()->permissions : 'USER';
+
+            if (!$acl->has($this->_controller)) {
+                $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('Redirector');
+                $redirector->gotoUrlAndExit('/404');
+            }
  
             if (!$acl->isAllowed($role, $this->_controller, $this->_action)) {
                 $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('Redirector');
