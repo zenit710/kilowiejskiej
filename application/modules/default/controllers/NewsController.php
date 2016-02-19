@@ -21,6 +21,9 @@ class NewsController extends Zend_Controller_Action
         $slug = $this->getRequest()->getParam('slug');
         $newsMapper = new Application_Model_DbTable_News();
         $news = $newsMapper->getByCategoryAndSlug($category, $slug);
+        if (!$news) {
+            throw new My_Exception_NotFound('Artykuł, którego szukasz, nie istnieje!');
+        }
         $this->view->news = $this->prepareNewsDate($news);
         $this->view->currentLink = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         
