@@ -67,7 +67,7 @@ class My_Forms_Match extends Zend_Form {
             'required' => true
         ));
         $this->addElement('submit','submit',array(
-            'label' => 'Dodaj mecz',
+            'label' => 'Zapisz mecz',
             'ignore' => true
         ));
     }

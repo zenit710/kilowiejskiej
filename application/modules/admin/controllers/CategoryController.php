@@ -28,6 +28,10 @@ class Admin_CategoryController extends Zend_Controller_Action
             if(!$values['picture']){
                 unset($values['picture']);
             }
+            if ($values['picture_delete']) {
+                $values['picture'] = NULL;
+            }
+            unset($values['picture_delete']);
             $this->categoriesMapper->insert($values);
             $this->redirect('/admin/category');
         }
@@ -50,6 +54,10 @@ class Admin_CategoryController extends Zend_Controller_Action
             if(!$values['picture']){
                 unset($values['picture']);
             }
+            if ($values['picture_delete']) {
+                $values['picture'] = NULL;
+            }
+            unset($values['picture_delete']);
             $this->categoriesMapper->update($values, 'id = '.$id);
             $this->redirect('/admin/category');
         }

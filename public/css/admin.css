@@ -98,3 +98,7 @@ input, select, textarea{
 .errors{
     color: red;
 }
+
+img[src=""] {
+    display: none;
+}

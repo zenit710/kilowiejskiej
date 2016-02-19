@@ -26,6 +26,17 @@ class Admin_TeamController extends Zend_Controller_Action
             if(!$values['photo']){
                 unset($values['photo']);
             }
+            if ($values['photo_delete']) {
+                $values['photo'] = NULL;
+            }
+            unset($values['photo_delete']);
+            if (!$values['logo']) {
+                unset($values['logo']);
+            }
+            if ($values['logo_delete']) {
+                $values['logo'] = NULL;
+            }
+            unset($values['logo_delete']);
             $this->teamsMapper->insert($values);
             $this->redirect('/admin/team');
         }
@@ -44,6 +55,17 @@ class Admin_TeamController extends Zend_Controller_Action
             if(!$values['photo']){
                 unset($values['photo']);
             }
+            if ($values['photo_delete']) {
+                $values['photo'] = NULL;
+            }
+            unset($values['photo_delete']);
+            if (!$values['logo']) {
+                unset($values['logo']);
+            }
+            if ($values['logo_delete']) {
+                $values['logo'] = NULL;
+            }
+            unset($values['logo_delete']);
             $this->teamsMapper->update($values,'id = '.$id);
             $this->redirect('/admin/team');
         }

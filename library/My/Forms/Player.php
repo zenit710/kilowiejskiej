@@ -92,7 +92,7 @@ class My_Forms_Player extends Zend_Form {
         $this->photo->getValidator('Extension')->setMessage('Nipoprawne rozszerzenie. Możesz dodawać tylko .jpg,.png,.gif');
         $this->addElement(
             'hidden',
-            'preview',
+            'preview_photo',
             array(
                 'label' => 'Aktualny obraz:',
                 'required' => false,
@@ -102,14 +102,18 @@ class My_Forms_Player extends Zend_Form {
                     array(
                         'HtmlTag', array(
                             'tag'  => 'img',
-                            'id'   => 'preview',
-                            $this->img ? 'src' : '' => '/img/kw/player/' . $this->img
+                            'id'   => 'preview_photo',
+                            'style'=> 'max-width: 50%',
+                            'src'  => $this->img ? '/img/kw/player/' . $this->img : ''
                         )
                     )
                 )
             )
         );
-        $this->preview->clearValidators();
+        $this->preview_photo->clearValidators();
+        $this->addElement('checkbox','photo_delete',array(
+            'label' => 'Usuń zdjęcie:'
+        ));
         $this->addElement('select','team_id',array(
             'label' => 'Drużyna:',
             'required' => true,
@@ -129,7 +133,7 @@ class My_Forms_Player extends Zend_Form {
             'checked' => 'checked'
         ));
         $this->addElement('submit','submit',array(
-            'label' => 'Dodaj zawodnika',
+            'label' => 'Zapisz zawodnika',
             'ignore' => true
         ));
     }

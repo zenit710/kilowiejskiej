@@ -38,6 +38,10 @@ class Admin_NewsController extends Zend_Controller_Action
             if(!$values['main_photo']){
                 unset($values['main_photo']);
             }
+            if ($values['main_photo_delete']) {
+                $values['main_photo'] = NULL;
+            }
+            unset($values['main_photo_delete']);
             $this->newsMapper->insert($values);
             $this->redirect('/admin/news');
         }
@@ -62,6 +66,10 @@ class Admin_NewsController extends Zend_Controller_Action
             if(!$values['main_photo']){
                 unset($values['main_photo']);
             }
+            if ($values['main_photo_delete']) {
+                $values['main_photo'] = NULL;
+            }
+            unset($values['main_photo_delete']);
             $this->newsMapper->update($values,'id = '.$id);
             $this->redirect('/admin/news');
         }

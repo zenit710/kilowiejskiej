@@ -1,4 +1,5 @@
-/nbproject
-/library/zend
-/library/Glitch
-/application/configs/application.ini
+nbproject
+library/Zend
+library/Glitch
+application/configs/
+public/img
