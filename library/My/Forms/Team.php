@@ -59,6 +59,9 @@ class My_Forms_Team extends Zend_Form {
             )
         );
         $this->preview_photo->clearValidators();
+        $this->addElement('checkbox','photo_delete',array(
+            'label' => 'Usuń zdjęcie drużyny:'
+        ));
         $this->addElement('file','logo',array(
             'label' => 'Logo drużyny:',
             'destination' => realpath(APPLICATION_PATH . '/../public/img/kw/team'),
@@ -96,6 +99,9 @@ class My_Forms_Team extends Zend_Form {
             )
         );
         $this->preview_logo->clearValidators();
+        $this->addElement('checkbox','logo_delete',array(
+            'label' => 'Usuń logo drużyny:'
+        ));
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj',
             'ignore' => true

@@ -111,6 +111,9 @@ class My_Forms_Player extends Zend_Form {
             )
         );
         $this->preview_photo->clearValidators();
+        $this->addElement('checkbox','photo_delete',array(
+            'label' => 'Usuń zdjęcie:'
+        ));
         $this->addElement('select','team_id',array(
             'label' => 'Drużyna:',
             'required' => true,

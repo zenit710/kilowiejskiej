@@ -76,6 +76,9 @@ class My_Forms_News extends Zend_Form {
             )
         );
         $this->preview_main_photo->clearValidators();
+        $this->addElement('checkbox','main_photo_delete',array(
+            'label' => 'Usuń zdjęcie główne:'
+        ));
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj artykuł',
             'ignore' => true

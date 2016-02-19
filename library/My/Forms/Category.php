@@ -57,6 +57,9 @@ class My_Forms_Category extends Zend_Form {
             )
         );
         $this->preview_picture->clearValidators();
+        $this->addElement('checkbox','picture_delete',array(
+            'label' => 'Usuń domyślną grafikę:'
+        ));
         $this->addElement('submit','submit',array(
             'label' => 'Dodaj',
             'ignore' => true
