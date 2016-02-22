@@ -55,7 +55,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     protected function _initLogger() {
         $this->bootstrap("log");
         $logger = $this->getResource("log");
-        $logger->registerErrorHandler();
         Zend_Registry::set("logger", $logger);
 
         return $logger;
