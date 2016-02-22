@@ -48,7 +48,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
     {
         $config = new Zend_Config($this->getOptions(), true);
         Zend_Registry::set('config', $config);
+
         return $config;
+    }
+
+    protected function _initLogger() {
+        $this->bootstrap("log");
+        $logger = $this->getResource("log");
+        $logger->registerErrorHandler();
+        Zend_Registry::set("logger", $logger);
+
+        return $logger;
     }
 
 }
