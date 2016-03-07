@@ -12,6 +12,17 @@
         <div class="footer_events col-md-4">
             <div style="margin-bottom: 20px">Najbliższe turnieje organizowane przez <span class="span_kilo">Kilo Wiejskiej</span>:</div>
             <table class="footer_events_table">
+                <?php 
+                    $startTimeStamp = time();
+                    $endTimeStamp = strtotime("2016/03/20 23:59:59");
+                    $timeDiff = abs($endTimeStamp - $startTimeStamp);
+                    $numberDays = $timeDiff/86400;
+                    $numberDays = intval($numberDays);
+                ?>
+                <tr>
+                    <td>Turniej Wielkanocny</td>
+                    <td>20.03.2016 (za <?php echo $numberDays; ?> dni)</td>
+                </tr>
                 <tr>
                     <td>Turniej Mikołajkowy</td>
                     <td>-</td>
